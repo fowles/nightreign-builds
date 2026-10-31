@@ -35,13 +35,14 @@ Weight = **focus × size × coverage × uptime × availability**, scored at **0.
   - Damage: total = Π(1 + all-damage buffs) × [(1 − Σc) + Σ c × Π(1 + that scope's buffs)], and points = 0.4 × (total − 1) × 100. Flat damage sources (shockwaves, stats) are added as points.
 - **Fight model (per build)** for sustain:
   - **Incoming mix:** the share of damage taken per type (e.g. physical 0.6, each element 0.1). Negations multiply: damage taken = Σ share × Π(1 − negation), and eHP gain = 1 / damage taken − 1. Affinity negation applies to every element.
-  - **Fight HP budget:** how many max-HP bars you absorb per fight, counting base HP, flasks and baseline regen (e.g. 3.0). A heal worth h max-HP bars per fight adds h / budget eHP. Max HP +x% adds about x% eHP.
-  - **Ally factor:** how much each ally's eHP counts compared to yours (e.g. 0.5, with 2 allies). Used for team heals and team negation.
+  - **Fight HP budget:** how many max-HP bars you absorb per fight, counting base HP, flasks and baseline regen (e.g. 3.0). A heal worth h max-HP bars per fight adds h / budget to the heal term. Max HP +x% multiplies eHP by (1 + x%).
+  - **Self eHP is one product:** eHP gain = (1 + max HP) × (1 + Σ heals / budget) / damage taken − 1. Heals add to each other; max HP, heals and negation multiply, because heals restore a share of max HP and negation makes every bar last longer. A curse that lowers max HP (e.g. Vigor) goes inside the product too, and the eHP it costs is reported as a penalty. Whether flasks heal a share of max HP (so the whole budget scales) is **(unverified)**.
+  - **Ally factor:** how much each ally's eHP counts compared to yours (e.g. 0.5, with 2 allies). Used for team heals and team negation. Team effects and hand-weighted sustain (poise, aggro) add on top of the self product.
 - **Uptime:** discount conditional effects (only at low HP, only while the Art is active, only near Madness, and so on).
 - **Availability:** discount effects that need specific drops (a spell school, a weapon class, `3+ X Equipped`) by how likely the run is to supply them.
 - **Meta anchors:**
   - **`Attack power increased for each Night Invader defeated`** ≈ **+20% damage**, possibly the best damage effect in the current meta. It's only on standard relics. Assume copies don't stack **(unverified)**.
-  - **Rally (`Partial HP Restoration upon Post-Damage Attacks`)** is by far the strongest melee sustain effect and is **non-negotiable for melee builds**. Anchor it at 50% eHP for the base tier (20 points); +1/+2 heal 25%/35% more (25/27 points). Check that every top melee loadout carries it.
+  - **Rally (`Partial HP Restoration upon Post-Damage Attacks`)** is by far the strongest melee sustain effect and is **non-negotiable for melee builds**. Anchor the base tier at 1.5 max-HP bars healed per fight with the reference budget of 3.0 (50% eHP, 20 points on its own); +1/+2 heal 25%/35% more (1.875 / 2.025 bars). Check that every top melee loadout carries it.
   - **Stamina is worth 0.** That covers max stamina, stamina recovery, and Endurance. It's nice to have at best. Use it only to break a tie.
 - **Score in four parts**, which must add up to the total:
   - **damage:** attack buffs, guard counters, damage-dealing passives and skills

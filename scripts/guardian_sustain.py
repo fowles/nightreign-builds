@@ -9,7 +9,13 @@ Scoring:
   - Effects are grouped into families by stripping a trailing " +N". Attack
     families in STACKING count every copy across all six slots; in every other
     family only the highest tier counts (see CLAUDE.md "Stacking").
+  - Self-sustain is one effective-HP product (CLAUDE.md "Fight model"):
+    eHP = (1 + max HP) x (1 + heals / budget) / damage taken. Max HP families
+    multiply, heal families add (in max-HP bars per fight), negations multiply.
+    Team heals/negation and hand-weighted sustain (poise, aggro) add on top.
   - Each curse is penalized per CURSE_PENALTY; repeating a curse costs extra.
+    Curses in CURSE_MAXHP lower max HP inside the eHP product instead, and the
+    eHP they cost is reported as a penalty.
   - Dormant Powers: Halberds neutral, anything else negative, and carrying
     more than one costs extra because they dilute each other.
   - Effects flagged unverified_effect cost a small tiebreak penalty.
@@ -38,7 +44,7 @@ COVERAGE = {
     "crit": 0.03,  # guess: ripostes/backstabs are rare for a guard tank
 }
 
-# Reference fight model for sustain (CLAUDE.md "Sustain scale"). All guesses.
+# Reference fight model for sustain (CLAUDE.md "Fight model"). All guesses.
 INCOMING = {"physical": 0.6, "fire": 0.1, "holy": 0.1, "lightning": 0.1, "magic": 0.1}  # share of damage taken
 AFFINITY = ("fire", "holy", "lightning", "magic")
 FIGHT_HP_BUDGET = 3.0  # max-HP bars absorbed per fight: base HP + flasks + baseline regen
@@ -64,8 +70,8 @@ def pct(sizes, scope="all"):
 
 
 def ehp(sizes):
-    """Tier weights for a direct effective-HP gain of `sizes` percent (e.g. max HP)."""
-    return [POINTS_PER_PCT * s for s in sizes]
+    """Tier weights for a self max-HP-like gain: multiplies self eHP by (1 + `sizes` percent)."""
+    return [Pct(POINTS_PER_PCT * s, "maxhp", "self", s) for s in sizes]
 
 
 def negation(sizes, scope):
@@ -85,25 +91,38 @@ def damage_points(buffs):
     return POINTS_PER_PCT * (total - 1) * 100
 
 
-def negation_points(negs):
-    """Points for a set of negation Pct effects: effective HP from multiplicative negation."""
+def sustain_points(effects, maxhp_extra=()):
+    """Points for self-sustain Pct effects, combined into one effective-HP product.
+
+    `maxhp_extra` holds additional max-HP percentages (e.g. from curses).
+    """
     keep = {}
-    for n in negs:
-        keep[n.scope] = keep.get(n.scope, 1.0) * (1 - n.size / 100)
+    maxhp = 1.0
+    bars = 0.0
+    for e in effects:
+        if e.kind == "negation":
+            keep[e.scope] = keep.get(e.scope, 1.0) * (1 - e.size / 100)
+        elif e.kind == "maxhp":
+            maxhp *= 1 + e.size / 100
+        else:
+            bars += e.size
+    for m in maxhp_extra:
+        maxhp *= 1 + m / 100
     aff = keep.get("affinity", 1.0)
     taken = INCOMING["physical"] * keep.get("physical", 1.0)
     taken += sum(INCOMING[t] * aff * keep.get(t, 1.0) for t in AFFINITY)
-    return POINTS_PER_PCT * (sum(INCOMING.values()) / taken - 1) * 100
+    taken /= sum(INCOMING.values())
+    return POINTS_PER_PCT * (maxhp * (1 + bars / FIGHT_HP_BUDGET) / taken - 1) * 100
 
 
 def heal(per_fight):
-    """Tier weights for healing worth `per_fight` max-HP bars over the reference fight."""
-    return ehp([h / FIGHT_HP_BUDGET * 100 for h in per_fight])
+    """Tier weights for self-healing worth `per_fight` max-HP bars over the reference fight."""
+    return [Pct(POINTS_PER_PCT * h / FIGHT_HP_BUDGET * 100, "heal", "self", h) for h in per_fight]
 
 
 def team(sizes):
-    """Tier weights for an eHP gain of `sizes` percent for each ally."""
-    return ehp([s * ALLY_FACTOR * ALLIES for s in sizes])
+    """Tier weights for an eHP gain of `sizes` percent for each ally (added, not multiplied)."""
+    return [POINTS_PER_PCT * s * ALLY_FACTOR * ALLIES for s in sizes]
 
 
 # category -> family -> list of weights indexed by tier (base = tier 0, "+1" = tier 1, ...)
@@ -129,14 +148,15 @@ CATEGORIES = {
     },
     "sustain": {
         # Self
-        # Rally: meta anchor, non-negotiable for melee (50% eHP base); +1/+2 heal 25%/35% more.
-        "Partial HP Restoration upon Post-Damage Attacks": ehp([50, 62.5, 67.5]),
+        # Rally: meta anchor, non-negotiable for melee. Base heals 1.5 bars per fight
+        # (50% eHP on its own); +1/+2 heal 25%/35% more.
+        "Partial HP Restoration upon Post-Damage Attacks": heal([1.5, 1.875, 2.025]),
         "HP Recovery From Successful Guarding": heal([0.9]),  # guess: ~60 blocks x 1.5%
         "HP Restoration upon Thrusting Counterattack": heal([0.25, 0.33]),  # 10 x 2.5% guess / 3.3%
         "HP Restoration upon Halberd Attacks": heal([0.3]),  # guess
         "Continuous HP Recovery": heal([0.25]),  # guess
         "Slowly restore HP for self and nearby allies when HP is low": heal([0.25]),  # guess
-        "Increased Maximum HP": ehp([10]),
+        "Increased Maximum HP": ehp([10]),  # guess: size unsourced
         "Max HP increased for each great enemy defeated at a Great Church.": ehp([2.5]),  # guess: ~5% x 0.5 availability
         "Vigor": ehp([0, 2, 3.5, 5]),  # guess: % max HP per relic tier
         "Improved Flask HP Restoration": heal([0.1]),  # +10% of ~1 bar of flask healing
@@ -151,7 +171,7 @@ CATEGORIES = {
         # Defense
         "Improved Physical Damage Negation": negation([8, 10.5, 12], "physical"),  # base guessed
         "Improved Affinity Damage Negation": negation([6, 10.5, 12], "affinity"),
-        "Improved Damage Negation at Low HP": ehp([2.5]),  # guess, low uptime
+        "Improved Damage Negation at Low HP": ehp([2.5]),  # guess: eHP factor, low uptime
         "Improved Poise & Damage Negation When Knocked Back by Damage": [1.5],  # hand-weighted
         "Poise": [0, 1.5, 2, 2.5],  # hand-weighted: stagger, not eHP
         "Fire Damage Negation Up": negation([10], "fire"),  # guessed
@@ -223,10 +243,14 @@ CURSE_PENALTY = {
     "Lower Attack When Below Max HP": -3,
     "Poison Buildup When Below Max HP": -3.5,
     "Rot Buildup When Below Max HP": -4,
-    "Reduced Vigor and Arcane": -4,
+    "Reduced Vigor and Arcane": 0,  # scored through CURSE_MAXHP; Arcane is free
     "Continuous HP Loss": -4,
 }
 DUP_CURSE = -1  # extra per repeat of the same curse
+# Curses that lower max HP, as a percentage, applied inside the eHP product.
+CURSE_MAXHP = {
+    "Reduced Vigor and Arcane": -5,  # guess: mirrors the Vigor +3 relic (+5% max HP)
+}
 UNVERIFIED = -0.5
 
 # name -> (normal colors, deep colors); "W" = any
@@ -329,7 +353,11 @@ def breakdown(relics):
         else:
             parts[cats[fam]] += v
     parts["damage"] += damage_points([p for p in pcts if p.kind == "damage"])
-    parts["sustain"] += negation_points([p for p in pcts if p.kind == "negation"])
+    selfs = [p for p in pcts if p.kind != "damage"]
+    clean = sustain_points(selfs)
+    parts["sustain"] += clean
+    cursed = [CURSE_MAXHP[c] for c, n in curses.items() if c in CURSE_MAXHP for _ in range(n)]
+    parts["penalties"] += sustain_points(selfs, cursed) - clean
     for c, n in curses.items():
         parts["penalties"] += CURSE_PENALTY.get(c, -2) * n + DUP_CURSE * (n - 1)
     for d in dormant:
