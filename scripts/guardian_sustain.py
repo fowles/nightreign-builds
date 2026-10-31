@@ -1,6 +1,6 @@
 """Guardian Deep of Night loadout search: sustain + guard counters + Ultimate Art regen.
 
-Usage: python3 -I scripts/guardian_sustain.py [--top N] [--vessel NAME]
+Usage: python3 -I scripts/guardian_sustain.py [--top N] [--vessel NAME] [--max-curses N]
 
 Scoring:
   - Each family belongs to a category (damage / sustain / utility); output
@@ -351,14 +351,19 @@ def load():
     return [Relic(r) for r in data["relics"] if r["status"] == "active"]
 
 
-def top_triples(pool, colors, per_slot, keep):
+def curse_count(relics):
+    return sum(len(r.curses) for r in relics)
+
+
+def top_triples(pool, colors, per_slot, keep, max_curses):
     """Best `keep` relic triples (by triple score) for the given slot colors."""
+    pool = [r for r in pool if len(r.curses) <= max_curses]
     cands = [sorted((r for r in pool if r.fits(c)), key=lambda r: -r.solo)[:per_slot] for c in colors]
     seen = set()
     out = []
     for combo in itertools.product(*cands):
         ids = frozenset(r.id for r in combo)
-        if len(ids) < 3 or ids in seen:
+        if len(ids) < 3 or ids in seen or curse_count(combo) > max_curses:
             continue
         seen.add(ids)
         out.append((score(combo), combo))
@@ -366,15 +371,16 @@ def top_triples(pool, colors, per_slot, keep):
     return out[:keep]
 
 
-def search(relics, normal, deep, per_slot, keep):
+def search(relics, normal, deep, per_slot, keep, max_curses=99):
     std = [r for r in relics if r.kind == "standard" and r.solo > DISQUALIFY / 2]
     dp = [r for r in relics if r.kind == "deep" and r.solo > DISQUALIFY / 2]
-    nt = top_triples(std, normal, per_slot, keep)
-    dt = top_triples(dp, deep, per_slot, keep)
+    nt = top_triples(std, normal, per_slot, keep, max_curses)
+    dt = top_triples(dp, deep, per_slot, keep, max_curses)
     results = []
     for _, n in nt:
         for _, d in dt:
-            results.append((score(n + d), n, d))
+            if curse_count(n + d) <= max_curses:
+                results.append((score(n + d), n, d))
     results.sort(key=lambda t: -t[0])
     return results
 
@@ -405,13 +411,14 @@ def main():
     ap.add_argument("--vessel")
     ap.add_argument("--per-slot", type=int, default=80)
     ap.add_argument("--keep", type=int, default=2000)
+    ap.add_argument("--max-curses", type=int, default=99, help="cap on total curses per loadout")
     args = ap.parse_args()
     relics = load()
     summary = []
     for name, (normal, deep) in VESSELS.items():
         if args.vessel and args.vessel != name:
             continue
-        res = search(relics, normal, deep, args.per_slot, args.keep)
+        res = search(relics, normal, deep, args.per_slot, args.keep, args.max_curses)
         best = res[0][1] + res[0][2]
         has_rally = any(RALLY in r.fams for r in best)
         summary.append((res[0][0], name, breakdown(best), has_rally))
