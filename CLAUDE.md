@@ -25,13 +25,19 @@ This project is for designing **Elden Ring Nightreign** relic loadouts for **Dee
 
 ## Weighing effects
 
-Weight = **focus × size × uptime × availability**.
+Weight = **focus × size × coverage × uptime × availability**.
 
 - **Focus is binary.** An effect is *in focus* if it boosts something the build does every fight: its damage type, weapon class, spell school, or the character's skill, Art or passive. *Out-of-focus* effects are worth 0. Don't give partial credit for "might come up". Out of focus means 0, not negative. Dormant Power and curse penalties still apply separately. Fix the in-focus list when the build's goal is set (workflow step 1).
 - **Size:** use real percentages where known, so tier weights scale with them. For example, `Physical Attack Up` base through +4 is 3 / 4 / 5 / 8.5 / 10%, where +3/+4 come from aoeah and the lower tiers from a Nexus mod note. Mark guessed sizes **(unverified)**.
+- **Coverage (per build):** the share of the build's total damage that a damage effect actually boosts.
+  - Each build declares its own coverage table in its script and build file: scope → fraction, e.g. `all: 1.0, guard_counter: 0.35`.
+  - The default is 1.0. Use it for effects that touch nearly everything the build does, such as `Physical Attack Up` on a physical weapon build.
+  - Narrow effects get the fraction of damage they touch. For an explicit Bestial caster, Bestial spells are most of the damage, so `Improved Bestial Incantations` gets about 0.9. For a guard-counter Guardian, guard counters are only part of total damage, so `Improved Guard Counters` gets well under 1.
+  - Focus still gates first: an out-of-focus effect is 0 whatever its coverage.
+- **Damage scale:** 0.4 points per 1% of total damage after coverage. So +10% to everything is 4 points, and +22% to guard counters at 0.35 coverage is about 3.1 points. Use the same scale in every build so damage scores compare.
 - **Uptime:** discount conditional effects, such as ones that apply only at low HP, only while the Art is active, or only near Madness.
 - **Availability:** discount effects that need specific drops (a spell school, a weapon class, `3+ X Equipped`) by how likely the run is to supply them.
-- Example: `Improved Bestial Incantations` is out of focus for a halberd Guardian, so it's worth 0. For a Bestial caster, it and `Physical Attack Up` are both in focus, since Bestial spells do physical damage. They also stack, so they don't compete except for slots.
+- Example: `Improved Bestial Incantations` is out of focus for a halberd Guardian, so it's worth 0. For a Bestial caster, it and `Physical Attack Up` are both in focus, since Bestial spells do physical damage. Both get high coverage: about 0.9 for Bestial, and nearly 1.0 for Physical Attack Up. They also stack, so they don't compete except for slots.
 - **Meta anchors:**
   - **`Attack power increased for each Night Invader defeated`** is rated as about **+20% damage**, possibly the best damage effect in the current meta. It's only on standard relics. Assume copies don't stack **(unverified)**.
   - **Rally (`Partial HP Restoration upon Post-Damage Attacks`)** is by far the strongest sustain effect for melee builds and is **non-negotiable for melee sustain**. Weight it so that no melee loadout without it can win, and check that every top loadout carries it.

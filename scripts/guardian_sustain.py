@@ -22,17 +22,30 @@ from pathlib import Path
 
 DB = Path(__file__).resolve().parent.parent / "mfk-relicdb.json"
 
+# Share of this build's total damage each scope covers (CLAUDE.md "Coverage").
+COVERAGE = {
+    "all": 1.0,  # halberd hits, skills, counters: effectively all physical
+    "guard_counter": 0.35,  # guess: guard counters are a big but minor share of damage
+}
+DAMAGE_POINTS_PER_PCT = 0.4
+
+
+def pct(sizes, scope="all"):
+    """Tier weights for a damage buff of `sizes` percent over `scope`."""
+    return [DAMAGE_POINTS_PER_PCT * s * COVERAGE[scope] for s in sizes]
+
+
 # category -> family -> list of weights indexed by tier (base = tier 0, "+1" = tier 1, ...)
 # Categories are reported separately so damage and sustain compare across builds.
 # Stamina effects (incl. Endurance) are deliberately unweighted: nice to have at best.
 CATEGORIES = {
     "damage": {
-        "Improved Guard Counters": [8, 10, 12],
-        "Guard counter is given a boost based on current HP": [8],
+        "Improved Guard Counters": pct([18, 22, 26], "guard_counter"),  # base 18% guessed
+        "Guard counter is given a boost based on current HP": pct([18], "guard_counter"),  # guessed
         "[Guardian] Successful guards send out shockwaves while ability is active": [7],
-        "Physical Attack Up": [1.2, 1.6, 2, 3.4, 4],  # 3/4/5/8.5/10%, 0.4 per %
-        "Attack power increased for each Night Invader defeated": [8],  # ~20%, meta-top
-        "Improved Halberd Attack Power": [4],
+        "Physical Attack Up": pct([3, 4, 5, 8.5, 10]),
+        "Attack power increased for each Night Invader defeated": pct([20]),  # meta-top
+        "Improved Halberd Attack Power": pct([10]),  # size guessed
         "Strength": [0, 1, 1.5, 2],
         "Improved Attack Power with 3+ Halberds Equipped": [0.5],
         "[Guardian] Creates whirlwind when charging halberd attacks": [1],
