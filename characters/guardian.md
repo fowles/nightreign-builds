@@ -12,7 +12,7 @@
 | Passive | **Steel Guard**: hold Guard + tap Dodge to brace. Guard Boost x5, walk speed, slow stamina drain, no dodging. Covers a 180° frontal arc (widened in 1.02.2). Separately, +10% Guard Boost with any shield. |
 | Character Skill | **Whirlwind**: 360° spin; charging enlarges the area, pulls enemies in, deflects small projectiles. Cooldown 13 s (wiki.gg; Fextralife doesn't list one). Hits trigger "Stamina restored with each successful attack". |
 | Ultimate Art | **Wings of Salvation**: leap + dive with i-frames throughout. Instantly revives downed allies at the landing point. Holding after landing gives allies a damage-immunity aura for up to 5 s or until the gauge runs out (grabs bypass it). Uncharged use costs only half the gauge (Fextralife). |
-| Stats that matter | Vigor, Endurance (guard stamina), Strength (halberd), some Dex |
+| Stats that matter | Vigor, Strength (halberd), some Dex. Endurance (guard stamina) is worth 0 in scoring per CLAUDE.md. |
 | Stats that don't (near-free curses) | Intelligence; Faith and Arcane (unless running a Faith/incantation variant) |
 
 "Skill" = Whirlwind. "Ult/Art" = Wings of Salvation. In tagged effect text, **"ability" means the passive, Steel Guard** (e.g. "shockwaves while ability is active").
@@ -41,7 +41,7 @@
 | Giant's Cradle Grail (all) | B B B | B B B | 3000 Murk (after 7 Nightlords) |
 | Scadutree Grail (all, DLC) | R R R | R R R | 3000 Murk (after Dreglord) |
 
-Matches the CLAUDE.md table. All rows checked against wiki.gg and Fextralife. Fextralife's comparison table appeared to show Chalice deep as Y Y G, but its own Chalice page says R B Y, matching wiki.gg.
+Grail rows match the CLAUDE.md table. All rows checked against wiki.gg and Fextralife. Fextralife's comparison table appeared to show Chalice deep as Y Y G, but its own Chalice page says R B Y, matching wiki.gg.
 
 ## Character-tagged relic effects
 
@@ -79,10 +79,11 @@ The Scene relic names come from wiki.gg, and their pages were partially garbled 
 
 | Group | Effects (in-game text) |
 |---|---|
-| Guard counter offense | Improved Guard Counters (+1/+2), Guard counter is given a boost based on current HP, Improved Halberd Attack Power, Physical Attack Up (+1…+4) |
+| Guard counter offense | **Attack power increased for each Night Invader defeated** (≈+20%, meta-top per CLAUDE.md; standard relics only, 8 owned), Improved Guard Counters (+1/+2; +22%/+26% per aoeah, which predates the 1.03 buff, so likely higher now **(unverified)**), Guard counter is given a boost based on current HP, Improved Halberd Attack Power, Physical Attack Up (+1…+4) |
 | Art charge | Successful guarding fills more of the Art gauge (+1), Ultimate Art Auto Charge (+1…+3), Critical hits fill more of the Art gauge |
-| Sustain | HP Recovery From Successful Guarding (buffed 1.03.2), HP Restoration upon Thrusting Counterattack (+1), Continuous HP Recovery, Increased Maximum HP, Slowly restore HP for self and nearby allies when HP is low, Partial HP Restoration upon Post-Damage Attacks |
-| Defense / utility | Improved Physical Damage Negation (+1/+2), Improved Affinity Damage Negation, Increased Maximum Stamina, Draw enemy attention while guarding (buffed 1.03.2), Character Skill Cooldown Reduction, Flask Also Heals Allies |
+| Sustain | **Rally** = Partial HP Restoration upon Post-Damage Attacks (non-negotiable for melee per CLAUDE.md), HP Recovery From Successful Guarding (buffed 1.03.2), HP Restoration upon Thrusting Counterattack (+1), Continuous HP Recovery, Increased Maximum HP, Slowly restore HP for self and nearby allies when HP is low |
+| Defense / utility | Improved Physical Damage Negation (+1/+2), Improved Affinity Damage Negation, Draw enemy attention while guarding (buffed 1.03.2), Character Skill Cooldown Reduction, Flask Also Heals Allies |
+| Stamina | Increased Maximum Stamina: **worth 0 in scoring** (CLAUDE.md: stamina is tie-break only) |
 
 ## Dormant Powers
 
@@ -100,7 +101,7 @@ The Scene relic names come from wiki.gg, and their pages were partially garbled 
 | Acceptable | Reduced Dexterity and Faith, Reduced Faith and Strength, Reduced Rune Acquisition, Repeated Evasions Lower Damage Negation, Reduced Damage Negation After Evading (he blocks rather than rolls) | Low impact on a guard playstyle |
 | Costly | Reduced Vigor and Arcane (Vigor S), Reduced Flask HP Restoration, Reduced Damage Negation for Flask Usages, Near Death Reduces Max HP, All Resistances Down, Continuous HP Loss | Hurt the tank's HP pool or sustain |
 | Below-Max-HP family | Rot / Poison Buildup When Below Max HP, Lower Attack When Below Max HP | Preferred over `Taking Damage` variants, but a tank sits below max HP often, so not free |
-| Near-disqualifying | Taking Damage Causes Death / Sleep Buildup (worst), …Poison / Rot / Frost / Blood Loss / Madness Buildup | Unknown whether blocked chip damage triggers them (open question in CLAUDE.md) |
+| Near-disqualifying | Taking Damage Causes Death / Sleep Buildup (worst), …Poison / Rot / Frost / Blood Loss / Madness Buildup | Unknown whether blocked chip damage triggers them (CLAUDE.md curse rules) |
 | Disqualifying | Ultimate Art Charging Impaired | Wings of Salvation is the team's revive button |
 
 ## Meta notes and patch history

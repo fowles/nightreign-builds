@@ -12,7 +12,7 @@
 | Passive | **Bagcraft**: about 2x consumables per slot (darts 8→12); starting relic consumables doubled. Each item category levels up with use: Lv2 stronger, Lv3 adds a bonus (e.g. darts: stacking +damage-taken debuff up to +20% for 40 s; Crystal Tears: all attributes +5 for 120 s; Boiled Crab: +30% max HP). |
 | Character Skill | **Analyse**: monocle builds a progress dial on each enemy in view (decays when off-target; distance and nearby allies affect speed; new "specimens", i.e. enemy types, start higher). Below 50%: one step of enemy attack down, or self stamina up. Above 50%: double. Full on enemy: next hit does bonus stance damage. Full on self: one-hit negate shield plus a staggering shockwave. Self-use costs FP (implied by the deep relic; base cost not published). |
 | Ultimate Art | **Communion**: threads enemies (and allies); invulnerable while casting. Damage to one threaded enemy deals 20% to the other threaded enemies; threaded allies share healing; enemies that hit threaded targets take damage back. Gauge cost not published. |
-| Stats that matter | Arcane (status buildup, items), Vigor, Endurance. Dex only with the deep swap. |
+| Stats that matter | Arcane (status buildup, items), Vigor. Dex only with the deep swap. Endurance only matters for stamina, which is worth 0 in scoring per CLAUDE.md. |
 | Stats that don't (near-free curses) | Strength, Faith. Intelligence is mostly free (C; used by some items). |
 
 "Skill" = Analyse. "Ult/Art" = Communion. "Specimen" = a distinct enemy type you've analysed (inferred from the relic wording). "Character Skill on self" = Analyse aimed at yourself (the shield).
@@ -82,9 +82,9 @@ R01929 is the standout: two core tagged effects plus Cooldown −3, all on one Y
 |---|---|
 | Team/items | Items confer effect to all nearby allies, Improved Throwing Pot Damage (+1), HP restored when using medicinal boluses, etc. (+1), Improved Perfuming Arts (+1), Physical attack power increases after using grease items (+1/+2), Flask Also Heals Allies |
 | Starting items (doubled by Bagcraft) | Small Pouch, Fire / Lightning / Magic / Holy Water Pots, Crystal Darts, Poisonbone Darts, Crimson/Cerulean Crystal Tears ... "in possession at start of expedition" |
-| Status offense | Starting armament inflicts blood loss / poison / frost, Attack power up when facing poison- / scarlet rot- / frostbite-afflicted enemy (+1/+2), Arcane +3, Improved Thrusting Sword Attack Power |
+| Status offense | **Attack power increased for each Night Invader defeated** (≈+20%, meta-top per CLAUDE.md; standard relics only, 8 owned), Starting armament inflicts blood loss / poison / frost, Attack power up when facing poison- / scarlet rot- / frostbite-afflicted enemy (+1/+2), Arcane +3, Improved Thrusting Sword Attack Power |
 | Skill / Art | Character Skill Cooldown Reduction (+1..+3), Ultimate Art Auto Charge (+1..+3), Defeating enemies fills more of the Art gauge (+1) |
-| Sustain | Vigor +3, Increased Maximum HP, Partial HP Restoration upon Post-Damage Attacks |
+| Sustain | **Rally** = Partial HP Restoration upon Post-Damage Attacks (non-negotiable for melee per CLAUDE.md), Vigor +3, Increased Maximum HP |
 
 ## Dormant Powers
 

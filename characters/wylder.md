@@ -72,11 +72,11 @@ R00753, R01920 and R01921 are all **Red**. Wylder's Urn (R R B) and the Scadutre
 
 | Group | Effects (in-game text) |
 |---|---|
-| Offense | Physical Attack Up (+1…+4), Improved Greatsword Attack Power, Improved Attack Power with 3+ Greatswords Equipped, Fire Attack Power Up (+1…+4), Improved Initial Standard Attack, Improved Stance-Breaking when Two-Handing, Improved Critical Hits |
+| Offense | **Attack power increased for each Night Invader defeated** (≈+20%, meta-top per CLAUDE.md; standard relics only, 8 owned), Physical Attack Up (+1…+4), Improved Greatsword Attack Power, Improved Attack Power with 3+ Greatswords Equipped, Fire Attack Power Up (+1…+4), Improved Initial Standard Attack, Improved Stance-Breaking when Two-Handing, Improved Critical Hits |
 | Skill uptime | Character Skill Cooldown Reduction (+1…+3) |
 | Art charge | Ultimate Art Auto Charge (+1…+3), Critical hits fill more of the Art gauge (+1), Defeating enemies fills more of the Art gauge (+1) |
-| Sustain | Partial HP Restoration upon Post-Damage Attacks (+1/+2), Increased Maximum HP, Continuous HP Recovery, Improved Physical Damage Negation |
-| Stamina | Stamina Recovery upon Landing Attacks (+1), Increased Maximum Stamina, Critical Hit Boosts Stamina Recovery Speed |
+| Sustain | **Rally** = Partial HP Restoration upon Post-Damage Attacks (+1/+2; non-negotiable for melee per CLAUDE.md), Increased Maximum HP, Continuous HP Recovery, Improved Physical Damage Negation |
+| Stamina | Stamina Recovery upon Landing Attacks (+1), Increased Maximum Stamina, Critical Hit Boosts Stamina Recovery Speed: **worth 0 in scoring** (CLAUDE.md: stamina is tie-break only) |
 | Bleed | Starting armament inflicts blood loss, Changes compatible armament's skill to Blood Blade at start of expedition |
 
 ## Dormant Powers

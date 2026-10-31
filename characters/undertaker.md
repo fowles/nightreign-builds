@@ -63,7 +63,7 @@ Ratings: **Ham** = Str/Faith hammer, **Buff** = incantation-buff, **Stat** = sta
 | [Undertaker] Improved Mind and Faith, Reduced Strength | deep | Mind +9, Faith +12, Strength −15 | skip | good | skip | 3 deep, 1 std |
 | [Undertaker] Improved Dexterity, Reduced Vigor and Faith | deep | Dex +19, Vigor −5, Faith −13. wiki.gg: for curved sword/twinblade builds. | skip | skip | skip | 3 deep, 1 std |
 
-Every known [Undertaker] effect is owned. The chain-finisher bonus is "+12%" per wiki.gg. Trance itself also scales its damage bonus on chain completion, but whether the two stack multiplicatively is unknown.
+Every known [Undertaker] effect is owned. The chain-finisher bonus is "+12%" per wiki.gg. Trance itself also scales its damage bonus on chain completion, Per CLAUDE.md, attack buffs multiply, so assume the two multiply.
 
 **Stat swaps:**
 - **Mind/Faith up, Str −15**: only for a Faith-weighted incantation build. Strength A drives hammer damage, so the meta build skips it.
@@ -85,13 +85,13 @@ On Glass Necklace, "Successive Attacks Boost Attack Power" is +5%, stacking to +
 
 | Group | Effects (exact text) |
 |---|---|
-| Offense | Physical Attack Up (+1..+4; +3/+4 = +10.5%/+12% per wiki.gg, buffed 1.03), Improved Hammer Attack Power, Improved Attack Power with 3+ Hammers Equipped, Improved Initial Standard Attack, Improved Melee Attack Power, Improved Skill Attack Power, Strength +3, Faith +3 |
+| Offense | **Attack power increased for each Night Invader defeated** (≈+20%, meta-top per CLAUDE.md; standard relics only, 8 owned), Physical Attack Up (+1..+4; +3/+4 = +10.5%/+12% per wiki.gg, buffed 1.03. CLAUDE.md uses aoeah's 8.5%/10%, which may be pre-buff **(unverified)**), Improved Hammer Attack Power, Improved Attack Power with 3+ Hammers Equipped, Improved Initial Standard Attack, Improved Melee Attack Power, Improved Skill Attack Power, Strength +3, Faith +3 |
 | Stance | Improved Stance-Breaking when Two-Handing, Improved Stance-Breaking when Wielding Two Armaments |
 | Skill / Art | Character Skill Cooldown Reduction (+1..+3), Ultimate Art Auto Charge (+1..+3), Defeating enemies fills more of the Art gauge (+1), Critical hits fill more of the Art gauge (+1) |
-| Sustain | Partial HP Restoration upon Post-Damage Attacks (+1/+2), HP Restoration upon Hammer Attacks, Increased Maximum HP, Vigor +3, Improved Physical Damage Negation (+1/+2) |
+| Sustain | **Rally** = Partial HP Restoration upon Post-Damage Attacks (+1/+2; non-negotiable for melee per CLAUDE.md), HP Restoration upon Hammer Attacks, Increased Maximum HP, Vigor +3, Improved Physical Damage Negation (+1/+2) |
 | Buff build | Extended Spell Duration, Changes compatible armament's incantation to ... (Golden Vow isn't in my owned list) |
 
-**Stacking note:** wiki.gg's Undertaker page says **Partial HP Restoration +1 and +2 stack with each other but not with the base version**, and Stamina Recovery upon Landing Attacks +1 stacks with the base. This contradicts the project's "tiers don't stack" assumption for these families **(unverified)**.
+**Stacking note:** wiki.gg's Undertaker page says **Partial HP Restoration +1 and +2 stack with each other but not with the base version**, and Stamina Recovery upon Landing Attacks +1 stacks with the base. CLAUDE.md lists the rally case as an unverified exception to "healing doesn't stack". The stamina case doesn't matter, since stamina is worth 0.
 
 ## Dormant Powers
 

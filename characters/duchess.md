@@ -13,7 +13,7 @@
 | Character Skill | **Restage**: replays hits that nearby enemies took in the last 3 s at 50% damage, including stance damage and **status buildup**. Usable mid-animation. Cooldown 12 s (wiki.gg). |
 | Ultimate Art | **Finale**: Duchess and nearby allies turn invisible, and enemies drop aggro. Duration **15 s per wiki.gg vs ~10 s per Fextralife**. 1.02.2 increased it, so Fextralife is likely stale **(unverified)**. I-frames during the cast only. Attacking doesn't break it, but enemies swing toward you. |
 | Stats that matter | Dexterity (daggers), Intelligence (sorcery/magic daggers), Faith (Divine variant), Mind |
-| Stats that don't (near-free curses) | Strength, Endurance; Arcane mostly (C) unless using Arcane bleed daggers |
+| Stats that don't (near-free curses) | Strength, Endurance (stamina is worth 0 anyway); Arcane mostly (C) unless using Arcane bleed daggers |
 
 "Skill" = Restage. "Ult/Art" = Finale.
 
@@ -73,12 +73,12 @@ wiki.gg gives both Scene relics the same name, which is probably a fetch or summ
 
 | Group | Effects (in-game text) |
 |---|---|
-| Offense | Improved Dagger Attack Power, Improved Attack Power with 3+ Daggers Equipped, Physical Attack Up (+1…+4), Improved Critical Hits (+1), Improved Initial Standard Attack |
+| Offense | **Attack power increased for each Night Invader defeated** (≈+20%, meta-top per CLAUDE.md; standard relics only, 8 owned), Improved Dagger Attack Power, Improved Attack Power with 3+ Daggers Equipped, Physical Attack Up (+1…+4), Improved Critical Hits (+1), Improved Initial Standard Attack |
 | Status | Starting armament inflicts blood loss / frost, Attack power up when facing frostbite-afflicted enemy (+1/+2), Changes compatible armament's skill to Blood Blade / Chilling Mist at start of expedition |
 | Skill uptime | Character Skill Cooldown Reduction (+1…+3). Restage is her main damage multiplier. |
 | Art charge | Critical hits fill more of the Art gauge (+1), Defeating enemies fills more of the Art gauge (+1), Ultimate Art Auto Charge |
-| Sustain | HP Restoration upon Dagger Attacks, Partial HP Restoration upon Post-Damage Attacks, Continuous HP Recovery, Increased Maximum HP (low base HP) |
-| Stamina | Critical Hit Boosts Stamina Recovery Speed, Stamina Recovery upon Landing Attacks |
+| Sustain | **Rally** = Partial HP Restoration upon Post-Damage Attacks (non-negotiable for melee per CLAUDE.md), HP Restoration upon Dagger Attacks, Continuous HP Recovery, Increased Maximum HP (low base HP) |
+| Stamina | Critical Hit Boosts Stamina Recovery Speed, Stamina Recovery upon Landing Attacks: **worth 0 in scoring** (CLAUDE.md: stamina is tie-break only) |
 
 ## Dormant Powers
 

@@ -12,7 +12,7 @@
 | Passive | **Tenacity**: after recovering from an ailment, +20% attack power and +8 stamina regen/s for 20 s. Triggers when the ailment expires or is cured. Bleed, Sleep and Madness trigger it immediately. |
 | Character Skill | **Cursed Sword** (renamed Suncatcher after the Remembrance): toggles to the Cursed Sword, no cooldown. Guard timing deflects for low stamina cost and stance damage; **deflects count as guards for passives**. Walk speed only; dodge is a short dash (8 i-frames vs 13). Three deflects "unlock" the sword: the next attack/weapon skill is empowered. The Cursed Sword deals no ailments and gets no katana-specific bonuses. |
 | Ultimate Art | **Aspects of the Crucible: Beast**: full HP restore, max HP doubled, opening roar. Gauge drains over 15 s and can be cancelled early to save it. New light/heavy combos; guard = wide-area roar; weapon skill = claw swipe that ends the form. Large hitbox. Since 1.03.2: extra negation on the skill attack, a brief window where you can't be downed, and if HP hits 0 the form ends at 1 HP. |
-| Stats that matter | Dex, Arcane (bleed), Vigor, Endurance (deflect stamina) |
+| Stats that matter | Dex, Arcane (bleed), Vigor. Endurance (deflect stamina) is worth 0 in scoring per CLAUDE.md. |
 | Stats that don't (near-free curses) | Intelligence, Faith. Strength is minor (C). |
 
 "Skill" = Cursed Sword. "Ult/Art" = Beast transformation. In tagged effect text, **"ability" means the passive, Tenacity** (ailment recovery). "Roaring" = the guard input while in Beast form.
@@ -62,7 +62,7 @@ Every known [Executor] effect is owned. The old "...Attacking Drains HP" text no
 
 **Stat swaps:**
 - **Dex/Arc up, Vigor −7**: the damage swap. Arcane drives bleed buildup, Dex drives katana scaling. Costs about 7 Vigor of HP.
-- **Vig/End up, Arcane −13**: a defensive swap for a deflect build with no bleed. More stamina for deflects, and Arcane doesn't matter if the Cursed Sword (which can't inflict ailments) is your damage.
+- **Vig/End up, Arcane −13**: a defensive swap for a deflect build with no bleed. It scores as Vigor +5 only, since stamina is worth 0. Arcane doesn't matter if the Cursed Sword (which can't inflict ailments) is your damage.
 - The standard copies are DLC Scene relics (Grand Burning Scene: Vigor +3 / End +3 + swap; Grand Luminous Scene: Dex +3 / Arcane +3 + swap). They aren't in my unique-relic list, so query the db for their relic_ids.
 
 ## Remembrance / unique relics
@@ -80,10 +80,11 @@ Golden Sprout's "HP Recovery From Successful Guarding" should trigger on Cursed 
 
 | Group | Effects (exact text) |
 |---|---|
-| Offense | Improved Katana Attack Power, Improved Attack Power with 3+ Katana Equipped, Improved Critical Hits (+1), Improved Skill Attack Power, Improved Melee Attack Power, Physical Attack Up (+1..+4), Improved Initial Standard Attack, Dexterity +3, Arcane +3, Starting armament inflicts blood loss, Changes compatible armament's skill to Blood Blade / Seppuku |
+| Offense | **Attack power increased for each Night Invader defeated** (≈+20%, meta-top per CLAUDE.md; standard relics only, 8 owned), Improved Katana Attack Power, Improved Attack Power with 3+ Katana Equipped, Improved Critical Hits (+1), Improved Skill Attack Power, Improved Melee Attack Power, Physical Attack Up (+1..+4), Improved Initial Standard Attack, Dexterity +3, Arcane +3, Starting armament inflicts blood loss, Changes compatible armament's skill to Blood Blade / Seppuku |
 | Deflect (= guard) | HP Recovery From Successful Guarding, Successful guarding fills more of the Art gauge (+1), Improved Guard Counters (+1/+2) **(applies to deflects? unverified)** |
 | Art / Beast | Improved Roar & Breath Attacks (1.02 made Roar & Breath boosts apply to some Beast attacks), Ultimate Art Auto Charge, Critical hits fill more of the Art gauge (+1), Defeating enemies fills more of the Art gauge |
-| Sustain | Increased Maximum HP, Vigor +3, Increased Maximum Stamina, HP Restoration upon Katana Attacks, Partial HP Restoration upon Post-Damage Attacks, Critical Hit Boosts Stamina Recovery Speed |
+| Sustain | **Rally** = Partial HP Restoration upon Post-Damage Attacks (non-negotiable for melee per CLAUDE.md), Increased Maximum HP, Vigor +3, HP Restoration upon Katana Attacks |
+| Stamina | Increased Maximum Stamina, Critical Hit Boosts Stamina Recovery Speed: **worth 0 in scoring** (CLAUDE.md: stamina is tie-break only), even though deflects cost stamina |
 
 ## Dormant Powers
 

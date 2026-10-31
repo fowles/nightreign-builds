@@ -78,10 +78,10 @@ Every known [Revenant] effect is owned.
 
 | Group | Effects (exact text) |
 |---|---|
-| Offense (Faith) | Improved Incantations (+1/+2), Holy Attack Power Up (+1..+4), Fire Attack Power Up (+1..+4), Improved Claw Attack Power, Improved Attack Power with 3+ Claws Equipped, Faith +3, Improved Fundamentalist / Godslayer / Dragon Communion Incantations (whichever school you're running) |
+| Offense (Faith) | **Attack power increased for each Night Invader defeated** (≈+20%, meta-top per CLAUDE.md; standard relics only, 8 owned), Improved Incantations (+1/+2), Holy Attack Power Up (+1..+4), Fire Attack Power Up (+1..+4), Improved Claw Attack Power, Improved Attack Power with 3+ Claws Equipped, Faith +3, Improved Fundamentalist / Godslayer / Dragon Communion Incantations (whichever school you're running) |
 | FP | Increased Maximum FP, Reduced FP Consumption, Continuous FP Recovery, FP Restoration upon Claw Attacks, Max FP Up with 3+ Sacred Seals Equipped |
 | Art charge | Ultimate Art Auto Charge (+1..+3), Defeating enemies fills more of the Art gauge (+1), Critical hits fill more of the Art gauge |
-| Sustain / team | Increased Maximum HP, Vigor +3, Flask Also Heals Allies, Items confer effect to all nearby allies, Slowly restore HP for self and nearby allies when HP is low |
+| Sustain / team | **Rally** = Partial HP Restoration upon Post-Damage Attacks (core only if the build fights in melee, e.g. claws; whether spells trigger it is unverified), Increased Maximum HP, Vigor +3, Flask Also Heals Allies, Items confer effect to all nearby allies, Slowly restore HP for self and nearby allies when HP is low |
 | Utility | Changes compatible armament's incantation to ... (Wrath of Gold, Lightning Spear, O, Flame!, etc.) for the Finger Seal |
 
 ## Dormant Powers

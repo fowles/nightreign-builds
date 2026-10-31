@@ -70,12 +70,13 @@ Scene relic names are from wiki.gg, partially garbled when fetched **(unverified
 
 | Group | Effects (in-game text) |
 |---|---|
-| Offense | Improved Bow Attack Power, Improved Attack Power with 3+ Bows Equipped (both nerfed 1.03.2 after an accidental 1.03 buff), Physical Attack Up (+1…+4), Improved Critical Hits |
+| Offense | **Attack power increased for each Night Invader defeated** (≈+20%, meta-top per CLAUDE.md; standard relics only, 8 owned), Improved Bow Attack Power, Improved Attack Power with 3+ Bows Equipped (both nerfed 1.03.2 after an accidental 1.03 buff), Physical Attack Up (+1…+4), Improved Critical Hits |
 | Poison | Starting armament inflicts poison, Attack power up when facing poison-afflicted enemy (+1/+2), Poison & Rot in Vicinity Increases Attack Power, Changes compatible armament's skill to Poison Moth Flight / Poisonous Mist |
 | Skill uptime | Character Skill Cooldown Reduction (+1…+3) |
 | Art charge | Ultimate Art Auto Charge (+1…+3), Critical hits fill more of the Art gauge (+1), Defeating enemies fills more of the Art gauge (+1) |
-| Sustain | Partial HP Restoration upon Post-Damage Attacks (+1/+2; applies to bows since 1.02), Increased Maximum HP, Continuous HP Recovery, FP Restoration upon Bow Attacks. No "HP Restoration upon Bow Attacks" appears in the inventory. |
-| Utility | Changes compatible armament's skill to Rain of Arrows (Fextralife suggestion), Stamina Recovery upon Landing Attacks |
+| Sustain | **Rally** = Partial HP Restoration upon Post-Damage Attacks (+1/+2; applies to bows since 1.02, so in focus for a bow build too), Increased Maximum HP, Continuous HP Recovery, FP Restoration upon Bow Attacks. No "HP Restoration upon Bow Attacks" appears in the inventory. |
+| Utility | Changes compatible armament's skill to Rain of Arrows (Fextralife suggestion) |
+| Stamina | Stamina Recovery upon Landing Attacks: **worth 0 in scoring** (CLAUDE.md: stamina is tie-break only) |
 
 ## Dormant Powers
 

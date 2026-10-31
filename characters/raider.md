@@ -12,7 +12,7 @@
 | Passive | **Fighter's Resolve**: taking damage powers up Retaliate. Can't be knocked down during Retaliate, and lethal damage during it leaves him at 1 HP. Since 1.03.2, a big HP drop grants attack power for a set time. wiki.gg: +50% damage for 10 s at ≤25% HP (exact post-1.03.2 numbers **unverified**). |
 | Character Skill | **Retaliate**: hyper-armored stance with increased damage negation, then a punch. After taking ≥850 damage (pre-negation) he steams and the next use is charged: +50% damage, shockwave, Ult-level stagger. Cooldown **not published** by either wiki. Its damage doesn't trigger Partial HP Restoration. |
 | Ultimate Art | **Totem Stela**: summons a climbable tombstone for 20 s. Creation deals AoE damage (range widened in 1.03.2), and nearby Nightfarers get +15% physical damage. Blocks arrows and can obstruct allies. I-frames during the wind-up. |
-| Stats that matter | Strength, Vigor, Endurance |
+| Stats that matter | Strength, Vigor. Endurance only matters for stamina, which is worth 0 in scoring per CLAUDE.md. |
 | Stats that don't (near-free curses) | Intelligence, Faith, Mind (all D); Dexterity and Arcane mostly (C) |
 
 "Skill" = Retaliate. "Ult/Art" = Totem Stela.
@@ -50,7 +50,7 @@ Ratings: **Ret** = Retaliate bruiser, **Totem** = Totem support, **Break** = sta
 | [Raider] Improved Mind and Intelligence, Reduced Vigor and Endurance | deep | Mind +9, Int +35, Vigor −8, Endurance −4 | skip | skip | skip | 6 deep, 1 std |
 | [Raider] Improved Arcane, Reduced Vigor | deep | Arc +17, Vigor −4 | niche (bleed/rot Arcane weapons, e.g. Rotten Greataxe) | skip | niche | 6 deep, 1 std |
 
-**Stat swaps:** Mind/Int is a gimmick (Int +35 for an Int-scaling colossal weapon or sorcery Raider) and costs Vigor and Endurance. Treat it as negative on normal builds. Arcane/Vigor is cheap (−4 Vigor) and helps only on Arcane-scaling status weapons. The standard copies come from DLC Scene relics (Grand Burning Scene 2 and Grand Tranquil Scene 1, Collector Signboard after the Dreglord), with magnitudes **(unverified)**.
+**Stat swaps:** Mind/Int is a gimmick (Int +35 for an Int-scaling colossal weapon or sorcery Raider) and costs Vigor (the Endurance cost is free, since stamina is worth 0). Treat it as negative on normal builds. Arcane/Vigor is cheap (−4 Vigor) and helps only on Arcane-scaling status weapons. The standard copies come from DLC Scene relics (Grand Burning Scene 2 and Grand Tranquil Scene 1, Collector Signboard after the Dreglord), with magnitudes **(unverified)**.
 
 ## Remembrance / unique relics
 
@@ -62,17 +62,17 @@ Ratings: **Ret** = Retaliate bruiser, **Totem** = Totem support, **Break** = sta
 | Besmirched Frame | Blue | Taking attacks improves attack power; Faith +3 | Fextralife Raider recommendation (no tag) | **R00752** |
 | Night of the Fathom | Red | Increased Maximum HP; Flask Also Heals Allies; Items confer effect to all nearby allies | Common guide pick (no tag) | **R00813** |
 
-Scene relic name is from wiki.gg, partially garbled when fetched **(unverified)**. Other owned no-tag relics carrying "Taking attacks improves attack power": **R00829** Dark Night of the Beast (Yellow) and **R00771** Dark Night of the Demon (Blue, which also has two Madness effects). **Taking attacks improves attack power** is a single family, so assume multiple copies don't stack (per CLAUDE.md).
+Scene relic name is from wiki.gg, partially garbled when fetched **(unverified)**. Other owned no-tag relics carrying "Taking attacks improves attack power": **R00829** Dark Night of the Beast (Yellow) and **R00771** Dark Night of the Demon (Blue, which also has two Madness effects). **Taking attacks improves attack power** is a conditional attack buff, so per CLAUDE.md assume copies don't stack: highest tier only **(unverified)**.
 
 ## Key universal effects
 
 | Group | Effects (in-game text) |
 |---|---|
-| Offense | Taking attacks improves attack power, Physical Attack Up (+1…+4), Improved Colossal Weapon Attack Power / Great Hammer / Greataxe / Colossal Sword, Improved Attack Power with 3+ (type) Equipped, Improved Critical Hits |
+| Offense | **Attack power increased for each Night Invader defeated** (≈+20%, meta-top per CLAUDE.md; standard relics only, 8 owned), Taking attacks improves attack power, Physical Attack Up (+1…+4), Improved Colossal Weapon Attack Power / Great Hammer / Greataxe / Colossal Sword, Improved Attack Power with 3+ (type) Equipped, Improved Critical Hits |
 | Stance | Improved Stance-Breaking when Two-Handing, Improved Stance-Breaking when Wielding Two Armaments |
 | Defense | Improved Poise & Damage Negation When Knocked Back by Damage, Improved Physical Damage Negation (+1/+2), Improved Damage Negation at Low HP (potency cut in 1.03, triggers broadened), Poise +N |
 | Totem / Art | Defeating enemies near Totem Stela restores HP, Improved Poise Near Totem Stela, Ultimate Art Auto Charge, Defeating enemies fills more of the Art gauge (+1) |
-| Sustain | HP Restoration upon Colossal Weapon / Greataxe / Great Hammer Attacks, Partial HP Restoration upon Post-Damage Attacks (+1/+2; doesn't proc off Retaliate), Increased Maximum HP |
+| Sustain | **Rally** = Partial HP Restoration upon Post-Damage Attacks (+1/+2; non-negotiable for melee per CLAUDE.md; doesn't proc off Retaliate), HP Restoration upon Colossal Weapon / Greataxe / Great Hammer Attacks, Increased Maximum HP |
 | Skill uptime | Character Skill Cooldown Reduction (+1…+3) |
 
 ## Dormant Powers

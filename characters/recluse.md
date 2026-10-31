@@ -79,10 +79,10 @@ Bone-Like Stone is the only Recluse Remembrance relic I'm missing. Finish Rememb
 
 | Group | Effects (exact text) |
 |---|---|
-| Offense | Improved Sorceries (+1/+2), Improved Incantations (+1/+2), Magic Attack Power Up (+1..+4), Holy / Fire / Lightning Attack Power Up, Improved Affinity Attack Power (+1/+2), Intelligence +3, Faith +3. School-specific: Improved Carian Sword / Glintblade / Gravity / Crystalian / Stonedigger / Thorn Sorcery, Improved Dragon Communion / Godslayer / Fundamentalist Incantations. |
+| Offense | **Attack power increased for each Night Invader defeated** (≈+20%, meta-top per CLAUDE.md; standard relics only, 8 owned), Improved Sorceries (+1/+2), Improved Incantations (+1/+2), Magic Attack Power Up (+1..+4), Holy / Fire / Lightning Attack Power Up, Improved Affinity Attack Power (+1/+2), Intelligence +3, Faith +3. School-specific: Improved Carian Sword / Glintblade / Gravity / Crystalian / Stonedigger / Thorn Sorcery, Improved Dragon Communion / Godslayer / Fundamentalist Incantations. |
 | FP | Increased Maximum FP, Reduced FP Consumption, Continuous FP Recovery, Max FP Up with 3+ Staves Equipped, Max FP Up with 3+ Sacred Seals Equipped, Max FP increased for each Sorcerer's Rise unlocked |
 | Art charge | Ultimate Art Auto Charge (+1..+3), Defeating enemies fills more of the Art gauge (+1) |
-| Sustain / defense | Increased Maximum HP, Vigor +3, Improved Affinity Damage Negation (+1/+2), Improved Damage Negation at Low HP |
+| Sustain / defense | **Rally** = Partial HP Restoration upon Post-Damage Attacks (core only if the build fights in melee; whether spells trigger it is unverified), Increased Maximum HP, Vigor +3, Improved Affinity Damage Negation (+1/+2), Improved Damage Negation at Low HP |
 | Utility | Changes compatible armament's sorcery to ... (Carian Greatsword, Night Shard, Magma Shot, Magic Glintblade); Changes compatible armament's incantation to ... |
 
 ## Dormant Powers
