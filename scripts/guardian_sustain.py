@@ -31,15 +31,28 @@ COVERAGE = {
 }
 
 # Reference fight model for sustain (CLAUDE.md "Sustain scale"). All guesses.
-INCOMING = {"physical": 0.6, "affinity": 0.4, "element": 0.1}  # share of damage taken
+INCOMING = {"physical": 0.6, "fire": 0.1, "holy": 0.1, "lightning": 0.1, "magic": 0.1}  # share of damage taken
+AFFINITY = ("fire", "holy", "lightning", "magic")
 FIGHT_HP_BUDGET = 3.0  # max-HP bars absorbed per fight: base HP + flasks + baseline regen
 ALLY_FACTOR = 0.5  # each ally's eHP vs. your own
 ALLIES = 2
 
 
+class Pct(float):
+    """A percentage effect that combines multiplicatively in breakdown().
+
+    Its float value is the linear (single-effect) weight, used for ranking relics.
+    """
+
+    def __new__(cls, points, kind, scope, size):
+        obj = super().__new__(cls, points)
+        obj.kind, obj.scope, obj.size = kind, scope, size
+        return obj
+
+
 def pct(sizes, scope="all"):
     """Tier weights for a damage buff of `sizes` percent over `scope`."""
-    return [POINTS_PER_PCT * s * COVERAGE[scope] for s in sizes]
+    return [Pct(POINTS_PER_PCT * s * COVERAGE[scope], "damage", scope, s) for s in sizes]
 
 
 def ehp(sizes):
@@ -48,8 +61,31 @@ def ehp(sizes):
 
 
 def negation(sizes, scope):
-    """Tier weights for `sizes` percent damage negation against an INCOMING share."""
-    return ehp([INCOMING[scope] * (100 / (100 - s) - 1) * 100 for s in sizes])
+    """Tier weights for `sizes` percent damage negation of `scope` ("affinity" = all elements)."""
+    share = sum(INCOMING[t] for t in AFFINITY) if scope == "affinity" else INCOMING[scope]
+    return [Pct(POINTS_PER_PCT * share * (100 / (100 - s) - 1) * 100, "negation", scope, s) for s in sizes]
+
+
+def damage_points(buffs):
+    """Points for a set of damage Pct buffs: multiplicative within a scope, scopes by coverage."""
+    mult = {}
+    for b in buffs:
+        mult[b.scope] = mult.get(b.scope, 1.0) * (1 + b.size / 100)
+    sub = [sc for sc in COVERAGE if sc != "all"]
+    narrow = 1 - sum(COVERAGE[sc] for sc in sub) + sum(COVERAGE[sc] * mult.get(sc, 1.0) for sc in sub)
+    total = mult.get("all", 1.0) * narrow
+    return POINTS_PER_PCT * (total - 1) * 100
+
+
+def negation_points(negs):
+    """Points for a set of negation Pct effects: effective HP from multiplicative negation."""
+    keep = {}
+    for n in negs:
+        keep[n.scope] = keep.get(n.scope, 1.0) * (1 - n.size / 100)
+    aff = keep.get("affinity", 1.0)
+    taken = INCOMING["physical"] * keep.get("physical", 1.0)
+    taken += sum(INCOMING[t] * aff * keep.get(t, 1.0) for t in AFFINITY)
+    return POINTS_PER_PCT * (sum(INCOMING.values()) / taken - 1) * 100
 
 
 def heal(per_fight):
@@ -104,14 +140,14 @@ CATEGORIES = {
         "Improved Damage Negation at Low HP": ehp([2.5]),  # guess, low uptime
         "Improved Poise & Damage Negation When Knocked Back by Damage": [1.5],  # hand-weighted
         "Poise": [0, 1.5, 2, 2.5],  # hand-weighted: stagger, not eHP
-        "Fire Damage Negation Up": negation([10], "element"),  # guessed
-        "Improved Fire Damage Negation": negation([10, 15, 16], "element"),
-        "Holy Damage Negation Up": negation([10], "element"),
-        "Improved Holy Damage Negation": negation([10, 15, 16], "element"),
-        "Lightning Damage Negation Up": negation([10], "element"),
-        "Improved Lightning Damage Negation": negation([10, 15, 16], "element"),
-        "Magic Damage Negation Up": negation([10], "element"),
-        "Improved Magic Damage Negation": negation([10, 15, 16], "element"),
+        "Fire Damage Negation Up": negation([10], "fire"),  # guessed
+        "Improved Fire Damage Negation": negation([10, 15, 16], "fire"),
+        "Holy Damage Negation Up": negation([10], "holy"),
+        "Improved Holy Damage Negation": negation([10, 15, 16], "holy"),
+        "Lightning Damage Negation Up": negation([10], "lightning"),
+        "Improved Lightning Damage Negation": negation([10, 15, 16], "lightning"),
+        "Magic Damage Negation Up": negation([10], "magic"),
+        "Improved Magic Damage Negation": negation([10, 15, 16], "magic"),
         # Stat swaps that cost Vigor
         "[Guardian] Improved Strength and Dexterity, Reduced Vigor": [-2],
         "[Guardian] Improved Mind and Faith, Reduced Vigor": [-4],
@@ -245,6 +281,7 @@ class Relic:
 def breakdown(relics):
     """Score split into damage / sustain / utility / penalties; values sum to the total."""
     parts = dict.fromkeys(("damage", "sustain", "utility", "penalties"), 0.0)
+    pcts = []  # multiplicative effects, combined after the loop
     best = {}
     cats = {}
     curses = {}
@@ -255,7 +292,10 @@ def breakdown(relics):
             # Negative families (stat swaps) and attack buffs always apply;
             # other positives take the max.
             if v < 0 or fam in STACKING:
-                parts[r.cats[fam]] += v
+                if isinstance(v, Pct):
+                    pcts.append(v)
+                else:
+                    parts[r.cats[fam]] += v
             elif v > best.get(fam, 0):
                 best[fam] = v
         for c in r.curses:
@@ -263,7 +303,12 @@ def breakdown(relics):
         dormant += r.dormant
         parts["penalties"] += UNVERIFIED * len(r.unverified)
     for fam, v in best.items():
-        parts[cats[fam]] += v
+        if isinstance(v, Pct):
+            pcts.append(v)
+        else:
+            parts[cats[fam]] += v
+    parts["damage"] += damage_points([p for p in pcts if p.kind == "damage"])
+    parts["sustain"] += negation_points([p for p in pcts if p.kind == "negation"])
     for c, n in curses.items():
         parts["penalties"] += CURSE_PENALTY.get(c, -2) * n + DUP_CURSE * (n - 1)
     for d in dormant:

@@ -6,12 +6,13 @@
 > - Stamina is worth 0.
 > - Meta anchors: Night Invader ≈ +20% damage; rally is non-negotiable. Every vessel's top two loadouts carry rally.
 > - **Damage and sustain share one scale: 0.4 points per 1%** of total damage or of effective HP.
+> - **Damage buffs and negations combine multiplicatively** (two +10% = +21%).
 >
 > | Model input | Value | Note |
 > |---|---|---|
 > | Damage coverage: all | 1.0 | `Physical Attack Up`, Night Invader, halberd attack power |
 > | Damage coverage: guard_counter | 0.35 | guess |
-> | Incoming damage mix | physical 0.6, affinity 0.4, each element 0.1 | guess |
+> | Incoming damage mix | physical 0.6; fire, holy, lightning, magic 0.1 each | guess |
 > | Fight HP budget | 3.0 max-HP bars | guess |
 > | Ally factor | 0.5 per ally, 2 allies | guess |
 >
@@ -24,16 +25,16 @@ Best loadout per vessel:
 | Vessel | Total | Damage | Sustain | Utility | Penalties |
 |---|---|---|---|---|---|
 | Guardian's Chalice | 93.5 | 16.0 | 56.5 | 22.5 | −1.5 |
-| Giant's Cradle Grail | 91.6 | 7.0 | 74.1 | 12.0 | −1.5 |
-| Guardian's Urn | 89.0 | 21.5 | 54.5 | 18.0 | −5.0 |
-| Guardian's Goblet | 87.6 | 15.5 | 53.1 | 21.0 | −2.0 |
-| Sealed Guardian's Urn | 87.6 | 17.5 | 50.1 | 22.0 | −2.0 |
-| Sacred Erdtree Grail | 87.5 | 21.0 | 58.5 | 20.0 | −12.0 |
-| Forgotten Guardian's Goblet | 85.6 | 14.0 | 55.1 | 18.0 | −1.5 |
-| Decrepit Guardian's Goblet | 85.5 | 23.0 | 47.0 | 18.0 | −2.5 |
-| Soot-Covered Guardian's Urn | 83.3 | 17.5 | 45.7 | 22.0 | −2.0 |
-| Spirit Shelter Grail | 81.9 | 23.0 | 42.9 | 18.0 | −2.0 |
-| Scadutree Grail | 80.1 | 17.5 | 55.1 | 9.0 | −1.5 |
+| Giant's Cradle Grail | 91.4 | 7.0 | 73.9 | 12.0 | −1.5 |
+| Guardian's Urn | 90.6 | 23.1 | 54.5 | 18.0 | −5.0 |
+| Sacred Erdtree Grail | 88.9 | 22.4 | 58.5 | 20.0 | −12.0 |
+| Guardian's Goblet | 88.2 | 16.1 | 53.1 | 21.0 | −2.0 |
+| Sealed Guardian's Urn | 88.1 | 18.0 | 50.1 | 22.0 | −2.0 |
+| Decrepit Guardian's Goblet | 87.1 | 24.6 | 47.0 | 18.0 | −2.5 |
+| Forgotten Guardian's Goblet | 86.4 | 14.8 | 55.1 | 18.0 | −1.5 |
+| Soot-Covered Guardian's Urn | 83.8 | 18.0 | 45.7 | 22.0 | −2.0 |
+| Spirit Shelter Grail | 83.5 | 24.6 | 42.8 | 18.0 | −2.0 |
+| Scadutree Grail | 81.2 | 21.6 | 52.1 | 9.0 | −1.5 |
 
 Utility (Art gauge, cooldowns) and a few sustain effects (poise, aggro) are still hand-weighted.
 
@@ -66,7 +67,7 @@ Utility (Art gauge, cooldowns) and a few sustain effects (poise, aggro) are stil
 
 ## Alternative: Giant's Cradle Grail (Normal B B B / Deep B B B), maximum sustain
 
-**Score 91.6:** damage 7.0, sustain 74.1, utility 12.0, penalties −1.5.
+**Score 91.4:** damage 7.0, sustain 73.9, utility 12.0, penalties −1.5.
 
 | Slot | Relic | Effects (curse attached) |
 |---|---|---|
