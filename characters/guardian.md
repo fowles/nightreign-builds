@@ -84,18 +84,6 @@ The Scene relic names come from wiki.gg, and their pages were partially garbled 
 | Sustain | HP Recovery From Successful Guarding (buffed 1.03.2), HP Restoration upon Thrusting Counterattack (+1), Continuous HP Recovery, Increased Maximum HP, Slowly restore HP for self and nearby allies when HP is low, Partial HP Restoration upon Post-Damage Attacks |
 | Defense / utility | Improved Physical Damage Negation (+1/+2), Improved Affinity Damage Negation, Increased Maximum Stamina, Draw enemy attention while guarding (buffed 1.03.2), Character Skill Cooldown Reduction, Flask Also Heals Allies |
 
-## Current builds (from CLAUDE.md, preserved)
-
-**Best: Forgotten Guardian's Goblet** (Normal G B B / Deep R B W)
-- Normal: R00855 Night of the Champion, R01922 Witch's Brooch, R00823 Dark Night of the Fathom
-- Deep: R01176 (Red), R00306 (Blue), R00394 (White)
-- One curse total, no Dormant Powers.
-
-**Fallback: Guardian's Goblet** (B B G / B B G)
-- Normal: R00855, R01922, R00823
-- Deep: R01755, R01318, R00387
-- Swap R01318 for R00306 if you want healing on block instead of Art charge on block.
-
 ## Dormant Powers
 
 | Status | Dormant Powers |

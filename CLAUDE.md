@@ -18,7 +18,20 @@ This project is for designing **Elden Ring Nightreign** relic loadouts for **Dee
 - **Deep of Night uses all six slots.** Each vessel has 3 normal slots, which take `standard` relics, and 3 deep slots, which take `deep` relics. Both sets apply in Deep of Night. Deep relics do nothing in normal expeditions.
 - **Slot colors must match.** White slots accept any color.
 - **Character-tagged effects** (`[Guardian] ...`) only work on that Nightfarer. A relic tagged for another character can still be used for its other effects, but the tagged effect is wasted. Score it that way.
-- **Stacking:** assume different tiers of the same effect (e.g., `Improved Guard Counters` / `+1` / `+2`) do **not** stack, so only the highest counts. State this assumption when it affects a pick. Different effect families do stack.
+- **Stacking:** different effect families always stack. Within one family it depends on what kind of buff it is:
+  - **Attack buffs stack.** Count every copy, across tiers and duplicates: `Physical Attack Up`, element `Attack Power Up`, `Improved Affinity Attack Power`, `Improved Sorceries`/`Incantations`, spell-school and weapon-class attack power, `Improved Guard Counters`. Exception: aoeah lists conditional attack buffs as non-stacking (grease, `... in Vicinity Improves Attack Power`, attack up vs. poison/rot/frostbite). Treat those as highest-tier-only **(unverified)**.
+  - **Defensive and healing buffs don't stack.** Only the highest tier counts: damage negation, poise, HP recovery and restoration, max HP. wiki.gg lists some exceptions (e.g. `Partial HP Restoration +1` and `+2` stack with each other) **(unverified)**.
+  - **Everything else** (crits, Art gauge, cooldowns, utility): unknown. Assume highest-tier-only and say so when it affects a pick.
+
+## Weighing effects
+
+Weight = **focus × size × uptime × availability**.
+
+- **Focus is binary.** An effect is *in focus* if it boosts something the build does every fight: its damage type, weapon class, spell school, or the character's skill, Art or passive. *Out-of-focus* effects are worth 0. Don't give partial credit for "might come up". Out of focus means 0, not negative. Dormant Power and curse penalties still apply separately. Fix the in-focus list when the build's goal is set (workflow step 1).
+- **Size:** use real percentages where known, so tier weights scale with them. For example, `Physical Attack Up` base through +4 is 3 / 4 / 5 / 8.5 / 10%, where +3/+4 come from aoeah and the lower tiers from a Nexus mod note. Mark guessed sizes **(unverified)**.
+- **Uptime:** discount conditional effects, such as ones that apply only at low HP, only while the Art is active, or only near Madness.
+- **Availability:** discount effects that need specific drops (a spell school, a weapon class, `3+ X Equipped`) by how likely the run is to supply them.
+- Example: `Improved Bestial Incantations` is out of focus for a halberd Guardian, so it's worth 0. For a Bestial caster, it and `Physical Attack Up` are both in focus, since Bestial spells do physical damage. They also stack, so they don't compete except for slots.
 
 ## Non-negotiable rules
 
@@ -52,37 +65,33 @@ Grails usable by every Nightfarer:
 
 ## Workflow for a new build
 
-1. Confirm the goal: character, weapon type, playstyle, and what "alt", "ult" or "skill" means (Character Skill vs. Ultimate Art).
+1. Confirm the goal: character, weapon type, playstyle.
 2. Check the current meta with web search. Patches change effects and vessels.
-3. Write effect weights for the goal and curse penalties for the build's stats and playstyle. Apply the Dormant Power and on-hit curse rules above.
+3. Write effect weights for the goal (see **Weighing effects**) and curse penalties for the build's stats and playstyle. Apply the Dormant Power and on-hit curse rules above.
 4. Score relics, then brute-force or search every 6-slot combination for each eligible vessel, deduplicating effect families across all six slots.
-5. Present the top vessel plus one alternative, preferring easy-to-get vessels when scores are close. For each loadout, give:
+5. Present the top vessel plus one alternative. For each loadout, give:
    - a table with every relic and every effect, curses attached
    - total curses, Dormant Powers carried, and any `unverified_effect` flags
    - the gameplay loop the build creates, and its trade-offs
 6. Keep scripts in `scripts/` so weights can be adjusted and re-run.
+7. Write the result to its own file in `builds/`, not the character file.
 
 ## Character notes
 
-Read the Nightfarer's file before building for them. Each covers kit and stat scaling, meta archetypes, vessels, every `[Character]`-tagged effect (with how many I own), remembrance relics (with `relic_id`s), key universal effects, on-build Dormant Powers, curse judgments, patch history, and sources. Current builds live in the character file. Update it when a build changes.
+Read the Nightfarer's file before building for them. Each covers kit and stat scaling, meta archetypes, vessels, every `[Character]`-tagged effect (with how many I own), remembrance relics (with `relic_id`s), key universal effects, on-build Dormant Powers, curse judgments, patch history, and sources. Character files are reference only: don't put builds in them. Each build gets its own file in `builds/`, named `<nightfarer>-<goal>.md` (e.g. `builds/guardian-sustain.md`), with the full presentation from the workflow above. Update a build's file when it changes.
 
-| Nightfarer | File | Notes |
-|---|---|---|
-| Wylder | [characters/wylder.md](characters/wylder.md) | |
-| Guardian | [characters/guardian.md](characters/guardian.md) | Has current best and fallback builds |
-| Ironeye | [characters/ironeye.md](characters/ironeye.md) | Some vessel colors unverified |
-| Duchess | [characters/duchess.md](characters/duchess.md) | |
-| Raider | [characters/raider.md](characters/raider.md) | |
-| Revenant | [characters/revenant.md](characters/revenant.md) | Decrepit Goblet colors unverified |
-| Recluse | [characters/recluse.md](characters/recluse.md) | Decrepit/Forgotten colors unverified; Bone-Like Stone not owned |
-| Executor | [characters/executor.md](characters/executor.md) | |
-| Scholar | [characters/scholar.md](characters/scholar.md) | Forsaken Hollows DLC; Forgotten Goblet colors unverified |
-| Undertaker | [characters/undertaker.md](characters/undertaker.md) | Forsaken Hollows DLC; four vessels unverified |
+| Nightfarer | File |
+|---|---|
+| Wylder | [characters/wylder.md](characters/wylder.md) |
+| Guardian | [characters/guardian.md](characters/guardian.md) |
+| Ironeye | [characters/ironeye.md](characters/ironeye.md) |
+| Duchess | [characters/duchess.md](characters/duchess.md) |
+| Raider | [characters/raider.md](characters/raider.md) |
+| Revenant | [characters/revenant.md](characters/revenant.md) |
+| Recluse | [characters/recluse.md](characters/recluse.md) |
+| Executor | [characters/executor.md](characters/executor.md) |
+| Scholar | [characters/scholar.md](characters/scholar.md) |
+| Undertaker | [characters/undertaker.md](characters/undertaker.md) |
 
 In tagged effect text, "ability" usually means the character's passive and "Art" means the Ultimate Art.
 
-## Open questions
-
-- Does blocked chip damage trigger `Taking Damage Causes X Buildup` curses? Test early in a Deep of Night run against an elemental attacker.
-- Do different tiers of the same effect stack? Currently assumed no. wiki.gg claims some do (e.g. `Partial HP Restoration` +1 and +2 stack with each other but not with the base; `Stamina Recovery upon Landing Attacks` +1 stacks with its base). Single source; untested.
-- Standard-relic stat-swap effects (`[X] Improved A, Reduced B` on fixed DLC Scene relics): magnitudes unknown. Deep versions are documented in the character files.
