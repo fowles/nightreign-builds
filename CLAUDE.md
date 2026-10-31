@@ -18,42 +18,38 @@ This project is for designing **Elden Ring Nightreign** relic loadouts for **Dee
 - **Deep of Night uses all six slots.** Each vessel has 3 normal slots, which take `standard` relics, and 3 deep slots, which take `deep` relics. Both sets apply in Deep of Night. Deep relics do nothing in normal expeditions.
 - **Slot colors must match.** White slots accept any color.
 - **Character-tagged effects** (`[Guardian] ...`) only work on that Nightfarer. A relic tagged for another character can still be used for its other effects, but the tagged effect is wasted. Score it that way.
-- **Stacking:** different effect families always stack. Within one family it depends on what kind of buff it is:
-  - **Attack buffs stack, and always multiply.** Two +10% buffs give +21%, not +20%. Count every copy, across tiers and duplicates: `Physical Attack Up`, element `Attack Power Up`, `Improved Affinity Attack Power`, `Improved Sorceries`/`Incantations`, spell-school and weapon-class attack power, `Improved Guard Counters`. Exception: aoeah lists conditional attack buffs as non-stacking (grease, `... in Vicinity Improves Attack Power`, attack up vs. poison/rot/frostbite). Treat those as highest-tier-only **(unverified)**.
-  - **Defensive and healing buffs don't stack.** Only the highest tier counts: damage negation, poise, HP recovery and restoration, max HP. wiki.gg lists some exceptions (e.g. `Partial HP Restoration +1` and `+2` stack with each other) **(unverified)**.
-  - **Everything else** (crits, Art gauge, cooldowns, utility): unknown. Assume highest-tier-only and say so when it affects a pick.
+- **Stacking:** different effect families always stack. Within one family it depends on the kind of buff:
+  - **Attack buffs stack, and multiply** (two +10% = +21%). Count every copy, across tiers and duplicates: `Physical Attack Up`, element `Attack Power Up`, `Improved Affinity Attack Power`, `Improved Sorceries`/`Incantations`, spell-school and weapon-class attack power, `Improved Guard Counters`. Exception: conditional attack buffs (grease, `... in Vicinity Improves Attack Power`, attack up vs. poison/rot/frostbite) count highest tier only **(unverified)**.
+  - **Defensive and healing buffs don't stack.** Only the highest tier counts: damage negation, poise, HP recovery and restoration, max HP. Different negation families (e.g. physical and affinity) still multiply together. wiki.gg says `Partial HP Restoration +1` and `+2` stack with each other **(unverified)**.
+  - **Everything else** (crits, Art gauge, cooldowns): unknown. Assume highest tier only and say so when it affects a pick.
 
 ## Weighing effects
 
-Weight = **focus × size × coverage × uptime × availability**.
+Weight = **focus × size × coverage × uptime × availability**, scored at **0.4 points per 1%** of total damage or of effective HP (eHP). The same scale is used for damage and sustain and in every build, so scores compare. The reasoning: how long you survive scales with eHP and how long you take to kill scales with damage, so +1% of either counts the same.
 
-- **Focus is binary.** An effect is *in focus* if it boosts something the build does every fight: its damage type, weapon class, spell school, or the character's skill, Art or passive. *Out-of-focus* effects are worth 0. Don't give partial credit for "might come up". Out of focus means 0, not negative. Dormant Power and curse penalties still apply separately. Fix the in-focus list when the build's goal is set (workflow step 1).
-- **Size:** use real percentages where known, so tier weights scale with them. For example, `Physical Attack Up` base through +4 is 3 / 4 / 5 / 8.5 / 10%, where +3/+4 come from aoeah and the lower tiers from a Nexus mod note. Mark guessed sizes **(unverified)**.
-- **Coverage (per build):** the share of the build's total damage that a damage effect actually boosts.
-  - Each build declares its own coverage table in its script and build file: scope → fraction, e.g. `all: 1.0, guard_counter: 0.35`.
-  - The default is 1.0. Use it for effects that touch nearly everything the build does, such as `Physical Attack Up` on a physical weapon build.
-  - Narrow effects get the fraction of damage they touch. For an explicit Bestial caster, Bestial spells are most of the damage, so `Improved Bestial Incantations` gets about 0.9. For a guard-counter Guardian, guard counters are only part of total damage, so `Improved Guard Counters` gets well under 1.
-  - Focus still gates first: an out-of-focus effect is 0 whatever its coverage.
-- **Damage scale:** 0.4 points per 1% of total damage after coverage. Multiply buffs within each scope, then weight each scope by its coverage: total = Π(1 + all-damage buffs) × [(1 − Σc) + Σ c × Π(1 + that scope's buffs)], and points = 0.4 × (total − 1) × 100. Flat damage sources (shockwaves, stats) are added as points. So +10% to everything is 4 points, and +22% to guard counters at 0.35 coverage is about 3.1 points. Use the same scale in every build so damage scores compare.
-- **Sustain scale:** also 0.4 points per 1% of **effective HP (eHP)** over a reference fight. The reasoning: how long you survive scales with eHP and how long you take to kill scales with damage, so +1% of either counts the same. Each build declares its own fight model in its script and build file:
-  - **Incoming mix:** the share of incoming damage per type (e.g. `physical: 0.6`, each element `0.1`). Negations multiply: damage taken = Σ share × Π(1 − negation) over the negations that apply to that type, and eHP gain = 1 / damage taken − 1. Affinity negation applies to every element.
-  - **Fight HP budget:** how many max-HP bars of damage you absorb in a reference fight, counting base HP, flasks and baseline regen (e.g. 3.0). A heal worth h max-HP over the fight adds `h / budget` eHP. Max HP +x% adds about x% eHP.
-  - **Ally factor:** how much an ally's eHP counts relative to your own (e.g. 0.5 per ally, 2 allies). Team heals and team negation use it.
-  - Effects that aren't HP or negation (poise, aggro) stay hand-weighted. Mark them as such.
-- **Uptime:** discount conditional effects, such as ones that apply only at low HP, only while the Art is active, or only near Madness.
+- **Focus is binary.** An effect is in focus if it boosts something the build does every fight: its damage type, weapon class, spell school, or the character's skill, Art or passive. Out-of-focus effects are worth 0, not negative. Dormant Power and curse penalties still apply separately.
+- **Size:** use real percentages where known, e.g. `Physical Attack Up` base through +4 = 3 / 4 / 5 / 8.5 / 10%. Mark guessed sizes **(unverified)**.
+- **Coverage (per build):** the share of the build's total damage that a damage effect boosts.
+  - The default is 1.0, for effects like `Physical Attack Up` on a physical weapon build.
+  - A narrow scope gets its fraction: e.g. `guard_counter: 0.35` for a guard-counter Guardian, or about 0.9 for `Improved Bestial Incantations` on an explicit Bestial caster.
+  - Damage: total = Π(1 + all-damage buffs) × [(1 − Σc) + Σ c × Π(1 + that scope's buffs)], and points = 0.4 × (total − 1) × 100. Flat damage sources (shockwaves, stats) are added as points.
+- **Fight model (per build)** for sustain:
+  - **Incoming mix:** the share of damage taken per type (e.g. physical 0.6, each element 0.1). Negations multiply: damage taken = Σ share × Π(1 − negation), and eHP gain = 1 / damage taken − 1. Affinity negation applies to every element.
+  - **Fight HP budget:** how many max-HP bars you absorb per fight, counting base HP, flasks and baseline regen (e.g. 3.0). A heal worth h max-HP bars per fight adds h / budget eHP. Max HP +x% adds about x% eHP.
+  - **Ally factor:** how much each ally's eHP counts compared to yours (e.g. 0.5, with 2 allies). Used for team heals and team negation.
+- **Uptime:** discount conditional effects (only at low HP, only while the Art is active, only near Madness, and so on).
 - **Availability:** discount effects that need specific drops (a spell school, a weapon class, `3+ X Equipped`) by how likely the run is to supply them.
-- Example: `Improved Bestial Incantations` is out of focus for a halberd Guardian, so it's worth 0. For a Bestial caster, it and `Physical Attack Up` are both in focus, since Bestial spells do physical damage. Both get high coverage: about 0.9 for Bestial, and nearly 1.0 for Physical Attack Up. They also stack, so they don't compete except for slots.
 - **Meta anchors:**
-  - **`Attack power increased for each Night Invader defeated`** is rated as about **+20% damage**, possibly the best damage effect in the current meta. It's only on standard relics. Assume copies don't stack **(unverified)**.
-  - **Rally (`Partial HP Restoration upon Post-Damage Attacks`)** is by far the strongest sustain effect for melee builds and is **non-negotiable for melee sustain**. Weight it so that no melee loadout without it can win, and check that every top loadout carries it.
-- **Stamina is worth 0.** That covers max stamina, stamina recovery, and Endurance. It's nice to have at best. Mention it only to break a tie.
-- **Score in separate parts.** Put every weighted family in one category, so loadouts and builds can be compared on each part:
+  - **`Attack power increased for each Night Invader defeated`** ≈ **+20% damage**, possibly the best damage effect in the current meta. It's only on standard relics. Assume copies don't stack **(unverified)**.
+  - **Rally (`Partial HP Restoration upon Post-Damage Attacks`)** is by far the strongest melee sustain effect and is **non-negotiable for melee builds**. Anchor it at 50% eHP for the base tier (20 points); +1/+2 heal 25%/35% more (25/27 points). Check that every top melee loadout carries it.
+  - **Stamina is worth 0.** That covers max stamina, stamina recovery, and Endurance. It's nice to have at best. Use it only to break a tie.
+- **Score in four parts**, which must add up to the total:
   - **damage:** attack buffs, guard counters, damage-dealing passives and skills
   - **sustain:** healing, max HP, damage negation, poise, team heals and protection
   - **utility:** Art gauge, cooldowns, everything else
   - **penalties:** curses, Dormant Powers, `unverified_effect` flags
 
-  The four must add up to the total score. Report all four with the total for every loadout.
+  Utility, poise and aggro effects are still hand-weighted. Say so.
 
 ## Non-negotiable rules
 
@@ -87,13 +83,14 @@ Grails usable by every Nightfarer:
 
 ## Workflow for a new build
 
-1. Confirm the goal: character, weapon type, playstyle.
+1. Confirm the goal: character, weapon type, playstyle. Fix the in-focus list, the coverage table and the fight model.
 2. Check the current meta with web search. Patches change effects and vessels.
-3. Write effect weights for the goal (see **Weighing effects**) and curse penalties for the build's stats and playstyle. Apply the Dormant Power and on-hit curse rules above.
-4. Score relics, then brute-force or search every 6-slot combination for each eligible vessel, deduplicating effect families across all six slots.
+3. Write effect weights from **Weighing effects**, and curse penalties for the build's stats and playstyle. Apply the Dormant Power and on-hit curse rules above.
+4. Score relics, then search every 6-slot combination for each eligible vessel, applying the stacking rules across all six slots.
 5. Present the top vessel plus one alternative. For each loadout, give:
    - a table with every relic and every effect, curses attached
    - the score split into damage / sustain / utility / penalties, plus the total
+   - the coverage table and fight model used, with guesses marked
    - total curses, Dormant Powers carried, and any `unverified_effect` flags
    - the gameplay loop the build creates, and its trade-offs
 6. Keep scripts in `scripts/` so weights can be adjusted and re-run.
