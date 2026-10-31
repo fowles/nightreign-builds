@@ -35,6 +35,11 @@ Weight = **focus × size × coverage × uptime × availability**.
   - Narrow effects get the fraction of damage they touch. For an explicit Bestial caster, Bestial spells are most of the damage, so `Improved Bestial Incantations` gets about 0.9. For a guard-counter Guardian, guard counters are only part of total damage, so `Improved Guard Counters` gets well under 1.
   - Focus still gates first: an out-of-focus effect is 0 whatever its coverage.
 - **Damage scale:** 0.4 points per 1% of total damage after coverage. So +10% to everything is 4 points, and +22% to guard counters at 0.35 coverage is about 3.1 points. Use the same scale in every build so damage scores compare.
+- **Sustain scale:** also 0.4 points per 1% of **effective HP (eHP)** over a reference fight. The reasoning: how long you survive scales with eHP and how long you take to kill scales with damage, so +1% of either counts the same. Each build declares its own fight model in its script and build file:
+  - **Incoming mix:** the share of incoming damage per type (e.g. `physical: 0.6, affinity: 0.4`). A negation of x% on a share s adds `s × (1/(1−x) − 1)` eHP.
+  - **Fight HP budget:** how many max-HP bars of damage you absorb in a reference fight, counting base HP, flasks and baseline regen (e.g. 3.0). A heal worth h max-HP over the fight adds `h / budget` eHP. Max HP +x% adds about x% eHP.
+  - **Ally factor:** how much an ally's eHP counts relative to your own (e.g. 0.5 per ally, 2 allies). Team heals and team negation use it.
+  - Effects that aren't HP or negation (poise, aggro) stay hand-weighted. Mark them as such.
 - **Uptime:** discount conditional effects, such as ones that apply only at low HP, only while the Art is active, or only near Madness.
 - **Availability:** discount effects that need specific drops (a spell school, a weapon class, `3+ X Equipped`) by how likely the run is to supply them.
 - Example: `Improved Bestial Incantations` is out of focus for a halberd Guardian, so it's worth 0. For a Bestial caster, it and `Physical Attack Up` are both in focus, since Bestial spells do physical damage. Both get high coverage: about 0.9 for Bestial, and nearly 1.0 for Physical Attack Up. They also stack, so they don't compete except for slots.

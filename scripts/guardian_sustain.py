@@ -22,22 +22,50 @@ from pathlib import Path
 
 DB = Path(__file__).resolve().parent.parent / "mfk-relicdb.json"
 
+POINTS_PER_PCT = 0.4  # per 1% of total damage or of effective HP (CLAUDE.md)
+
 # Share of this build's total damage each scope covers (CLAUDE.md "Coverage").
 COVERAGE = {
     "all": 1.0,  # halberd hits, skills, counters: effectively all physical
     "guard_counter": 0.35,  # guess: guard counters are a big but minor share of damage
 }
-DAMAGE_POINTS_PER_PCT = 0.4
+
+# Reference fight model for sustain (CLAUDE.md "Sustain scale"). All guesses.
+INCOMING = {"physical": 0.6, "affinity": 0.4, "element": 0.1}  # share of damage taken
+FIGHT_HP_BUDGET = 3.0  # max-HP bars absorbed per fight: base HP + flasks + baseline regen
+ALLY_FACTOR = 0.5  # each ally's eHP vs. your own
+ALLIES = 2
 
 
 def pct(sizes, scope="all"):
     """Tier weights for a damage buff of `sizes` percent over `scope`."""
-    return [DAMAGE_POINTS_PER_PCT * s * COVERAGE[scope] for s in sizes]
+    return [POINTS_PER_PCT * s * COVERAGE[scope] for s in sizes]
+
+
+def ehp(sizes):
+    """Tier weights for a direct effective-HP gain of `sizes` percent (e.g. max HP)."""
+    return [POINTS_PER_PCT * s for s in sizes]
+
+
+def negation(sizes, scope):
+    """Tier weights for `sizes` percent damage negation against an INCOMING share."""
+    return ehp([INCOMING[scope] * (100 / (100 - s) - 1) * 100 for s in sizes])
+
+
+def heal(per_fight):
+    """Tier weights for healing worth `per_fight` max-HP bars over the reference fight."""
+    return ehp([h / FIGHT_HP_BUDGET * 100 for h in per_fight])
+
+
+def team(sizes):
+    """Tier weights for an eHP gain of `sizes` percent for each ally."""
+    return ehp([s * ALLY_FACTOR * ALLIES for s in sizes])
 
 
 # category -> family -> list of weights indexed by tier (base = tier 0, "+1" = tier 1, ...)
 # Categories are reported separately so damage and sustain compare across builds.
 # Stamina effects (incl. Endurance) are deliberately unweighted: nice to have at best.
+# Sizes marked "guess" have no source; per-fight counts are guesses for a guard build.
 CATEGORIES = {
     "damage": {
         "Improved Guard Counters": pct([18, 22, 26], "guard_counter"),  # base 18% guessed
@@ -52,38 +80,38 @@ CATEGORIES = {
     },
     "sustain": {
         # Self
-        "HP Recovery From Successful Guarding": [10],
-        "HP Restoration upon Thrusting Counterattack": [5, 6],
-        # Rally: the strongest melee sustain effect, weighted to be non-negotiable.
-        "Partial HP Restoration upon Post-Damage Attacks": [20, 22, 24],
-        "Continuous HP Recovery": [6],
-        "HP Restoration upon Halberd Attacks": [5],
-        "Slowly restore HP for self and nearby allies when HP is low": [4],
-        "Increased Maximum HP": [5],
-        "Vigor": [0, 2, 3, 4],
-        "Improved Flask HP Restoration": [3],
-        "Max HP Up with 3+ Greatshields Equipped": [0.5],
-        "HP restored when using medicinal boluses, etc.": [0.5, 0.75],
+        # Rally: meta anchor, non-negotiable for melee (50% eHP base); +1/+2 heal 25%/35% more.
+        "Partial HP Restoration upon Post-Damage Attacks": ehp([50, 62.5, 67.5]),
+        "HP Recovery From Successful Guarding": heal([0.9]),  # guess: ~60 blocks x 1.5%
+        "HP Restoration upon Thrusting Counterattack": heal([0.25, 0.33]),  # 10 x 2.5% guess / 3.3%
+        "HP Restoration upon Halberd Attacks": heal([0.3]),  # guess
+        "Continuous HP Recovery": heal([0.25]),  # guess
+        "Slowly restore HP for self and nearby allies when HP is low": heal([0.25]),  # guess
+        "Increased Maximum HP": ehp([10]),
+        "Vigor": ehp([0, 2, 3.5, 5]),  # guess: % max HP per relic tier
+        "Improved Flask HP Restoration": heal([0.1]),  # +10% of ~1 bar of flask healing
+        "Max HP Up with 3+ Greatshields Equipped": ehp([1]),  # guess, rarely active
+        "HP restored when using medicinal boluses, etc.": heal([0.03, 0.05]),  # guess
         # Team
-        "[Guardian] Slowly restores nearby allies' HP while Art is active": [6],
-        "[Guardian] Character Skill Boosts Damage Negation of Nearby Allies": [5],
-        "Flask Also Heals Allies": [3],
-        "Draw enemy attention while guarding": [3],
-        "Defeating enemies restores HP for allies but not for self": [1],
+        "[Guardian] Slowly restores nearby allies' HP while Art is active": team([16.7]),  # guess
+        "[Guardian] Character Skill Boosts Damage Negation of Nearby Allies": team([13.6]),  # 12%
+        "Flask Also Heals Allies": team([10]),  # guess
+        "Defeating enemies restores HP for allies but not for self": team([2.5]),  # guess
+        "Draw enemy attention while guarding": [3],  # hand-weighted: aggro, not eHP
         # Defense
-        "Improved Physical Damage Negation": [4, 5, 6],
-        "Improved Affinity Damage Negation": [3, 3.5, 4],
-        "Improved Damage Negation at Low HP": [2],
-        "Improved Poise & Damage Negation When Knocked Back by Damage": [1.5],
-        "Poise": [0, 1.5, 2, 2.5],
-        "Fire Damage Negation Up": [1],
-        "Improved Fire Damage Negation": [1, 1.25, 1.5],
-        "Holy Damage Negation Up": [1],
-        "Improved Holy Damage Negation": [1, 1.25, 1.5],
-        "Lightning Damage Negation Up": [1],
-        "Improved Lightning Damage Negation": [1, 1.25, 1.5],
-        "Magic Damage Negation Up": [1],
-        "Improved Magic Damage Negation": [1, 1.25, 1.5],
+        "Improved Physical Damage Negation": negation([8, 10.5, 12], "physical"),  # base guessed
+        "Improved Affinity Damage Negation": negation([6, 10.5, 12], "affinity"),
+        "Improved Damage Negation at Low HP": ehp([2.5]),  # guess, low uptime
+        "Improved Poise & Damage Negation When Knocked Back by Damage": [1.5],  # hand-weighted
+        "Poise": [0, 1.5, 2, 2.5],  # hand-weighted: stagger, not eHP
+        "Fire Damage Negation Up": negation([10], "element"),  # guessed
+        "Improved Fire Damage Negation": negation([10, 15, 16], "element"),
+        "Holy Damage Negation Up": negation([10], "element"),
+        "Improved Holy Damage Negation": negation([10, 15, 16], "element"),
+        "Lightning Damage Negation Up": negation([10], "element"),
+        "Improved Lightning Damage Negation": negation([10, 15, 16], "element"),
+        "Magic Damage Negation Up": negation([10], "element"),
+        "Improved Magic Damage Negation": negation([10, 15, 16], "element"),
         # Stat swaps that cost Vigor
         "[Guardian] Improved Strength and Dexterity, Reduced Vigor": [-2],
         "[Guardian] Improved Mind and Faith, Reduced Vigor": [-4],
