@@ -31,6 +31,7 @@ CATEGORIES = {
         "Guard counter is given a boost based on current HP": [8],
         "[Guardian] Successful guards send out shockwaves while ability is active": [7],
         "Physical Attack Up": [1.2, 1.6, 2, 3.4, 4],  # 3/4/5/8.5/10%, 0.4 per %
+        "Attack power increased for each Night Invader defeated": [8],  # ~20%, meta-top
         "Improved Halberd Attack Power": [4],
         "Strength": [0, 1, 1.5, 2],
         "Improved Attack Power with 3+ Halberds Equipped": [0.5],
@@ -40,7 +41,8 @@ CATEGORIES = {
         # Self
         "HP Recovery From Successful Guarding": [10],
         "HP Restoration upon Thrusting Counterattack": [5, 6],
-        "Partial HP Restoration upon Post-Damage Attacks": [5, 6, 7],
+        # Rally: the strongest melee sustain effect, weighted to be non-negotiable.
+        "Partial HP Restoration upon Post-Damage Attacks": [20, 22, 24],
         "Continuous HP Recovery": [6],
         "HP Restoration upon Halberd Attacks": [5],
         "Slowly restore HP for self and nearby allies when HP is low": [4],
