@@ -1,6 +1,6 @@
 # Guardian: Guard Tank (low-curse)
 
-> Re-run 2026-10-31 with `scripts/guardian_sustain.py --max-curses N`. It uses the same weights, coverage and fight model as [guardian-sustain.md](guardian-sustain.md), including the multiplicative self-sustain product: eHP = (1 + max HP) × (1 + heals ÷ budget) ÷ damage taken. The only difference is a cap on total curses per loadout. Character reference: [characters/guardian.md](../characters/guardian.md).
+> Re-run 2026-10-31 with `scripts/guardian_sustain.py --max-curses N`. It uses the same weights, coverage and fight model as [guardian-sustain.md](guardian-sustain.md), including the multiplicative self-sustain product: eHP = (1 + max HP) × (1 + heals ÷ budget) ÷ damage taken. The only difference is a cap on total curses per loadout. `Reduced Damage Negation After Evading` now scores as very bad (−8), while `Repeated Evasions Lower Damage Negation` stays near-free (−0.5). The capped loadouts below only carry the latter, so they didn't change. Character reference: [characters/guardian.md](../characters/guardian.md).
 >
 > **History:** this file used to hold the hand-picked builds from before the scripted search. Neither carried rally, which CLAUDE.md makes non-negotiable for melee. Under the earlier additive model they scored 65.3 and 54.5. They've been replaced by the best capped loadouts, and every one of those carries rally.
 >
@@ -13,7 +13,7 @@
 
 **Goal:** the same halberd + greatshield guard tank as the sustain build, without the real curses (Rot Buildup When Below Max HP, All Resistances Down, Reduced Vigor and Arcane) the top sustain loadouts carry.
 
-Best two vessels per curse cap (the uncapped best is the Chalice at 105.7 with 4 curses):
+Best two vessels per curse cap (the uncapped best is the Chalice at 104.1 with 3 curses):
 
 | Cap | Vessel | Total | Damage | Sustain | Utility | Penalties |
 |---|---|---|---|---|---|---|
@@ -22,9 +22,9 @@ Best two vessels per curse cap (the uncapped best is the Chalice at 105.7 with 4
 | 1 | Guardian's Chalice | 99.1 | 17.9 | 60.7 | 21.0 | −0.5 |
 | 1 | Forgotten Guardian's Goblet | 96.0 | 9.5 | 66.0 | 21.0 | −0.5 |
 | 2 | Guardian's Chalice | 101.0 | 29.3 | 58.6 | 18.0 | −4.8 |
-| 2 | Forgotten Guardian's Goblet | 98.8 | 13.3 | 68.5 | 18.0 | −1.0 |
+| 2 | Forgotten Guardian's Goblet | 97.9 | 17.6 | 65.8 | 18.0 | −3.5 |
 
-The cap counts every curse equally, but some curses cost a blocker nothing. **Giant's Cradle Grail at 102.2** has 3 curses, all near-free (two evasion curses plus Reduced Dexterity and Faith). It's in [guardian-sustain.md](guardian-sustain.md) as the alternative, and it's the cleanest high-scoring tank in practice.
+The cap counts every curse equally, but some curses cost a blocker almost nothing. The Forgotten Goblet's 97.5 loadout (R01182, R00115, R00823 / R01176, R01318, R00162) has 2 curses, both near-free: Reduced Dexterity and Faith, and Repeated Evasions Lower Damage Negation. It's in [guardian-sustain.md](guardian-sustain.md) as the alternative. The cap-2 Forgotten row above (97.9) carries All Resistances Down instead.
 
 Utility (Art gauge, cooldowns), poise, aggro and flat curse penalties are still hand-weighted.
 
@@ -41,7 +41,7 @@ Utility (Art gauge, cooldowns), poise, aggro and flat curse penalties are still 
 | Deep B | **R01755** Deep Grand Drizzly Scene | [Guardian] Character Skill Boosts Damage Negation of Nearby Allies; Defeating enemies fills more of the Art gauge; Improved Sleep Resistance +1 *(status resistance, scored 0)* |
 | Deep Y | **R00211** Deep Polished Luminous Scene | HP Recovery From Successful Guarding; HP Restoration upon Thrusting Counterattack |
 
-- **Curses: 1.** Repeated Evasions Lower Damage Negation is near-free: Steel Guard can't dodge.
+- **Curses: 1.** Repeated Evasions Lower Damage Negation is near-free: it only kicks in on chained dodges, and Guardian rarely chains them.
 - **Dormant Powers:** none.
 - **`unverified_effect` flags:** none.
 - **Loop:**
@@ -49,7 +49,7 @@ Utility (Art gauge, cooldowns), poise, aggro and flat curse penalties are still 
   - Rally +2 and thrust-counter healing turn every counter into healing. Max HP grows as you clear Great Church bosses.
   - Damage comes from Night Invader scaling (≈×1.2 over the run) and Physical Attack Up +2.
   - The Art gauge charges from blocking, kills and Auto Charge +3. Wings of Salvation revives and heals the team, and the whirlwind gives allies +12% damage negation.
-- **Trade-offs:** It's 6.6 points below the uncapped Chalice (105.7) and carries no real curse. It has no Improved Guard Counters. R00211 can be swapped for **R00238** Deep Polished Luminous Scene (HP Recovery From Successful Guarding; FP Restoration upon Dagger Attacks *(does nothing with a halberd)*). That ties at 99.1, because thrust-counter healing is already on R01208.
+- **Trade-offs:** It's 5.0 points below the uncapped Chalice (104.1) and carries no real curse. It has no Improved Guard Counters. R00211 can be swapped for **R00238** Deep Polished Luminous Scene (HP Recovery From Successful Guarding; FP Restoration upon Dagger Attacks *(does nothing with a halberd)*). That ties at 99.1, because thrust-counter healing is already on R01208.
 - **Zero curses (93.2):** swap R00162 for **R00249** Deep Polished Burning Scene (Partial HP Restoration upon Post-Damage Attacks; Physical Attack Up +2). That's base rally instead of +2, without the Great Church max HP.
 - **Cap 2 (101.0):** Witch's Brooch, R01914, R00156 / R01176, R01789, R00128. It adds Improved Guard Counters and Physical Attack Up +4 (damage 29.3), but R00128 brings **Reduced Vigor and Arcane**, a real cost.
 
@@ -75,7 +75,7 @@ Utility (Art gauge, cooldowns), poise, aggro and flat curse penalties are still 
 
 ## Assumptions and unknowns
 
-- **Curse cap counts every curse equally.** It doesn't know that evasion curses are near-free for this build. That's why Giant's Cradle, with 3 near-free curses, doesn't show up under a cap.
+- **Curse cap counts every curse equally.** It doesn't know that `Repeated Evasions Lower Damage Negation` and off-stat curses are near-free. That's why the Forgotten Goblet's 97.5 loadout, with 2 near-free curses, doesn't top the cap-2 row.
 - **Search depth:** 80 relics per slot, 2000 triples per side. Not separately checked under a cap.
 - **Multiplicative sustain** assumes heals restore a share of max HP. Whether flasks do is **(unverified)**.
 - **Damage and sustain still add to each other**, so low-damage, sustain-heavy loadouts score well. See [guardian-sustain.md](guardian-sustain.md).

@@ -98,8 +98,9 @@ The Scene relic names come from wiki.gg, and their pages were partially garbled 
 | Verdict | Curses (owned text) | Why |
 |---|---|---|
 | Near-free | Reduced Strength and Intelligence (Int free, Str mild), Reduced Intelligence and Dexterity | Int D. Dex C is minor on a halberd. Exact stat reduction size unknown. |
-| Acceptable | Reduced Dexterity and Faith, Reduced Faith and Strength, Reduced Rune Acquisition, Repeated Evasions Lower Damage Negation, Reduced Damage Negation After Evading (he blocks rather than rolls) | Low impact on a guard playstyle |
+| Acceptable | Reduced Dexterity and Faith, Reduced Faith and Strength, Reduced Rune Acquisition, Repeated Evasions Lower Damage Negation (he rarely chains dodges) | Low impact on a guard playstyle |
 | Costly | Reduced Vigor and Arcane (Vigor S), Reduced Flask HP Restoration, Reduced Damage Negation for Flask Usages, Near Death Reduces Max HP, All Resistances Down, Continuous HP Loss | Hurt the tank's HP pool or sustain |
+| Very bad | Reduced Damage Negation After Evading | He still dodges outside Steel Guard, and a mistimed dodge then costs extra damage (CLAUDE.md curse rules) |
 | Below-Max-HP family | Rot / Poison Buildup When Below Max HP, Lower Attack When Below Max HP | Preferred over `Taking Damage` variants, but a tank sits below max HP often, so not free |
 | Near-disqualifying | Taking Damage Causes Death / Sleep Buildup (worst), …Poison / Rot / Frost / Blood Loss / Madness Buildup | Unknown whether blocked chip damage triggers them (CLAUDE.md curse rules) |
 | Disqualifying | Ultimate Art Charging Impaired | Wings of Salvation is the team's revive button |

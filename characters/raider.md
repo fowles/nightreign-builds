@@ -86,7 +86,8 @@ Scene relic name is from wiki.gg, partially garbled when fetched **(unverified)*
 | Verdict | Curses (owned text) | Why |
 |---|---|---|
 | Near-free | Reduced Intelligence and Dexterity, Reduced Dexterity and Faith | Int/Fai D, Dex C |
-| Mild | Reduced Rune Acquisition, Reduced Damage Negation After Evading, Repeated Evasions Lower Damage Negation | He tanks more than he rolls |
+| Mild | Reduced Rune Acquisition, Repeated Evasions Lower Damage Negation | He tanks more than he rolls |
+| Very bad | Reduced Damage Negation After Evading | A mistimed dodge costs extra damage (CLAUDE.md curse rules) |
 | Costly | Reduced Strength and Intelligence, Reduced Faith and Strength (Str S), Reduced Vigor and Arcane (Vig A) | |
 | **Bad for this kit** | Taking Damage Causes X Buildup (all), especially **Death** and **Sleep** | Retaliate's whole loop is deliberately taking hits |
 | **Bad for this kit** | Lower Attack When Below Max HP, Rot / Poison Buildup When Below Max HP, Near Death Reduces Max HP | He lives below max HP, and the 1.03.2 Fighter's Resolve buff rewards low HP |

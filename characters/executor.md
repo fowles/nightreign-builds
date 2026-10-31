@@ -106,7 +106,8 @@ Golden Sprout's "HP Recovery From Successful Guarding" should trigger on Cursed 
 | Taking Damage Causes Sleep / Madness Buildup | near-disqualifying | Sleep and Madness trigger Tenacity, but sleeping mid-fight is lethal |
 | Taking Damage Causes Blood Loss Buildup | acceptable, possibly synergistic **(unverified)** | Bleed procs instantly trigger Tenacity (+20% attack) and the deep regen. Each proc still deals % HP damage. My inference, not a community-tested result. |
 | Taking Damage Causes Poison / Rot / Frost Buildup | acceptable | Tenacity triggers when the ailment expires |
-| Reduced Damage Negation After Evading / Repeated Evasions Lower Damage Negation | acceptable-to-bad | Executor mostly deflects rather than rolls; the Cursed Sword uses a dash |
+| Repeated Evasions Lower Damage Negation | acceptable | Executor mostly deflects rather than rolls; the Cursed Sword uses a dash |
+| Reduced Damage Negation After Evading | very bad | A mistimed dodge costs extra damage (CLAUDE.md curse rules) |
 
 ## Meta notes and patch history
 

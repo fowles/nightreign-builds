@@ -235,7 +235,7 @@ CURSE_PENALTY = {
     "Reduced Faith and Strength": -1.5,
     "Reduced Rune Acquisition": -1,
     "Repeated Evasions Lower Damage Negation": -0.5,
-    "Reduced Damage Negation After Evading": -0.5,
+    "Reduced Damage Negation After Evading": -8,  # very bad: missed dodges hurt (CLAUDE.md)
     "Reduced Damage Negation for Flask Usages": -2.5,
     "Reduced Flask HP Restoration": -3,
     "Near Death Reduces Max HP": -3,

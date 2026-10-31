@@ -64,6 +64,7 @@ Weight = **focus × size × coverage × uptime × availability**, scored at **0.
    - Curses that lower a stat the build doesn't scale on are near-free (e.g., Int/Faith on a Strength build).
    - `Ultimate Art Charging Impaired` is disqualifying for any build that relies on its Ultimate Art.
    - **`Taking Damage Causes X Buildup`**: it's unconfirmed whether blocked chip damage triggers these. For guard-heavy builds, treat them as near-disqualifying, especially **Death** (an instant kill when the bar fills) and **Sleep**. Prefer `... When Below Max HP` variants or non-status curses.
+   - **`Reduced Damage Negation After Evading`** is very bad for every build, blockers included: a dodge that fails to avoid the hit leaves you taking extra damage. Score it near the `Taking Damage` buildup curses. **`Repeated Evasions Lower Damage Negation`** is fine: it only kicks in on chained dodges.
    - Don't stack the same curse twice (e.g., two `All Resistances Down`) without saying so.
    - Count total curses in a loadout and report it.
 4. **Optimize all six slots together, not normal and deep separately.** Effects duplicate across the two sets.

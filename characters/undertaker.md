@@ -113,7 +113,8 @@ On Glass Necklace, "Successive Attacks Boost Attack Power" is +5%, stacking to +
 | Taking Damage Causes Death / Sleep Buildup | **near-disqualifying** | Frontline hyperarmor brawler; Trance tanks hits instead of dodging |
 | Other Taking Damage Causes X Buildup | bad | Same reason; prefer "... When Below Max HP" variants |
 | Ultimate Art Charging Impaired | bad | Two core tagged effects trigger on Hex. Confluence bonus activations soften it in co-op only. |
-| Reduced Damage Negation After Evading / Repeated Evasions Lower Damage Negation | acceptable | Trance uses a dash and she mostly tanks |
+| Repeated Evasions Lower Damage Negation | acceptable | Trance uses a dash and she mostly tanks |
+| Reduced Damage Negation After Evading | very bad | A mistimed dodge costs extra damage (CLAUDE.md curse rules) |
 
 ## Meta notes and patch history
 
