@@ -28,7 +28,7 @@ This project is for designing **Elden Ring Nightreign** relic loadouts for **Dee
 Weight = **focus × size × coverage × uptime × availability**, scored at **0.4 points per 1%** of total damage or of effective HP (eHP). The same scale is used for damage and sustain and in every build, so scores compare. The reasoning: how long you survive scales with eHP and how long you take to kill scales with damage, so +1% of either counts the same.
 
 - **Focus is binary.** An effect is in focus if it boosts something the build does every fight: its damage type, weapon class, spell school, or the character's skill, Art or passive. Out-of-focus effects are worth 0, not negative. Dormant Power and curse penalties still apply separately.
-- **Size:** use real percentages where known, e.g. `Physical Attack Up` base through +4 = 3 / 4 / 5 / 8.5 / 10%. Mark guessed sizes **(unverified)**.
+- **Size:** use real percentages where known. Prefer post-1.03 sources. aoeah's spreadsheet (Oct 2025) predates the 1.03 buffs, and eldenring.wiki.gg has newer values. Examples: `Physical Attack Up` base through +4 = 4 / 5 / 6 / 10.5 / 12%; `Improved Guard Counters` base / +1 / +2 = 23 / 25 / 29% (tier labels **unverified**). Mark guessed sizes **(unverified)**.
 - **Coverage (per build):** the share of the build's total damage that a damage effect boosts.
   - The default is 1.0, for effects like `Physical Attack Up` on a physical weapon build.
   - A narrow scope gets its fraction: e.g. `guard_counter: 0.35` for a guard-counter Guardian, or about 0.9 for `Improved Bestial Incantations` on an explicit Bestial caster.

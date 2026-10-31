@@ -85,7 +85,7 @@ On Glass Necklace, "Successive Attacks Boost Attack Power" is +5%, stacking to +
 
 | Group | Effects (exact text) |
 |---|---|
-| Offense | **Attack power increased for each Night Invader defeated** (≈+20%, meta-top per CLAUDE.md; standard relics only, 8 owned), Physical Attack Up (+1..+4; +3/+4 = +10.5%/+12% per wiki.gg, buffed 1.03. CLAUDE.md uses aoeah's 8.5%/10%, which may be pre-buff **(unverified)**), Improved Hammer Attack Power, Improved Attack Power with 3+ Hammers Equipped, Improved Initial Standard Attack, Improved Melee Attack Power, Improved Skill Attack Power, Strength +3, Faith +3 |
+| Offense | **Attack power increased for each Night Invader defeated** (≈+20%, meta-top per CLAUDE.md; standard relics only, 8 owned), Physical Attack Up (base..+4 = +4/+5/+6/+10.5/+12% per eldenring.wiki.gg, post-1.03; CLAUDE.md uses these), Improved Hammer Attack Power, Improved Attack Power with 3+ Hammers Equipped, Improved Initial Standard Attack, Improved Melee Attack Power, Improved Skill Attack Power, Strength +3, Faith +3 |
 | Stance | Improved Stance-Breaking when Two-Handing, Improved Stance-Breaking when Wielding Two Armaments |
 | Skill / Art | Character Skill Cooldown Reduction (+1..+3), Ultimate Art Auto Charge (+1..+3), Defeating enemies fills more of the Art gauge (+1), Critical hits fill more of the Art gauge (+1) |
 | Sustain | **Rally** = Partial HP Restoration upon Post-Damage Attacks (+1/+2; non-negotiable for melee per CLAUDE.md), HP Restoration upon Hammer Attacks, Increased Maximum HP, Vigor +3, Improved Physical Damage Negation (+1/+2) |

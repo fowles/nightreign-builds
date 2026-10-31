@@ -104,10 +104,10 @@ def team(sizes):
 # Sizes marked "guess" have no source; per-fight counts are guesses for a guard build.
 CATEGORIES = {
     "damage": {
-        "Improved Guard Counters": pct([18, 22, 26], "guard_counter"),  # base 18% guessed
-        "Guard counter is given a boost based on current HP": pct([18], "guard_counter"),  # guessed
+        "Improved Guard Counters": pct([23, 25, 29], "guard_counter"),  # wiki.gg, post-1.03; tier labels unverified
+        "Guard counter is given a boost based on current HP": pct([18], "guard_counter"),  # guess; wiki.gg: +0.045-0.065 dmg per 1 HP
         "[Guardian] Successful guards send out shockwaves while ability is active": [7],
-        "Physical Attack Up": pct([3, 4, 5, 8.5, 10]),
+        "Physical Attack Up": pct([4, 5, 6, 10.5, 12]),  # wiki.gg, post-1.03
         "Attack power increased for each Night Invader defeated": pct([20]),  # meta-top
         "Improved Halberd Attack Power": pct([10]),  # size guessed
         "Strength": [0, 1, 1.5, 2],

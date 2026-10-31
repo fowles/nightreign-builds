@@ -79,7 +79,7 @@ The Scene relic names come from wiki.gg, and their pages were partially garbled 
 
 | Group | Effects (in-game text) |
 |---|---|
-| Guard counter offense | **Attack power increased for each Night Invader defeated** (≈+20%, meta-top per CLAUDE.md; standard relics only, 8 owned), Improved Guard Counters (+1/+2; +22%/+26% per aoeah, which predates the 1.03 buff, so likely higher now **(unverified)**), Guard counter is given a boost based on current HP, Improved Halberd Attack Power, Physical Attack Up (+1…+4) |
+| Guard counter offense | **Attack power increased for each Night Invader defeated** (≈+20%, meta-top per CLAUDE.md; standard relics only, 8 owned), Improved Guard Counters (base/+1/+2 = +23/+25/+29% per eldenring.wiki.gg, post-1.03; aoeah's older +22/+26% predates the buff; tier labels **unverified**), Guard counter is given a boost based on current HP (wiki.gg: +0.045 to +0.065 damage per 1 current HP, by weapon type; unit ambiguous), Improved Halberd Attack Power, Physical Attack Up (base..+4 = +4/+5/+6/+10.5/+12%) |
 | Art charge | Successful guarding fills more of the Art gauge (+1), Ultimate Art Auto Charge (+1…+3), Critical hits fill more of the Art gauge |
 | Sustain | **Rally** = Partial HP Restoration upon Post-Damage Attacks (non-negotiable for melee per CLAUDE.md), HP Recovery From Successful Guarding (buffed 1.03.2), HP Restoration upon Thrusting Counterattack (+1), Continuous HP Recovery, Increased Maximum HP, Slowly restore HP for self and nearby allies when HP is low |
 | Defense / utility | Improved Physical Damage Negation (+1/+2), Improved Affinity Damage Negation, Draw enemy attention while guarding (buffed 1.03.2), Character Skill Cooldown Reduction, Flask Also Heals Allies |
