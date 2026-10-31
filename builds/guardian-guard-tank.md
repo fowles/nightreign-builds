@@ -1,8 +1,10 @@
 # Guardian: Guard Tank (low-curse)
 
-> Re-run 2026-10-31 with `scripts/guardian_sustain.py --max-curses N`. It uses the same weights, coverage and fight model as [guardian-sustain.md](guardian-sustain.md), including the multiplicative self-sustain product: eHP = (1 + max HP) × (1 + heals ÷ budget) ÷ damage taken. The only difference is a cap on total curses per loadout. `Reduced Damage Negation After Evading` now scores as very bad (−8), while `Repeated Evasions Lower Damage Negation` stays near-free (−0.5). The capped loadouts below only carry the latter, so they didn't change. Character reference: [characters/guardian.md](../characters/guardian.md).
+> Re-run 2026-10-31 with `scripts/guardian_sustain.py --max-curses N`. It uses the same weights, coverage and fight model as [guardian-sustain.md](guardian-sustain.md), including the multiplicative self-sustain product: eHP = (1 + max HP) × (1 + heals ÷ budget) ÷ damage taken. The only difference is a cap on total curses per loadout. Character reference: [characters/guardian.md](../characters/guardian.md).
 >
-> **History:** this file used to hold the hand-picked builds from before the scripted search. Neither carried rally, which CLAUDE.md makes non-negotiable for melee. Under the earlier additive model they scored 65.3 and 54.5. They've been replaced by the best capped loadouts, and every one of those carries rally.
+> **Search fix (this run):** triples are now shortlisted with and without rally separately. Before, rally-less triples (notably anything with **R00823** Dark Night of the Fathom) fell off the shortlist. Every row below went up. The uncapped best is now the Chalice at 109.4 with **one near-free curse** (Reduced Faith and Strength), so caps 1 and 2 reproduce the sustain build exactly. This file's remaining job is the **zero-curse** loadout.
+>
+> **History:** this file used to hold the hand-picked builds from before the scripted search. Neither carried rally, which CLAUDE.md makes non-negotiable for melee. They've been replaced by the best capped loadouts, and every one of those carries rally.
 >
 > | Model input | Value | Note |
 > |---|---|---|
@@ -11,72 +13,67 @@
 > | Fight HP budget | 3.0 max-HP bars | guess |
 > | Ally factor | 0.5 per ally, 2 allies | guess |
 
-**Goal:** the same halberd + greatshield guard tank as the sustain build, without the real curses (Rot Buildup When Below Max HP, All Resistances Down, Reduced Vigor and Arcane) the top sustain loadouts carry.
+**Goal:** the same halberd + greatshield guard tank as the sustain build, with no curses at all.
 
-Best two vessels per curse cap (the uncapped best is the Chalice at 104.1 with 3 curses):
+Best two vessels per curse cap:
 
 | Cap | Vessel | Total | Damage | Sustain | Utility | Penalties |
 |---|---|---|---|---|---|---|
-| 0 | Guardian's Chalice | 93.2 | 20.9 | 51.2 | 21.0 | 0.0 |
-| 0 | Forgotten Guardian's Goblet | 89.0 | 12.1 | 56.0 | 21.0 | 0.0 |
-| 1 | Guardian's Chalice | 99.1 | 17.9 | 60.7 | 21.0 | −0.5 |
-| 1 | Forgotten Guardian's Goblet | 96.0 | 9.5 | 66.0 | 21.0 | −0.5 |
-| 2 | Guardian's Chalice | 101.0 | 29.3 | 58.6 | 18.0 | −4.8 |
-| 2 | Forgotten Guardian's Goblet | 97.9 | 17.6 | 65.8 | 18.0 | −3.5 |
+| 0 | Guardian's Chalice | 97.3 | 17.9 | 61.4 | 18.0 | 0.0 |
+| 0 | Forgotten Guardian's Goblet | 90.7 | 8.0 | 69.2 | 13.5 | 0.0 |
+| 1 | Guardian's Chalice | 109.4 | 15.0 | 74.9 | 21.0 | −1.5 |
+| 1 | Forgotten Guardian's Goblet | 101.9 | 16.5 | 74.9 | 12.0 | −1.5 |
+| 2 | *(same as cap 1)* | | | | | |
 
-The cap counts every curse equally, but some curses cost a blocker almost nothing. The Forgotten Goblet's 97.5 loadout (R01182, R00115, R00823 / R01176, R01318, R00162) has 2 curses, both near-free: Reduced Dexterity and Faith, and Repeated Evasions Lower Damage Negation. It's in [guardian-sustain.md](guardian-sustain.md) as the alternative. The cap-2 Forgotten row above (97.9) carries All Resistances Down instead.
+**Recommendation:** the one curse in the cap-1 loadout (Reduced Faith and Strength) costs a halberd blocker very little, and it buys 12 points, mostly rally +2 over base rally. Use the [sustain build](guardian-sustain.md) unless you want literally zero curses.
 
 Utility (Art gauge, cooldowns), poise, aggro and flat curse penalties are still hand-weighted.
 
-## Best: Guardian's Chalice, 1 near-free curse (Normal B Y W / Deep R B Y)
+## Best: Guardian's Chalice, 0 curses (Normal B Y W / Deep R B Y)
 
-**Score 99.1:** damage 17.9, sustain 60.7, utility 21.0, penalties −0.5.
+**Score 97.3:** damage 17.9, sustain 61.4, utility 18.0, penalties 0.0.
 
 | Slot | Relic | Effects (curse attached) |
 |---|---|---|
 | Normal B | **R01922** Witch's Brooch | [Guardian] Slowly restores nearby allies' HP while Art is active; [Guardian] Successful guards send out shockwaves while ability is active; Vigor +3 |
 | Normal Y | **R00156** Polished Luminous Scene | Attack power increased for each Night Invader defeated; Ultimate Art Auto Charge +3 |
-| Normal W | **R01208** Grand Drizzly Scene (Blue) | Successful guarding fills more of the Art gauge; HP Restoration upon Thrusting Counterattack; Physical Attack Up +2 |
-| Deep R | **R00162** Deep Polished Burning Scene | Partial HP Restoration upon Post-Damage Attacks +2 *(curse: Repeated Evasions Lower Damage Negation)*; Max HP increased for each great enemy defeated at a Great Church. |
-| Deep B | **R01755** Deep Grand Drizzly Scene | [Guardian] Character Skill Boosts Damage Negation of Nearby Allies; Defeating enemies fills more of the Art gauge; Improved Sleep Resistance +1 *(status resistance, scored 0)* |
+| Normal W | **R00823** Dark Night of the Fathom (Blue) | Increased Maximum HP; Continuous HP Recovery; Slowly restore HP for self and nearby allies when HP is low |
+| Deep R | **R00249** Deep Polished Burning Scene | Partial HP Restoration upon Post-Damage Attacks; Physical Attack Up +2 |
+| Deep B | **R00318** Deep Polished Drizzly Scene | HP Restoration upon Katana Attacks *(does nothing with a halberd)*; Successful guarding fills more of the Art gauge |
 | Deep Y | **R00211** Deep Polished Luminous Scene | HP Recovery From Successful Guarding; HP Restoration upon Thrusting Counterattack |
 
-- **Curses: 1.** Repeated Evasions Lower Damage Negation is near-free: it only kicks in on chained dodges, and Guardian rarely chains them.
+- **Curses: 0.**
 - **Dormant Powers:** none.
 - **`unverified_effect` flags:** none.
 - **Loop:**
   - Steel Guard through combos. Each block heals, charges the Art gauge, and sends out a shockwave.
-  - Rally +2 and thrust-counter healing turn every counter into healing. Max HP grows as you clear Great Church bosses.
-  - Damage comes from Night Invader scaling (≈×1.2 over the run) and Physical Attack Up +2.
-  - The Art gauge charges from blocking, kills and Auto Charge +3. Wings of Salvation revives and heals the team, and the whirlwind gives allies +12% damage negation.
-- **Trade-offs:** It's 5.0 points below the uncapped Chalice (104.1) and carries no real curse. It has no Improved Guard Counters. R00211 can be swapped for **R00238** Deep Polished Luminous Scene (HP Recovery From Successful Guarding; FP Restoration upon Dagger Attacks *(does nothing with a halberd)*). That ties at 99.1, because thrust-counter healing is already on R01208.
-- **Zero curses (93.2):** swap R00162 for **R00249** Deep Polished Burning Scene (Partial HP Restoration upon Post-Damage Attacks; Physical Attack Up +2). That's base rally instead of +2, without the Great Church max HP.
-- **Cap 2 (101.0):** Witch's Brooch, R01914, R00156 / R01176, R01789, R00128. It adds Improved Guard Counters and Physical Attack Up +4 (damage 29.3), but R00128 brings **Reduced Vigor and Arcane**, a real cost.
+  - Base rally and thrust-counter healing turn counters into healing. Dark Night of the Fathom adds +10% max HP, continuous regen and a low-HP regen.
+  - Damage comes from Night Invader scaling (≈×1.2 over the run), Physical Attack Up +2 and shockwaves.
+  - The Art gauge charges from blocking and Auto Charge +3. Wings of Salvation revives and heals the team.
+- **Trade-offs:** 12.1 points below the 1-curse sustain build, almost all from base rally instead of +2.
+- **Runner-up (96.7):** swap R00318 for **R01755** Deep Grand Drizzly Scene ([Guardian] Character Skill Boosts Damage Negation of Nearby Allies; Defeating enemies fills more of the Art gauge; Improved Sleep Resistance +1 *(status resistance, scored 0)*). That trades Art charge on block for +12% negation for allies.
 
-## Alternative: Forgotten Guardian's Goblet, 1 near-free curse, with Dark Night of the Fathom (Normal G B B / Deep R B W)
+## Alternative: Forgotten Guardian's Goblet, 0 curses (Normal G B B / Deep R B W)
 
-**Score 96.0:** damage 9.5, sustain 66.0, utility 21.0, penalties −0.5.
+**Score 90.7:** damage 8.0, sustain 69.2, utility 13.5, penalties 0.0.
 
 | Slot | Relic | Effects (curse attached) |
 |---|---|---|
-| Normal G | **R01182** Grand Tranquil Scene | [Guardian] Successful guards send out shockwaves while ability is active; Improved Throwing Pot Damage *(out of focus)*; Ultimate Art Auto Charge +3 |
-| Normal B | **R00115** Polished Drizzly Scene | HP Recovery From Successful Guarding; Flask Also Heals Allies |
+| Normal G | **R00788** Grand Tranquil Scene | [Guardian] Creates whirlwind when charging halberd attacks; Partial HP Restoration upon Post-Damage Attacks; Character Skill Cooldown Reduction +2 |
+| Normal B | **R01922** Witch's Brooch | [Guardian] Slowly restores nearby allies' HP while Art is active; [Guardian] Successful guards send out shockwaves while ability is active; Vigor +3 |
 | Normal B | **R00823** Dark Night of the Fathom | Increased Maximum HP; Continuous HP Recovery; Slowly restore HP for self and nearby allies when HP is low |
-| Deep R | **R00162** Deep Polished Burning Scene | Partial HP Restoration upon Post-Damage Attacks +2 *(curse: Repeated Evasions Lower Damage Negation)*; Max HP increased for each great enemy defeated at a Great Church. |
+| Deep R | **R00394** Deep Polished Burning Scene | Successful guarding fills more of the Art gauge; Improved Affinity Damage Negation |
 | Deep B | **R01755** Deep Grand Drizzly Scene | [Guardian] Character Skill Boosts Damage Negation of Nearby Allies; Defeating enemies fills more of the Art gauge; Improved Sleep Resistance +1 *(status resistance, scored 0)* |
-| Deep W | **R01867** Deep Grand Tranquil Scene (Green) | [Revenant] Increased Max FP upon Ability Activation *(wasted on Guardian)*; Successful guarding fills more of the Art gauge; Guard counter is given a boost based on current HP |
+| Deep W | **R00211** Deep Polished Luminous Scene (Yellow) | HP Recovery From Successful Guarding; HP Restoration upon Thrusting Counterattack |
 
-- **Curses: 1.** Repeated Evasions Lower Damage Negation is near-free.
-- **Dormant Powers:** none.
-- **`unverified_effect` flags:** none.
-- **Loop:** sustain-first. Heal on block, rally +2, continuous and low-HP regen, two max-HP effects (Fathom +10% and Great Church), and Flask Also Heals Allies. Damage comes from shockwaves and the HP-based guard-counter boost, which stays strong because you stay near full HP.
-- **Trade-offs:** More sustain than the Chalice pick (66.0 vs 60.7), but little damage (9.5): no Night Invader and no Physical Attack Up. The Forgotten Goblet needs 4 Sovereign Sigils to unlock.
-- **Runner-up (95.9):** swap R01867 for **R00394** Deep Polished Burning Scene (Successful guarding fills more of the Art gauge; Improved Affinity Damage Negation). That trades the guard-counter HP boost for affinity negation.
+- **Curses: 0.** **Dormant Powers:** none. **`unverified_effect` flags:** none.
+- **Loop:** sustain-first. Heal on block, base rally (on a normal relic here), continuous and low-HP regen, Fathom's +10% max HP, affinity negation, and team negation from the whirlwind. Damage is low (8.0): no Night Invader and no Physical Attack Up.
+- **Trade-offs:** 6.6 points below the zero-curse Chalice, and it needs 4 Sovereign Sigils to unlock. Use it only if you don't have the Chalice.
 
 ## Assumptions and unknowns
 
-- **Curse cap counts every curse equally.** It doesn't know that `Repeated Evasions Lower Damage Negation` and off-stat curses are near-free. That's why the Forgotten Goblet's 97.5 loadout, with 2 near-free curses, doesn't top the cap-2 row.
-- **Search depth:** 80 relics per slot, 2000 triples per side. Not separately checked under a cap.
+- **Curse cap counts every curse equally.** It doesn't know that `Repeated Evasions Lower Damage Negation` and off-stat curses are near-free.
+- **Search depth:** 80 relics per slot, 2000 triples per side (split 1000 with rally / 1000 without). Not separately checked under a cap.
 - **Multiplicative sustain** assumes heals restore a share of max HP. Whether flasks do is **(unverified)**.
 - **Damage and sustain still add to each other**, so low-damage, sustain-heavy loadouts score well. See [guardian-sustain.md](guardian-sustain.md).
 - **Sizes:** `Increased Maximum HP` +10% and the Great Church max HP (2.5% effective) are guesses, as are the per-fight heal amounts.

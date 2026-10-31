@@ -384,7 +384,13 @@ def curse_count(relics):
 
 
 def top_triples(pool, colors, per_slot, keep, max_curses):
-    """Best `keep` relic triples (by triple score) for the given slot colors."""
+    """Best relic triples (by triple score) for the given slot colors.
+
+    Keeps the best `keep` / 2 triples with rally and the best `keep` / 2
+    without. A side-only score credits rally fully even when the other side
+    already carries a better copy, so a single list fills with rally triples
+    and drops strong rally-less ones.
+    """
     pool = [r for r in pool if len(r.curses) <= max_curses]
     cands = [sorted((r for r in pool if r.fits(c)), key=lambda r: -r.solo)[:per_slot] for c in colors]
     seen = set()
@@ -396,7 +402,9 @@ def top_triples(pool, colors, per_slot, keep, max_curses):
         seen.add(ids)
         out.append((score(combo), combo))
     out.sort(key=lambda t: -t[0])
-    return out[:keep]
+    with_rally = [t for t in out if any(RALLY in r.fams for r in t[1])]
+    without = [t for t in out if not any(RALLY in r.fams for r in t[1])]
+    return with_rally[: keep // 2] + without[: keep // 2]
 
 
 def search(relics, normal, deep, per_slot, keep, max_curses=99):

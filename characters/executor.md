@@ -37,13 +37,13 @@ Most players mix all three: the bleed katana carries, the Cursed Sword handles b
 | Soot-Covered Executor's Urn | R R B | R R B | 4 Sovereign Sigils |
 | Sealed Executor's Urn | Y Y R | G G B | 4 Sovereign Sigils |
 | Decrepit Executor's Goblet (Forsaken Hollows) | R R Y **(unverified, single source)** | R R Y **(unverified, single source)** | 4 Sovereign Sigils |
-| Forgotten Executor's Goblet (Forsaken Hollows) | G B R **(unverified, single source)** | Y G W **(unverified, single source)** | 4 Sovereign Sigils |
+| Forgotten Executor's Goblet (Forsaken Hollows) | G B R | Y G W | 4 Sovereign Sigils |
 | Sacred Erdtree Grail (all) | Y Y Y | Y Y Y | 3000 Murk (after Night Aspect) |
 | Spirit Shelter Grail (all) | G G G | G G G | 3000 Murk (after 4 Nightlords) |
 | Giant's Cradle Grail (all) | B B B | B B B | 3000 Murk (after 7 Nightlords) |
 | Scadutree Grail (all, DLC) | R R R | R R R | 3000 Murk (after Dreglord) |
 
-The five base vessels match on wiki.gg and Fextralife. The two DLC vessels come only from wiki.gg (its Vessels and Executor pages agree, but that's one wiki); the Fextralife fetch was cut off before them.
+The five base vessels match on wiki.gg and Fextralife. The two DLC vessels come only from wiki.gg (its Vessels and Executor pages agree, but that's one wiki); the Fextralife fetch was cut off before them. The Forgotten Goblet's colors were verified in game on 2026-10-31; the Decrepit Goblet's are still unverified.
 
 ## Character-tagged relic effects
 
@@ -103,7 +103,7 @@ Golden Sprout's "HP Recovery From Successful Guarding" should trigger on Cursed 
 | Reduced Vigor and Arcane | bad for bleed, acceptable for deflect | |
 | Ultimate Art Charging Impaired | bad | Beast is his emergency heal and second life bar |
 | Taking Damage Causes Death Buildup | **disqualifying** | Melee duelist who takes lots of hits |
-| Taking Damage Causes Sleep / Madness Buildup | near-disqualifying | Sleep and Madness trigger Tenacity, but sleeping mid-fight is lethal |
+| Taking Damage Causes Sleep / Madness Buildup | near-disqualifying, **except Sleep on the sleep-engine build** | Sleep and Madness trigger Tenacity immediately. A dedicated build takes Sleep + All Resistances Down on purpose to farm Tenacity and the stacking deep regen: see [builds/executor-sleep.md](../builds/executor-sleep.md). Madness also burns FP and HP, so it stays bad. |
 | Taking Damage Causes Blood Loss Buildup | acceptable, possibly synergistic **(unverified)** | Bleed procs instantly trigger Tenacity (+20% attack) and the deep regen. Each proc still deals % HP damage. My inference, not a community-tested result. |
 | Taking Damage Causes Poison / Rot / Frost Buildup | acceptable | Tenacity triggers when the ailment expires |
 | Repeated Evasions Lower Damage Negation | acceptable | Executor mostly deflects rather than rolls; the Cursed Sword uses a dash |
