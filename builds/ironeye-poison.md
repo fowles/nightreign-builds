@@ -7,77 +7,77 @@
 **Requirements (enforced by the search):**
 - `[Ironeye] +1 additional Character Skill use` (your rule for every Ironeye build)
 - the deep heavy-poison Marking effect
-- a second poison source: `Starting armament inflicts poison` or `[Ironeye] Art Charge Activation Adds Poison Effect`. Without the flag (`--no-poison-source`), the model rates a poison weapon about the same as a big sustain relic and drops it (Ironeye's Goblet, 71.5). That leaves Marking as the only poison source, at ~25% uptime, and then it isn't a poison build.
+- a second poison source: `Starting armament inflicts poison` or `[Ironeye] Art Charge Activation Adds Poison Effect`. Without the flag (`--no-poison-source`), the model narrowly prefers a loadout with Marking as the only poison source, at ~25% uptime (Ironeye's Goblet, 51.8). That isn't a poison build.
+
+Rally (`Partial HP Restoration upon Post-Damage Attacks`) does nothing on a ranged bow build, so it weighs 0.
 
 ## Results
 
-Best loadout per vessel (top 5):
+Best loadout per vessel (top 4):
 
 | Vessel | Total | Damage | Sustain | Utility | Penalties | Curses |
 |---|---|---|---|---|---|---|
-| Ironeye's Urn | 65.8 | 24.9 | 36.0 | 18.5 | −13.5 | 7 |
-| Ironeye's Chalice | 65.4 | 26.2 | 34.7 | 9.5 | −5.0 | 4 |
-| Forgotten Ironeye's Goblet | 65.0 | 21.3 | 38.6 | 18.5 | −13.5 | 7 |
-| Ironeye's Goblet | 64.5 | 11.9 | 47.1 | 14.0 | −8.5 | 4 |
-| Sealed Ironeye's Urn | 62.6 | 26.2 | 32.3 | 9.5 | −5.5 | 4 |
+| Soot-Covered Ironeye's Urn | 49.7 | 47.2 | 2.0 | 10.0 | −9.5 | 5 |
+| Ironeye's Chalice | 49.2 | 33.5 | 11.2 | 9.5 | −5.0 | 4 |
+| Forgotten Ironeye's Goblet | 47.3 | 41.8 | 7.9 | 9.5 | −12.0 | 7 |
+| Sealed Ironeye's Urn | 46.5 | 38.6 | 1.4 | 9.5 | −3.0 | 3 |
 
-The top four are within 1.3 points, which is inside the model's noise. **I'd play the Chalice** (4 curses vs 7). The Urn tops the table, so it's shown first.
+The top two are 0.5 apart. **I'd play the Chalice:** it has fewer curses, real sustain, and no curses that build up poison on you. The Soot-Covered Urn is the glass-cannon option, and its slot colors are **unverified** between sources.
 
 Utility, poise and the Marking-burst size are hand-weighted. The poison model is all guesses (see Model inputs).
 
-## Best: Ironeye's Urn (Normal Y G G / Deep Y G G)
+## Best: Soot-Covered Ironeye's Urn (Normal B Y Y / Deep B Y Y)
 
-**Score 65.8:** damage 24.9, sustain 36.0, utility 18.5, penalties −13.5. Starter vessel.
+**Score 49.7:** damage 47.2, sustain 2.0, utility 10.0, penalties −9.5. Unlock: 4 Sovereign Sigils.
 
 | Slot | Relic | Effects (curse attached) |
 |---|---|---|
+| Normal B | **R00842** Grand Drizzly Scene | **[Ironeye] +1 additional Character Skill use**; Defeating enemies restores HP for allies but not for self; Endurance +2 *(stamina: worth 0)* |
 | Normal Y | **R00156** Polished Luminous Scene | Attack power increased for each Night Invader defeated; Ultimate Art Auto Charge +3 |
-| Normal G | **R00066** Polished Tranquil Scene | **[Ironeye] +1 additional Character Skill use**; Dexterity +3 |
-| Normal G | **R00892** Grand Tranquil Scene | FP Restoration upon Thrusting Sword Attacks *(out of focus)*; **Starting armament inflicts poison**; Lightning Attack Power Up +2 *(out of focus: physical arrows)* |
-| Deep Y | **R01893** Deep Grand Luminous Scene | [Ironeye] Improved Vigor and Strength, Reduced Dexterity; Critical hits fill more of the Art gauge +1 *(curse: Reduced Dexterity and Faith)*; Improved Physical Damage Negation +2 *(curse: Continuous HP Loss)* |
-| Deep G | **R00934** Deep Grand Tranquil Scene | **[Ironeye] Character Skill Inflicts Heavy Poison Damage on Poisoned Enemies**; Partial HP Restoration upon Post-Damage Attacks +1 *(curse: Rot Buildup When Below Max HP)*; Defeating enemies fills more of the Art gauge +1 *(curse: Near Death Reduces Max HP)* |
-| Deep G | **R01257** Deep Grand Tranquil Scene | Physical Attack Up +4 *(curse: Lower Attack When Below Max HP)*; Increased Maximum HP *(curse: Reduced Rune Acquisition)*; Improved Affinity Damage Negation +1 *(curse: Reduced Strength and Intelligence)* |
+| Normal Y | **R00814** Night of the Wise | Increased Maximum FP; **Starting armament inflicts poison**; **Poison & Rot in Vicinity Increases Attack Power** |
+| Deep B | **R01283** Deep Grand Drizzly Scene | **[Ironeye] Character Skill Inflicts Heavy Poison Damage on Poisoned Enemies**; Physical Attack Up +3 *(curse: Taking Damage Causes Blood Loss Buildup)*; Improved Affinity Damage Negation |
+| Deep Y | **R00292** Deep Polished Luminous Scene | [Wylder] Character Skill inflicts Blood Loss *(wasted on Ironeye)*; Physical Attack Up +4 *(curse: Near Death Reduces Max HP)* |
+| Deep Y | **R00914** Deep Grand Luminous Scene | HP Restoration upon Thrusting Counterattack +1 *(out of focus; curse: Taking Damage Causes Poison Buildup)*; Attack power up when facing poison-afflicted enemy +1 *(curse: Poison Buildup When Below Max HP)*; Physical Attack Up +3 *(curse: Reduced Damage Negation for Flask Usages)* |
 
-- **Poison engine:** weapon poison plus Marking, ~66% poison uptime (guess). About 15 Markings a fight, ~10 of them on a poisoned target. Poison ticks and Marking bursts are worth ~36% of your damage in the model.
-- **Curses: 7.**
-  - Costly: Reduced Dexterity and Faith (−3, Dex is his A stat), Continuous HP Loss (−3), Lower Attack When Below Max HP (−3).
-  - Mild: Near Death Reduces Max HP (−2), Rot Buildup When Below Max HP (−1), Reduced Rune Acquisition (−1).
-  - Near-free: Reduced Strength and Intelligence.
-  - No `Taking Damage Causes X`, no Death, no Ultimate Art Charging Impaired.
-- **Dormant Powers:** none. **`unverified_effect` flags:** none. **Rally:** yes (R00934 +1).
-- **Cleaner swap (64.4, 5 curses):** replace R01893 with **R01776** Deep Grand Luminous Scene (Attack power up when facing poison-afflicted enemy; Poise +3; Magic Damage Negation Up). This drops Continuous HP Loss and Reduced Dexterity and Faith. You lose the Vigor/Str respec and physical negation +2, and gain +10% damage against poisoned targets.
+- **Poison engine:** weapon poison plus Marking, ~66% uptime (guess). About 15 Markings a fight, ~10 of them on a poisoned target. Poison ticks and Marking bursts add ~36% of your damage, on top of +16% vs poisoned and +12% from Poison & Rot in Vicinity.
+- **Damage stack:** Physical Attack Up +3 / +4 / +3 multiply (+37%), plus Night Invader.
+- **Curses: 5.**
+  - Reduced Damage Negation for Flask Usages (−2.5), Near Death Reduces Max HP (−2).
+  - Taking Damage Causes Blood Loss Buildup (−2) and Taking Damage Causes Poison Buildup (−2): mild at range, and no Death or Sleep.
+  - Poison Buildup When Below Max HP (−1).
+  - No Ultimate Art Charging Impaired.
+- **Dormant Powers:** none. **`unverified_effect` flags:** none.
+- **Sustain is nearly zero (2.0).** One mistake hurts.
 
 ## Alternative (recommended): Ironeye's Chalice (Normal R G W / Deep R R G)
 
-**Score 65.4:** damage 26.2, sustain 34.7, utility 9.5, penalties −5.0. Slot colors are from wiki.gg. Check them in game.
+**Score 49.2:** damage 33.5, sustain 11.2, utility 9.5, penalties −5.0. Slot colors are from wiki.gg. Check them in game.
 
 | Slot | Relic | Effects (curse attached) |
 |---|---|---|
-| Normal R | **R01911** Grand Burning Scene | **[Ironeye] Art Charge Activation Adds Poison Effect**; Attack power up when facing poison-afflicted enemy; Ultimate Art Auto Charge +3 |
+| Normal R | **R01188** Grand Burning Scene | **Starting armament inflicts poison**; Changes compatible armament's skill to Thunderbolt at start of expedition *(skill swap; a bow likely isn't compatible)*; Poise +1 |
 | Normal G | **R00066** Polished Tranquil Scene | **[Ironeye] +1 additional Character Skill use**; Dexterity +3 |
-| Normal W | **R01299** Grand Drizzly Scene (Blue) | [Raider] Duration of Ultimate Art extended *(wasted on Ironeye)*; Attack power increased for each Night Invader defeated; Vigor +2 |
-| Deep R | **R00162** Deep Polished Burning Scene | Partial HP Restoration upon Post-Damage Attacks +2 *(curse: Repeated Evasions Lower Damage Negation)*; Max HP increased for each great enemy defeated at a Great Church. |
+| Normal W | **R00156** Polished Luminous Scene (Yellow) | Attack power increased for each Night Invader defeated; Ultimate Art Auto Charge +3 |
 | Deep R | **R00281** Deep Polished Burning Scene | **[Ironeye] Character Skill Inflicts Heavy Poison Damage on Poisoned Enemies**; Slowly restore HP for self and nearby allies when HP is low |
+| Deep R | **R01525** Deep Grand Burning Scene | **Attack power up when facing poison-afflicted enemy +2** *(curse: Repeated Evasions Lower Damage Negation)*; Holy Damage Negation Up; Improved Rot Resistance |
 | Deep G | **R01257** Deep Grand Tranquil Scene | Physical Attack Up +4 *(curse: Lower Attack When Below Max HP)*; Increased Maximum HP *(curse: Reduced Rune Acquisition)*; Improved Affinity Damage Negation +1 *(curse: Reduced Strength and Intelligence)* |
 
-- **Poison engine:** charged Single Shot (300 poison) plus Marking, ~36% uptime (guess). There's no poisoned weapon, so the starting bow keeps full damage and you're free to switch to any bow you find. The trade is fewer poisoned Markings (~5 bursts a fight vs ~10).
+- **Poison engine:** the same ~66% uptime (weapon poison plus Marking), with +20% vs poisoned (R01525 +2).
 - **Curses: 4.** Lower Attack When Below Max HP (−3), Reduced Rune Acquisition (−1), Repeated Evasions Lower Damage Negation (fine: only chained dodges), Reduced Strength and Intelligence (near-free).
-- **Dormant Powers:** none. **`unverified_effect` flags:** none. **Rally:** yes (R00162 +2).
-- To run both poison sources here, put **R00858** Grand Burning Scene (Partial HP Restoration upon Post-Damage Attacks; Starting armament inflicts poison; Changes compatible armament's skill to Lightning Slash) in the white slot in place of R01299. The rally on it is redundant with the deep +2 copy. Not separately scored.
+- **Dormant Powers:** none. **`unverified_effect` flags:** none.
 
 ## Gameplay loop
 
-1. Open with arrows from the poisoned starting bow (Urn) or a charged Single Shot (Chalice) to get the first poison proc.
+1. Open with arrows from the poisoned starting bow to get the first proc.
 2. Mark through the boss while it's poisoned. Each Marking adds 70 more buildup and, on a poisoned target, a ~250 + 0.25% max HP burst. Two charges let you mark, reposition, and mark again.
 3. Keep the weak point up for the team's +10% damage, and pop it with arrows.
-4. Charge Single Shot when it's ready. On the Chalice it's your main poison source. On both it's still the revive.
+4. Single Shot is your burst and the revive. No loadout carries Ultimate Art Charging Impaired.
 
 ## Trade-offs and unknowns
 
-- **Poison numbers are guesses.** Uptime per source, poison DoT on bosses, and the ~3%-of-your-fight-damage value per heavy-poison burst (assumes ~25k boss HP and ~8–10k damage from you) all come without a source. If bursts are worth less, the poison source requirement is what keeps this a poison build.
+- **Poison numbers are guesses.** Uptime per source, poison DoT on bosses, and the ~3%-of-your-fight-damage value per heavy-poison burst (assumes ~25k boss HP and ~8–10k damage from you) all come without a source.
 - `Starting armament inflicts poison` costs 15% damage on the starting bow (wiki.gg), and you have to keep using that bow.
 - Whether attack buffs scale poison damage is unknown. The model adds poison as flat damage with no buffs applied.
-- `[Ironeye] Improved Vigor and Strength, Reduced Dexterity` is valued as 8% max HP minus ~6% bow damage (guess).
 
 ## Model inputs
 
@@ -88,9 +88,9 @@ Utility, poise and the Marking-burst size are hand-weighted. The poison model is
 | Poison DoT | 10% of your damage at full uptime | guess |
 | Heavy-poison burst | 3% of your fight damage each, ×15 Markings × uptime | guess on wiki.gg's 250 + 0.25% max HP |
 | `vs poisoned` / `Poison & Rot in Vicinity` | 10 / 16 / 20% and 12%, × poison uptime | wiki.gg sizes; uptime model |
+| Rally | 0 | does nothing for ranged |
 | Incoming damage mix | physical 0.6; fire, holy, lightning, magic 0.1 each | guess |
 | Fight HP budget / ally factor | 3.0 bars / 0.5 × 2 allies | guess |
-| Rally | 1.0 / 1.25 / 1.35 bars per fight | ranged takes fewer hits than the 1.5 melee anchor; guess |
 | Ultimate Art Charging Impaired | disqualifying | the charged Art delivers poison and revives |
 
 ## Sources

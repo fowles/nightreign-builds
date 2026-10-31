@@ -74,7 +74,7 @@ Scene relic names are from wiki.gg, partially garbled when fetched **(unverified
 | Poison | Starting armament inflicts poison, Attack power up when facing poison-afflicted enemy (+1/+2), Poison & Rot in Vicinity Increases Attack Power, Changes compatible armament's skill to Poison Moth Flight / Poisonous Mist |
 | Skill uptime | Character Skill Cooldown Reduction (+1…+3) |
 | Art charge | Ultimate Art Auto Charge (+1…+3), Critical hits fill more of the Art gauge (+1), Defeating enemies fills more of the Art gauge (+1) |
-| Sustain | **Rally** = Partial HP Restoration upon Post-Damage Attacks (+1/+2; applies to bows since 1.02, so in focus for a bow build too), Increased Maximum HP, Continuous HP Recovery, FP Restoration upon Bow Attacks. No "HP Restoration upon Bow Attacks" appears in the inventory. |
+| Sustain | **Rally** (Partial HP Restoration upon Post-Damage Attacks) does nothing for ranged bow builds (confirmed in play, despite the 1.02 patch note), so it's worth 0 here. Increased Maximum HP, Continuous HP Recovery, FP Restoration upon Bow Attacks. No "HP Restoration upon Bow Attacks" appears in the inventory. |
 | Utility | Changes compatible armament's skill to Rain of Arrows (Fextralife suggestion) |
 | Stamina | Stamina Recovery upon Landing Attacks: **worth 0 in scoring** (CLAUDE.md: stamina is tie-break only) |
 

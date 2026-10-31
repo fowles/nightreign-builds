@@ -10,7 +10,7 @@ Every build requires `[Ironeye] +1 additional Character Skill use` (your rule).
               poison sources into a poison uptime, then scores the DoT, the Marking
               burst and the "vs poisoned" buffs from it.
   - isa:      stacks `Improved Initial Standard Attack` (+15% to the first light attack in
-              a chain, wiki.gg) on a tap-fire bow. Every copy multiplies **(unverified)**.
+              a chain, wiki.gg) on a tap-fire bow. Copies stack and multiply (confirmed by you).
   - affinity: also requires R00860 Night of the Lord (the only `Switching Weapons Adds an
               Affinity Attack` relic you own). Swap bows often: each swap adds random-element
               damage for 10 s, which affinity buffs boost. An elemental starting bow
@@ -75,7 +75,6 @@ CDR_SIZES = [0, 5, 7.5, 10]  # % shorter cooldown, +1..+3 (wiki.gg)
 VS_POISON = "Attack power up when facing poison-afflicted enemy"
 VS_POISON_SIZES = [10, 16, 20]  # wiki.gg
 POISON_VICINITY = "Poison & Rot in Vicinity Increases Attack Power"  # +12% for 20 s (wiki.gg)
-RALLY = "Partial HP Restoration upon Post-Damage Attacks"
 START_RE = re.compile(r"^Starting armament (?:inflicts (.+)|deals (.+) damage)$")
 NIGHT_OF_THE_LORD = "R00860"
 
@@ -129,7 +128,7 @@ def categories(build):
         "Physical Attack Up": pct([4, 5, 6, 10.5, 12], "phys"),  # wiki.gg, post-1.03
         "Attack power increased for each Night Invader defeated": pct([20]),  # meta-top
         "Attack power increased for each evergaol prisoner defeated": pct([5]),  # guess
-        ISA: pct([15], "first"),  # wiki.gg; bows count as light attacks (unverified)
+        ISA: pct([15], "first"),  # wiki.gg; copies stack (confirmed by you)
         "Improved Bow Attack Power": pct([6], "bow"),  # guess: nerfed in 1.03.2, no post-nerf number
         "Improved Attack Power with 3+ Bows Equipped": pct([4], "bow"),  # guess: ~8% x 0.5 availability
         "Improved Critical Hits": pct([18, 23], "crit"),  # wiki.gg
@@ -150,9 +149,8 @@ def categories(build):
     if build == "poison":
         damage["Arcane"] = [0, 0.5, 0.75, 1]  # guess: poison buildup on Arcane-scaling bows
     sustain = {
-        # Rally applies to bows since 1.02. Ranged takes fewer hits, so less than the melee
-        # anchor of 1.5 bars (guess).
-        RALLY: heal([1.0, 1.25, 1.35]),
+        # Rally (`Partial HP Restoration upon Post-Damage Attacks`) is deliberately absent:
+        # it does nothing for a ranged bow build (your call), so it weighs 0.
         "Continuous HP Recovery": heal([0.25]),  # guess
         "Slowly restore HP for self and nearby allies when HP is low": heal([0.25]),  # guess
         "Increased Maximum HP": ehp([10]),  # guess
@@ -521,9 +519,7 @@ def requirements(build, min_isa, poison_source):
 def top_triples(pool, colors, per_slot, keep, max_curses, model, require=None):
     """Best relic triples (by triple score) for the given slot colors.
 
-    Keeps the best `keep` / 2 triples with rally and the best `keep` / 2 without, so a
-    side-only score that credits rally fully doesn't crowd out strong rally-less triples.
-    Key relics (requirements, ISA, poison engine, starting-armament) are always candidates.
+    Keeps the best `keep` triples, plus the most ISA-heavy ones. Key relics (requirements, ISA, poison engine, starting-armament) are always candidates.
     """
     pool = [r for r in pool if len(r.curses) <= max_curses]
     cands = []
@@ -541,11 +537,9 @@ def top_triples(pool, colors, per_slot, keep, max_curses, model, require=None):
         seen.add(ids)
         out.append((score(combo, model), combo))
     out.sort(key=lambda t: -t[0])
-    with_rally = [t for t in out if has(t[1], RALLY)]
-    without = [t for t in out if not has(t[1], RALLY)]
     # ISA triples score low alone but multiply with each other: keep a slice of the best ones.
     isa = sorted(out, key=lambda t: (-sum(f == ISA for r in t[1] for f, _ in r.parsed), -t[0]))
-    return with_rally[: keep // 2] + without[: keep // 2] + isa[: keep // 4]
+    return out[:keep] + isa[: keep // 4]
 
 
 def search(relics, model, normal, deep, per_slot, keep, max_curses, min_isa, poison_source):
@@ -582,9 +576,7 @@ def describe(total, n, d, normal, deep, model):
             all_curses += r.curses
             dormant += r.dormant
             flags += [f"{r.id}: {u}" for u in r.unverified]
-    rally = [r.id for r in n + d if has([r], RALLY)]
     lines.append(f"  engine: {report}")
-    lines.append(f"  rally: {rally or 'none'}")
     lines.append(f"  curses ({len(all_curses)}): {all_curses}")
     lines.append(f"  dormant: {dormant or 'none'}")
     lines.append(f"  unverified: {flags or 'none'}")

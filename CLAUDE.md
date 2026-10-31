@@ -19,7 +19,7 @@ This project is for designing **Elden Ring Nightreign** relic loadouts for **Dee
 - **Slot colors must match.** White slots accept any color.
 - **Character-tagged effects** (`[Guardian] ...`) only work on that Nightfarer. A relic tagged for another character can still be used for its other effects, but the tagged effect is wasted. Score it that way.
 - **Stacking:** different effect families always stack. Within one family it depends on the kind of buff:
-  - **Attack buffs stack, and multiply** (two +10% = +21%). Count every copy, across tiers and duplicates: `Physical Attack Up`, element `Attack Power Up`, `Improved Affinity Attack Power`, `Improved Sorceries`/`Incantations`, spell-school and weapon-class attack power, `Improved Guard Counters`. Exception: conditional attack buffs (grease, `... in Vicinity Improves Attack Power`, attack up vs. poison/rot/frostbite) count highest tier only **(unverified)**.
+  - **Attack buffs stack, and multiply** (two +10% = +21%). Count every copy, across tiers and duplicates: `Physical Attack Up`, element `Attack Power Up`, `Improved Affinity Attack Power`, `Improved Sorceries`/`Incantations`, spell-school and weapon-class attack power, `Improved Guard Counters`, `Improved Initial Standard Attack` (confirmed in play). Exception: conditional attack buffs (grease, `... in Vicinity Improves Attack Power`, attack up vs. poison/rot/frostbite) count highest tier only **(unverified)**.
   - **Defensive and healing buffs don't stack.** Only the highest tier counts: damage negation, poise, HP recovery and restoration, max HP. Different negation families (e.g. physical and affinity) still multiply together. wiki.gg says `Partial HP Restoration +1` and `+2` stack with each other **(unverified)**.
   - **Everything else** (crits, Art gauge, cooldowns): unknown. Assume highest tier only and say so when it affects a pick.
 
@@ -42,7 +42,7 @@ Weight = **focus × size × coverage × uptime × availability**, scored at **0.
 - **Availability:** discount effects that need specific drops (a spell school, a weapon class, `3+ X Equipped`) by how likely the run is to supply them.
 - **Meta anchors:**
   - **`Attack power increased for each Night Invader defeated`** ≈ **+20% damage**, possibly the best damage effect in the current meta. It's only on standard relics. Assume copies don't stack **(unverified)**.
-  - **Rally (`Partial HP Restoration upon Post-Damage Attacks`)** is by far the strongest melee sustain effect and is **non-negotiable for melee builds**. Anchor the base tier at 1.5 max-HP bars healed per fight with the reference budget of 3.0 (50% eHP, 20 points on its own); +1/+2 heal 25%/35% more (1.875 / 2.025 bars). Check that every top melee loadout carries it.
+  - **Rally (`Partial HP Restoration upon Post-Damage Attacks`)** is by far the strongest melee sustain effect and is **non-negotiable for melee builds**. Anchor the base tier at 1.5 max-HP bars healed per fight with the reference budget of 3.0 (50% eHP, 20 points on its own); +1/+2 heal 25%/35% more (1.875 / 2.025 bars). Check that every top melee loadout carries it. It does nothing for ranged (bow) builds: weigh it 0 there.
   - **Stamina is worth 0.** That covers max stamina, stamina recovery, and Endurance. It's nice to have at best. Use it only to break a tie.
 - **Score in four parts**, which must add up to the total:
   - **damage:** attack buffs, guard counters, damage-dealing passives and skills
