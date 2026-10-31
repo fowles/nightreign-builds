@@ -3,6 +3,9 @@
 Usage: python3 -I scripts/guardian_sustain.py [--top N] [--vessel NAME]
 
 Scoring:
+  - Each family belongs to a category (damage / sustain / utility); output
+    reports those plus penalties (curses, Dormant Powers, unverified flags),
+    which sum to the total score.
   - Effects are grouped into families by stripping a trailing " +N". Attack
     families in STACKING count every copy across all six slots; in every other
     family only the highest tier counts (see CLAUDE.md "Stacking").
@@ -19,66 +22,72 @@ from pathlib import Path
 
 DB = Path(__file__).resolve().parent.parent / "mfk-relicdb.json"
 
-# family -> list of weights indexed by tier (base = tier 0, "+1" = tier 1, ...)
-WEIGHTS = {
-    # Guard counters
-    "Improved Guard Counters": [8, 10, 12],
-    "Guard counter is given a boost based on current HP": [8],
-    "[Guardian] Successful guards send out shockwaves while ability is active": [7],
-    # Ultimate Art regen
-    "Successful guarding fills more of the Art gauge": [9, 11],
-    "Ultimate Art Auto Charge": [0, 5, 7, 9],
-    "Critical hits fill more of the Art gauge": [2, 3],
-    "Defeating enemies fills more of the Art gauge": [3, 4],
-    # Sustain (self)
-    "HP Recovery From Successful Guarding": [10],
-    "HP Restoration upon Thrusting Counterattack": [5, 6],
-    "Partial HP Restoration upon Post-Damage Attacks": [5, 6, 7],
-    "Continuous HP Recovery": [6],
-    "HP Restoration upon Halberd Attacks": [5],
-    "Slowly restore HP for self and nearby allies when HP is low": [4],
-    "Increased Maximum HP": [5],
-    "Increased Maximum Stamina": [5],
-    "Vigor": [0, 2, 3, 4],
-    "Endurance": [0, 1.5, 2.5, 3.5],
-    "Improved Flask HP Restoration": [3],
-    # Sustain (team) / Art payoff
-    "[Guardian] Slowly restores nearby allies' HP while Art is active": [6],
-    "[Guardian] Character Skill Boosts Damage Negation of Nearby Allies": [5],
-    "Flask Also Heals Allies": [3],
-    "Draw enemy attention while guarding": [3],
-    # Defense
-    "Improved Physical Damage Negation": [4, 5, 6],
-    "Improved Affinity Damage Negation": [3, 3.5, 4],
-    "Improved Damage Negation at Low HP": [2],
-    "Improved Poise & Damage Negation When Knocked Back by Damage": [1.5],
-    "Poise": [0, 1.5, 2, 2.5],
-    "Fire Damage Negation Up": [1],
-    "Improved Fire Damage Negation": [1, 1.25, 1.5],
-    "Holy Damage Negation Up": [1],
-    "Improved Holy Damage Negation": [1, 1.25, 1.5],
-    "Lightning Damage Negation Up": [1],
-    "Improved Lightning Damage Negation": [1, 1.25, 1.5],
-    "Magic Damage Negation Up": [1],
-    "Improved Magic Damage Negation": [1, 1.25, 1.5],
-    # Offense
-    "Physical Attack Up": [1.2, 1.6, 2, 3.4, 4],  # 3/4/5/8.5/10%, 0.4 per %
-    "Improved Halberd Attack Power": [4],
-    "Strength": [0, 1, 1.5, 2],
-    "Improved Attack Power with 3+ Halberds Equipped": [0.5],
-    # Utility
-    "Character Skill Cooldown Reduction": [0, 1, 1.5, 2],
-    "Stamina Recovery upon Landing Attacks": [2, 2.5],
-    "Raised stamina recovery for nearby allies, but not for self": [1],
-    "Defeating enemies restores HP for allies but not for self": [1],
-    "Max HP Up with 3+ Greatshields Equipped": [0.5],
-    "HP restored when using medicinal boluses, etc.": [0.5, 0.75],
-    "[Guardian] Increased duration for Character Skill": [1],
-    "[Guardian] Creates whirlwind when charging halberd attacks": [1],
-    # Stat swaps that cost Vigor
-    "[Guardian] Improved Strength and Dexterity, Reduced Vigor": [-2],
-    "[Guardian] Improved Mind and Faith, Reduced Vigor": [-4],
+# category -> family -> list of weights indexed by tier (base = tier 0, "+1" = tier 1, ...)
+# Categories are reported separately so damage and sustain compare across builds.
+CATEGORIES = {
+    "damage": {
+        "Improved Guard Counters": [8, 10, 12],
+        "Guard counter is given a boost based on current HP": [8],
+        "[Guardian] Successful guards send out shockwaves while ability is active": [7],
+        "Physical Attack Up": [1.2, 1.6, 2, 3.4, 4],  # 3/4/5/8.5/10%, 0.4 per %
+        "Improved Halberd Attack Power": [4],
+        "Strength": [0, 1, 1.5, 2],
+        "Improved Attack Power with 3+ Halberds Equipped": [0.5],
+        "[Guardian] Creates whirlwind when charging halberd attacks": [1],
+    },
+    "sustain": {
+        # Self
+        "HP Recovery From Successful Guarding": [10],
+        "HP Restoration upon Thrusting Counterattack": [5, 6],
+        "Partial HP Restoration upon Post-Damage Attacks": [5, 6, 7],
+        "Continuous HP Recovery": [6],
+        "HP Restoration upon Halberd Attacks": [5],
+        "Slowly restore HP for self and nearby allies when HP is low": [4],
+        "Increased Maximum HP": [5],
+        "Increased Maximum Stamina": [5],
+        "Vigor": [0, 2, 3, 4],
+        "Endurance": [0, 1.5, 2.5, 3.5],
+        "Improved Flask HP Restoration": [3],
+        "Stamina Recovery upon Landing Attacks": [2, 2.5],
+        "Max HP Up with 3+ Greatshields Equipped": [0.5],
+        "HP restored when using medicinal boluses, etc.": [0.5, 0.75],
+        # Team
+        "[Guardian] Slowly restores nearby allies' HP while Art is active": [6],
+        "[Guardian] Character Skill Boosts Damage Negation of Nearby Allies": [5],
+        "Flask Also Heals Allies": [3],
+        "Draw enemy attention while guarding": [3],
+        "Defeating enemies restores HP for allies but not for self": [1],
+        # Defense
+        "Improved Physical Damage Negation": [4, 5, 6],
+        "Improved Affinity Damage Negation": [3, 3.5, 4],
+        "Improved Damage Negation at Low HP": [2],
+        "Improved Poise & Damage Negation When Knocked Back by Damage": [1.5],
+        "Poise": [0, 1.5, 2, 2.5],
+        "Fire Damage Negation Up": [1],
+        "Improved Fire Damage Negation": [1, 1.25, 1.5],
+        "Holy Damage Negation Up": [1],
+        "Improved Holy Damage Negation": [1, 1.25, 1.5],
+        "Lightning Damage Negation Up": [1],
+        "Improved Lightning Damage Negation": [1, 1.25, 1.5],
+        "Magic Damage Negation Up": [1],
+        "Improved Magic Damage Negation": [1, 1.25, 1.5],
+        # Stat swaps that cost Vigor
+        "[Guardian] Improved Strength and Dexterity, Reduced Vigor": [-2],
+        "[Guardian] Improved Mind and Faith, Reduced Vigor": [-4],
+    },
+    "utility": {
+        # Ultimate Art regen
+        "Successful guarding fills more of the Art gauge": [9, 11],
+        "Ultimate Art Auto Charge": [0, 5, 7, 9],
+        "Critical hits fill more of the Art gauge": [2, 3],
+        "Defeating enemies fills more of the Art gauge": [3, 4],
+        "Character Skill Cooldown Reduction": [0, 1, 1.5, 2],
+        "Raised stamina recovery for nearby allies, but not for self": [1],
+        "[Guardian] Increased duration for Character Skill": [1],
+    },
 }
+WEIGHTS = {fam: w for fams in CATEGORIES.values() for fam, w in fams.items()}
+CATEGORY = {fam: cat for cat, fams in CATEGORIES.items() for fam in fams}
 
 # Attack buffs: every copy counts, across tiers and duplicates.
 STACKING = {
@@ -90,7 +99,7 @@ STACKING = {
 
 # Prefix rules for effects not listed above.
 PREFIX_WEIGHTS = [
-    ("Starting armament deals", -1),  # converts physical halberd damage
+    ("Starting armament deals", -1, "damage"),  # converts physical halberd damage
 ]
 
 DORMANT_OK = {"Halberds": 0, "Greatshields": -1}
@@ -152,14 +161,15 @@ def family(text):
 
 
 def effect_value(text):
+    """(family, weight, category) for one effect."""
     fam, tier = family(text)
     if fam in WEIGHTS:
         w = WEIGHTS[fam]
-        return fam, w[min(tier, len(w) - 1)]
-    for prefix, w in PREFIX_WEIGHTS:
+        return fam, w[min(tier, len(w) - 1)], CATEGORY[fam]
+    for prefix, w, cat in PREFIX_WEIGHTS:
         if text.startswith(prefix):
-            return fam, w
-    return fam, 0
+            return fam, w, cat
+    return fam, 0, "utility"
 
 
 class Relic:
@@ -172,6 +182,7 @@ class Relic:
         self.effects = r["effects"]
         self.unverified = [f.split(":", 1)[1] for f in r["flags"] if f.startswith("unverified_effect:")]
         self.fams = {}  # family -> best value on this relic
+        self.cats = {}  # family -> category
         self.dormant = []
         self.curses = []
         for e in self.effects:
@@ -179,7 +190,8 @@ class Relic:
             if m:
                 self.dormant.append(m.group(1))
             else:
-                fam, v = effect_value(e["text"])
+                fam, v, cat = effect_value(e["text"])
+                self.cats[fam] = cat
                 if v > self.fams.get(fam, float("-inf")):
                     self.fams[fam] = v
             if e["curse"]:
@@ -190,30 +202,42 @@ class Relic:
         return slot == "W" or slot == self.color
 
 
-def score(relics):
+def breakdown(relics):
+    """Score split into damage / sustain / utility / penalties; values sum to the total."""
+    parts = dict.fromkeys(("damage", "sustain", "utility", "penalties"), 0.0)
     best = {}
+    cats = {}
     curses = {}
     dormant = []
-    s = 0.0
     for r in relics:
+        cats.update(r.cats)
         for fam, v in r.fams.items():
             # Negative families (stat swaps) and attack buffs always apply;
             # other positives take the max.
             if v < 0 or fam in STACKING:
-                s += v
+                parts[r.cats[fam]] += v
             elif v > best.get(fam, 0):
                 best[fam] = v
         for c in r.curses:
             curses[c] = curses.get(c, 0) + 1
         dormant += r.dormant
-        s += UNVERIFIED * len(r.unverified)
-    s += sum(best.values())
+        parts["penalties"] += UNVERIFIED * len(r.unverified)
+    for fam, v in best.items():
+        parts[cats[fam]] += v
     for c, n in curses.items():
-        s += CURSE_PENALTY.get(c, -2) * n + DUP_CURSE * (n - 1)
+        parts["penalties"] += CURSE_PENALTY.get(c, -2) * n + DUP_CURSE * (n - 1)
     for d in dormant:
-        s += DORMANT_OK.get(d, DORMANT_BAD)
-    s += DORMANT_EXTRA * max(0, len(dormant) - 1)
-    return s
+        parts["penalties"] += DORMANT_OK.get(d, DORMANT_BAD)
+    parts["penalties"] += DORMANT_EXTRA * max(0, len(dormant) - 1)
+    return parts
+
+
+def score(relics):
+    return sum(breakdown(relics).values())
+
+
+def format_parts(parts):
+    return "  ".join(f"{k} {v:.1f}" for k, v in parts.items())
 
 
 def load():
@@ -250,7 +274,7 @@ def search(relics, normal, deep, per_slot, keep):
 
 
 def describe(total, n, d, normal, deep):
-    lines = [f"score {total:.1f}"]
+    lines = [f"score {total:.1f}  ({format_parts(breakdown(n + d))})"]
     all_curses = []
     dormant = []
     flags = []
@@ -280,14 +304,14 @@ def main():
         if args.vessel and args.vessel != name:
             continue
         res = search(relics, normal, deep, args.per_slot, args.keep)
-        summary.append((res[0][0], name))
+        summary.append((res[0][0], name, breakdown(res[0][1] + res[0][2])))
         print(f"=== {name}  normal {normal} / deep {deep}")
         for total, n, d in res[: args.top]:
             print(describe(total, n, d, normal, deep))
         print()
     print("=== summary")
-    for s, name in sorted(summary, reverse=True):
-        print(f"  {s:6.1f}  {name}")
+    for s, name, parts in sorted(summary, key=lambda t: -t[0]):
+        print(f"  {s:6.1f}  {name:30}  {format_parts(parts)}")
 
 
 if __name__ == "__main__":

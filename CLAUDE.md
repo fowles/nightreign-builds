@@ -32,6 +32,13 @@ Weight = **focus × size × uptime × availability**.
 - **Uptime:** discount conditional effects, such as ones that apply only at low HP, only while the Art is active, or only near Madness.
 - **Availability:** discount effects that need specific drops (a spell school, a weapon class, `3+ X Equipped`) by how likely the run is to supply them.
 - Example: `Improved Bestial Incantations` is out of focus for a halberd Guardian, so it's worth 0. For a Bestial caster, it and `Physical Attack Up` are both in focus, since Bestial spells do physical damage. They also stack, so they don't compete except for slots.
+- **Score in separate parts.** Put every weighted family in one category, so loadouts and builds can be compared on each part:
+  - **damage:** attack buffs, guard counters, damage-dealing passives and skills
+  - **sustain:** healing, max HP and stamina, damage negation, poise, team heals and protection
+  - **utility:** Art gauge, cooldowns, everything else
+  - **penalties:** curses, Dormant Powers, `unverified_effect` flags
+
+  The four must add up to the total score. Report all four with the total for every loadout.
 
 ## Non-negotiable rules
 
@@ -71,6 +78,7 @@ Grails usable by every Nightfarer:
 4. Score relics, then brute-force or search every 6-slot combination for each eligible vessel, deduplicating effect families across all six slots.
 5. Present the top vessel plus one alternative. For each loadout, give:
    - a table with every relic and every effect, curses attached
+   - the score split into damage / sustain / utility / penalties, plus the total
    - total curses, Dormant Powers carried, and any `unverified_effect` flags
    - the gameplay loop the build creates, and its trade-offs
 6. Keep scripts in `scripts/` so weights can be adjusted and re-run.

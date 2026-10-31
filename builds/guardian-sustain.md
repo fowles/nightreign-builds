@@ -8,11 +8,30 @@
 
 **Goal:** halberd + greatshield tank. Stay healthy through long Deep of Night fights, hit hard with guard counters, and keep Wings of Salvation (Ultimate Art) coming back often.
 
-Scores across all 11 eligible vessels: Chalice 88.5, Forgotten Goblet 88.5, Decrepit Goblet 83.5, Soot-Covered Urn 82.5, Goblet 81.9, Urn 81.0, Sealed Urn 78.5, Scadutree 78.0, Giant's Cradle 77.0, Spirit Shelter 76.0, Sacred Erdtree 71.0.
+Best loadout per vessel:
+
+| Vessel | Total | Damage | Sustain | Utility | Penalties |
+|---|---|---|---|---|---|
+| Guardian's Chalice | 88.5 | 41.0 | 40.0 | 9.0 | −1.5 |
+| Forgotten Guardian's Goblet | 88.5 | 33.0 | 48.5 | 9.0 | −2.0 |
+| *(previous best: Forgotten Goblet, 2026-10-30)* | 87.9 | 26.4 | 57.0 | 9.0 | −4.5 |
+| Decrepit Guardian's Goblet | 83.5 | 47.0 | 25.0 | 18.0 | −6.5 |
+| Soot-Covered Guardian's Urn | 82.5 | 43.0 | 27.0 | 18.0 | −5.5 |
+| Guardian's Goblet | 81.9 | 28.4 | 48.5 | 9.0 | −4.0 |
+| Guardian's Urn | 81.0 | 33.0 | 31.5 | 18.0 | −1.5 |
+| Sealed Guardian's Urn | 78.5 | 27.0 | 36.5 | 22.0 | −7.0 |
+| Scadutree Grail | 78.0 | 33.0 | 31.5 | 18.0 | −4.5 |
+| Giant's Cradle Grail | 77.0 | 15.0 | 54.5 | 9.0 | −1.5 |
+| Spirit Shelter Grail | 76.0 | 45.0 | 19.0 | 18.0 | −6.0 |
+| Sacred Erdtree Grail | 71.0 | 29.0 | 26.5 | 21.0 | −5.5 |
+
+The score units are the script's weights, not real percentages. They compare across builds only when those builds use the same weight scale.
 
 The top two tie. The Chalice is listed first because it keeps `HP Recovery From Successful Guarding`, which drives the whole loop, and it carries only one curse.
 
 ## Best: Guardian's Chalice (Normal B Y W / Deep R B Y)
+
+**Score 88.5:** damage 41.0, sustain 40.0, utility 9.0, penalties −1.5.
 
 | Slot | Relic | Effects (curse attached) |
 |---|---|---|
@@ -32,6 +51,8 @@ The top two tie. The Chalice is listed first because it keeps `HP Recovery From 
 
 ## Alternative: Forgotten Guardian's Goblet (Normal G B B / Deep R B W), more passive sustain
 
+**Score 88.5:** damage 33.0, sustain 48.5, utility 9.0, penalties −2.0.
+
 | Slot | Relic | Effects (curse attached) |
 |---|---|---|
 | Normal G | **R00855** Night of the Champion | Increased Maximum Stamina; Guard counter is given a boost based on current HP; HP Restoration upon Thrusting Counterattack |
@@ -46,7 +67,7 @@ The top two tie. The Chalice is listed first because it keeps `HP Recovery From 
 - **`unverified_effect` flags:** none.
 - **Trade-offs:** Adds max HP, Continuous HP Recovery, low-HP regen, and affinity negation. But it has **no `HP Recovery From Successful Guarding`**, and only two guard-counter copies.
 
-**Previous best (2026-10-30), now 87.9.** It's the same Goblet with the same Normal slots (R00855, R01922, R00823); only the Deep slots differ. It is still a strong option if you'd rather have heal-on-block plus Fathom's passive regen than a second guard-counter copy.
+**Previous best (2026-10-30), now 87.9:** damage 26.4, sustain 57.0, utility 9.0, penalties −4.5. It's the same Goblet with the same Normal slots (R00855, R01922, R00823); only the Deep slots differ. It is still a strong option if you'd rather have heal-on-block plus Fathom's passive regen than a second guard-counter copy.
 
 | Slot | Relic | Effects (curse attached) |
 |---|---|---|
