@@ -13,6 +13,12 @@ Scoring:
   - Dormant Powers: Halberds neutral, anything else negative, and carrying
     more than one costs extra because they dilute each other.
   - Effects flagged unverified_effect cost a small tiebreak penalty.
+  - Every loadout reports whether it carries rally (non-negotiable for melee).
+
+Search: the best --keep triples per side (from the top --per-slot relics per
+slot) are crossed and scored as six-slot sets. Narrower defaults (40 / 600)
+missed the optimum because side-only scores double-count effects the other side
+already supplies; 80 / 2000 matched 120 / 4000 on the top vessels.
 """
 import argparse
 import itertools
@@ -28,6 +34,8 @@ POINTS_PER_PCT = 0.4  # per 1% of total damage or of effective HP (CLAUDE.md)
 COVERAGE = {
     "all": 1.0,  # halberd hits, skills, counters: effectively all physical
     "guard_counter": 0.35,  # guess: guard counters are a big but minor share of damage
+    "skill": 0.05,  # guess: Whirlwind is used for its negation buff, not its damage
+    "crit": 0.03,  # guess: ripostes/backstabs are rare for a guard tank
 }
 
 # Reference fight model for sustain (CLAUDE.md "Sustain scale"). All guesses.
@@ -109,7 +117,12 @@ CATEGORIES = {
         "[Guardian] Successful guards send out shockwaves while ability is active": [7],
         "Physical Attack Up": pct([4, 5, 6, 10.5, 12]),  # wiki.gg, post-1.03
         "Attack power increased for each Night Invader defeated": pct([20]),  # meta-top
+        "Attack power increased for each evergaol prisoner defeated": pct([5]),  # guess: size and evergaol count unknown
         "Improved Halberd Attack Power": pct([10]),  # size guessed
+        "Improved Melee Attack Power": pct([5]),  # wiki.gg (Will of the Balancers)
+        "Improved Skill Attack Power": pct([15], "skill"),  # wiki.gg (Will of the Balancers)
+        "Improved Critical Hits": pct([18, 23], "crit"),  # +1 = 23% per wiki.gg; base guessed
+        "Taking attacks improves attack power": pct([3]),  # guess: ~10% x 0.3 uptime; unknown if blocks count
         "Strength": [0, 1, 1.5, 2],
         "Improved Attack Power with 3+ Halberds Equipped": [0.5],
         "[Guardian] Creates whirlwind when charging halberd attacks": [1],
@@ -124,6 +137,7 @@ CATEGORIES = {
         "Continuous HP Recovery": heal([0.25]),  # guess
         "Slowly restore HP for self and nearby allies when HP is low": heal([0.25]),  # guess
         "Increased Maximum HP": ehp([10]),
+        "Max HP increased for each great enemy defeated at a Great Church.": ehp([2.5]),  # guess: ~5% x 0.5 availability
         "Vigor": ehp([0, 2, 3.5, 5]),  # guess: % max HP per relic tier
         "Improved Flask HP Restoration": heal([0.1]),  # +10% of ~1 bar of flask healing
         "Max HP Up with 3+ Greatshields Equipped": ehp([1]),  # guess, rarely active
@@ -171,7 +185,10 @@ STACKING = {
     "Physical Attack Up",
     "Improved Halberd Attack Power",
     "Improved Attack Power with 3+ Halberds Equipped",
+    "Improved Melee Attack Power",
+    "Improved Skill Attack Power",
 }
+RALLY = "Partial HP Restoration upon Post-Damage Attacks"  # non-negotiable for melee (CLAUDE.md)
 
 # Prefix rules for effects not listed above.
 PREFIX_WEIGHTS = [
@@ -257,7 +274,8 @@ class Relic:
         self.kind = r["kind"]
         self.effects = r["effects"]
         self.unverified = [f.split(":", 1)[1] for f in r["flags"] if f.startswith("unverified_effect:")]
-        self.fams = {}  # family -> best value on this relic
+        self.fams = {}  # family -> best value on this relic (non-stacking families)
+        self.stack = []  # (family, value) for every copy of a STACKING family
         self.cats = {}  # family -> category
         self.dormant = []
         self.curses = []
@@ -268,7 +286,9 @@ class Relic:
             else:
                 fam, v, cat = effect_value(e["text"])
                 self.cats[fam] = cat
-                if v > self.fams.get(fam, float("-inf")):
+                if fam in STACKING:
+                    self.stack.append((fam, v))
+                elif v > self.fams.get(fam, float("-inf")):
                     self.fams[fam] = v
             if e["curse"]:
                 self.curses.append(e["curse"])
@@ -288,15 +308,16 @@ def breakdown(relics):
     dormant = []
     for r in relics:
         cats.update(r.cats)
+        # Attack buffs and negative families (stat swaps) always apply;
+        # other positives take the max.
+        always = r.stack + [(fam, v) for fam, v in r.fams.items() if v < 0]
+        for fam, v in always:
+            if isinstance(v, Pct):
+                pcts.append(v)
+            else:
+                parts[r.cats[fam]] += v
         for fam, v in r.fams.items():
-            # Negative families (stat swaps) and attack buffs always apply;
-            # other positives take the max.
-            if v < 0 or fam in STACKING:
-                if isinstance(v, Pct):
-                    pcts.append(v)
-                else:
-                    parts[r.cats[fam]] += v
-            elif v > best.get(fam, 0):
+            if v > best.get(fam, 0):
                 best[fam] = v
         for c in r.curses:
             curses[c] = curses.get(c, 0) + 1
@@ -370,6 +391,8 @@ def describe(total, n, d, normal, deep):
             all_curses += r.curses
             dormant += r.dormant
             flags += [f"{r.id}: {u}" for u in r.unverified]
+    rally = [r.id for r in n + d if RALLY in r.fams]
+    lines.append(f"  rally: {rally or 'MISSING (non-negotiable for melee)'}")
     lines.append(f"  curses ({len(all_curses)}): {all_curses}")
     lines.append(f"  dormant: {dormant or 'none'}")
     lines.append(f"  unverified: {flags or 'none'}")
@@ -380,8 +403,8 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--top", type=int, default=3)
     ap.add_argument("--vessel")
-    ap.add_argument("--per-slot", type=int, default=40)
-    ap.add_argument("--keep", type=int, default=600)
+    ap.add_argument("--per-slot", type=int, default=80)
+    ap.add_argument("--keep", type=int, default=2000)
     args = ap.parse_args()
     relics = load()
     summary = []
@@ -389,14 +412,16 @@ def main():
         if args.vessel and args.vessel != name:
             continue
         res = search(relics, normal, deep, args.per_slot, args.keep)
-        summary.append((res[0][0], name, breakdown(res[0][1] + res[0][2])))
+        best = res[0][1] + res[0][2]
+        has_rally = any(RALLY in r.fams for r in best)
+        summary.append((res[0][0], name, breakdown(best), has_rally))
         print(f"=== {name}  normal {normal} / deep {deep}")
         for total, n, d in res[: args.top]:
             print(describe(total, n, d, normal, deep))
         print()
     print("=== summary")
-    for s, name, parts in sorted(summary, key=lambda t: -t[0]):
-        print(f"  {s:6.1f}  {name:30}  {format_parts(parts)}")
+    for s, name, parts, has_rally in sorted(summary, key=lambda t: -t[0]):
+        print(f"  {s:6.1f}  {name:30}  {format_parts(parts)}" + ("" if has_rally else "  NO RALLY"))
 
 
 if __name__ == "__main__":
