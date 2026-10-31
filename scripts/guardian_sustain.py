@@ -24,6 +24,7 @@ DB = Path(__file__).resolve().parent.parent / "mfk-relicdb.json"
 
 # category -> family -> list of weights indexed by tier (base = tier 0, "+1" = tier 1, ...)
 # Categories are reported separately so damage and sustain compare across builds.
+# Stamina effects (incl. Endurance) are deliberately unweighted: nice to have at best.
 CATEGORIES = {
     "damage": {
         "Improved Guard Counters": [8, 10, 12],
@@ -44,11 +45,8 @@ CATEGORIES = {
         "HP Restoration upon Halberd Attacks": [5],
         "Slowly restore HP for self and nearby allies when HP is low": [4],
         "Increased Maximum HP": [5],
-        "Increased Maximum Stamina": [5],
         "Vigor": [0, 2, 3, 4],
-        "Endurance": [0, 1.5, 2.5, 3.5],
         "Improved Flask HP Restoration": [3],
-        "Stamina Recovery upon Landing Attacks": [2, 2.5],
         "Max HP Up with 3+ Greatshields Equipped": [0.5],
         "HP restored when using medicinal boluses, etc.": [0.5, 0.75],
         # Team
@@ -82,7 +80,6 @@ CATEGORIES = {
         "Critical hits fill more of the Art gauge": [2, 3],
         "Defeating enemies fills more of the Art gauge": [3, 4],
         "Character Skill Cooldown Reduction": [0, 1, 1.5, 2],
-        "Raised stamina recovery for nearby allies, but not for self": [1],
         "[Guardian] Increased duration for Character Skill": [1],
     },
 }

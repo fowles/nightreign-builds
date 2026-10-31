@@ -32,9 +32,10 @@ Weight = **focus × size × uptime × availability**.
 - **Uptime:** discount conditional effects, such as ones that apply only at low HP, only while the Art is active, or only near Madness.
 - **Availability:** discount effects that need specific drops (a spell school, a weapon class, `3+ X Equipped`) by how likely the run is to supply them.
 - Example: `Improved Bestial Incantations` is out of focus for a halberd Guardian, so it's worth 0. For a Bestial caster, it and `Physical Attack Up` are both in focus, since Bestial spells do physical damage. They also stack, so they don't compete except for slots.
+- **Stamina is worth 0.** That covers max stamina, stamina recovery, and Endurance. It's nice to have at best. Mention it only to break a tie.
 - **Score in separate parts.** Put every weighted family in one category, so loadouts and builds can be compared on each part:
   - **damage:** attack buffs, guard counters, damage-dealing passives and skills
-  - **sustain:** healing, max HP and stamina, damage negation, poise, team heals and protection
+  - **sustain:** healing, max HP, damage negation, poise, team heals and protection
   - **utility:** Art gauge, cooldowns, everything else
   - **penalties:** curses, Dormant Powers, `unverified_effect` flags
 
