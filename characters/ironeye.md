@@ -23,7 +23,7 @@
 |---|---|---|---|
 | **Poison bow** (most cited) | Bows with poison (starting bow + poison relic) | Arrows build poison → Marking on a poisoned target does heavy poison damage (deep) → charged Single Shot adds 300 poison | [Ironeye] deep heavy poison, Art Charge poison, Starting armament inflicts poison, Attack power up when facing poison-afflicted enemy, +1 skill use, cooldown reduction |
 | **Mark / crit bow DPS** | Bow or greatbow (Lion Greatbow cited), melee backup | Keep the weak point up for +10% team damage, pop marks, run Art often | Extends duration of weak point, +1 skill use, Improved Bow Attack Power (nerfed 1.03.2), Critical hits fill more of the Art gauge |
-| **Thrust-counter hybrid** (niche) | Bow + thrusting melee (spear, rapier, dagger) | After Single Shot, +20% thrusting-counter damage for 30 s | [Ironeye] Boosts thrusting counterattacks after executing Art, HP Restoration upon Thrusting Counterattack. Whether arrows count as thrusting counters is **unknown**. |
+| **Thrust-counter hybrid** (niche) | Bow + thrusting melee (spear, rapier, dagger) | After Single Shot, +20% thrusting-counter damage for 30 s | [Ironeye] Boosts thrusting counterattacks after executing Art, HP Restoration upon Thrusting Counterattack. Arrows count as thrusting counters when they land during an enemy's attack (confirmed by you), so bow builds get some value from both. |
 
 ## Vessels
 
@@ -47,7 +47,7 @@ Ratings: **Poison** = poison bow, **Mark** = mark/crit DPS, **Thrust** = thrust-
 | [Ironeye] +1 additional Character Skill use | std | Stores 2 Markings | core | core | good | 11 |
 | [Ironeye] Extends duration of weak point | std | Weak point 17.5 → 22 s per wiki.gg. The extension was raised in 1.02.2, so wiki.gg's number may predate it **(unverified)**. | good | core | good | 15 |
 | [Ironeye] Art Charge Activation Adds Poison Effect | std | Fully charged Single Shot: 300 poison on the main arrow (not the AoE) | core | niche | skip | 12 |
-| [Ironeye] Boosts thrusting counterattacks after executing Art | std | +20% thrusting-counter damage for 30 s after Single Shot | skip | niche | core | 11 |
+| [Ironeye] Boosts thrusting counterattacks after executing Art | std | +20% thrusting-counter damage for 30 s after Single Shot. Arrows count (confirmed by you). | niche | niche | core | 11 |
 | [Ironeye] Character Skill Inflicts Heavy Poison Damage on Poisoned Enemies | deep | Marking adds 70 poison. Against an already-poisoned target it deals 250 + 0.25% max HP. | core | good | niche | 32 |
 | [Ironeye] Improved Arcane, Reduced Dexterity | deep | Arc +15, Dex −9 | good (Arc boosts poison/bleed buildup on Arcane-scaling weapons) | skip | skip | 6 deep, 1 std |
 | [Ironeye] Improved Vigor and Strength, Reduced Dexterity | deep | Vigor +5, Str +20, Dex −13 | skip | skip | niche (Str melee hybrid) | 3 deep, 1 std |

@@ -1,12 +1,12 @@
 """Ironeye Deep of Night loadout search: poison mark, initial standard attack, and affinity builds.
 
 Usage: python3 -I scripts/ironeye.py --build {poison,isa,affinity} [--switch-add PCT] [--top N]
-       [--vessel NAME] [--max-curses N] [--min-isa N] [--no-poison-source]
+       [--vessel NAME] [--max-curses N] [--min-isa N] [--no-art-poison]
 
 Every build requires `[Ironeye] +1 additional Character Skill use` (your rule).
   - poison:   also requires `[Ironeye] Character Skill Inflicts Heavy Poison Damage on
-              Poisoned Enemies` and a second poison source (`Starting armament inflicts
-              poison` or `[Ironeye] Art Charge Activation Adds Poison Effect`). A poison model (poison_model()) turns the loadout's
+              Poisoned Enemies` and `[Ironeye] Art Charge Activation Adds Poison Effect`
+              (`Starting armament inflicts poison` is optional). A poison model (poison_model()) turns the loadout's
               poison sources into a poison uptime, then scores the DoT, the Marking
               burst and the "vs poisoned" buffs from it.
   - isa:      stacks `Improved Initial Standard Attack` (+15% to the first light attack in
@@ -53,6 +53,10 @@ BUILDS = {
     "isa": dict(arrows=0.75, first=0.6, start=0.5, switch=0.15, other_aff=0.0, ult=0.12, skill=0.08, crit=0.05, melee=0.0),
     "affinity": dict(arrows=0.70, first=0.2, start=0.6, switch=0.6, other_aff=0.4, ult=0.12, skill=0.10, crit=0.05, melee=0.03),
 }
+# Arrows count as thrusting counterattacks when they land mid-enemy-attack (confirmed by you).
+COUNTER_SHARE = 0.3  # guess: share of arrow damage that lands as a counter hit
+COUNTER_HITS = 15  # guess: counter-hit arrows per fight that trigger the counter heal
+ART_WINDOW = 0.4  # guess: uptime of the 30 s post-Art window (~2 Single Shots per fight)
 ELEMENT_SPLIT = 0.5  # elemental share of an infused starting bow's arrows (guess)
 SWITCH_ADD = 4  # default --switch-add: % extra damage while `Switching Weapons Adds an Affinity Attack`
 # is up. wiki.gg (summarized, unverified) says +12 flat; on ~300 AR that's ~4% (guess)
@@ -134,6 +138,9 @@ def categories(build):
         "Improved Critical Hits": pct([18, 23], "crit"),  # wiki.gg
         SWITCH_BOOST: pct([10 * p["switch"]]),  # wiki.gg: +10% for 10 s
         "[Ironeye] Extends duration of weak point": pct([2]),  # guess: +20% mark uptime x 10%
+        # +20% counter damage for 30 s after Single Shot (Vulkk, GameWith); applied to bow
+        # slices pre-scaled by counter share and window uptime.
+        "[Ironeye] Boosts thrusting counterattacks after executing Art": pct([20 * COUNTER_SHARE * ART_WINDOW], "bow"),
         "Dexterity": [0, 1.5, 2, 2.5],  # Dex A
         # Stat swaps: the Dex loss is a bow-damage cut (guesses: Dex -9 ~ -4%, -13 ~ -6%).
         "[Ironeye] Improved Arcane, Reduced Dexterity": pct([-4], "bow"),
@@ -152,6 +159,8 @@ def categories(build):
         # Rally (`Partial HP Restoration upon Post-Damage Attacks`) is deliberately absent:
         # it does nothing for a ranged bow build (your call), so it weighs 0.
         "Continuous HP Recovery": heal([0.25]),  # guess
+        # 2.5% max HP per counter hit (wiki.gg, base tier); +1 guessed at 3%.
+        "HP Restoration upon Thrusting Counterattack": heal([COUNTER_HITS * 0.025, COUNTER_HITS * 0.03]),
         "Slowly restore HP for self and nearby allies when HP is low": heal([0.25]),  # guess
         "Increased Maximum HP": ehp([10]),  # guess
         "Max HP increased for each great enemy defeated at a Great Church.": ehp([2.5]),  # guess
@@ -496,7 +505,7 @@ def has(relics, fam):
     return any(f == fam for r in relics for f, _ in r.parsed)
 
 
-def requirements(build, min_isa, poison_source):
+def requirements(build, min_isa, art_poison):
     """(normal-side check, deep-side check, whole-loadout check) for a build."""
     normal = lambda n: has(n, SKILL_USE)
     deep = None
@@ -504,9 +513,10 @@ def requirements(build, min_isa, poison_source):
     checks = []
     if build == "poison":
         deep = lambda d: has(d, HEAVY_POISON)
-        if poison_source:
-            # The heavy-poison burst needs an already-poisoned target: carry a 2nd source.
-            checks.append(lambda rs: has(rs, WEAPON_POISON) or has(rs, ART_POISON))
+        if art_poison:
+            # The heavy-poison burst needs an already-poisoned target: the charged Art is the
+            # 2nd source the build is built around (your call). Weapon poison is optional.
+            checks.append(lambda rs: has(rs, ART_POISON))
     if build == "affinity":
         normal = lambda n: has(n, SKILL_USE) and any(r.id == NIGHT_OF_THE_LORD for r in n)
     if min_isa:
@@ -542,10 +552,10 @@ def top_triples(pool, colors, per_slot, keep, max_curses, model, require=None):
     return out[:keep] + isa[: keep // 4]
 
 
-def search(relics, model, normal, deep, per_slot, keep, max_curses, min_isa, poison_source):
+def search(relics, model, normal, deep, per_slot, keep, max_curses, min_isa, art_poison):
     std = [r for r in relics if r.kind == "standard" and r.solo > DISQUALIFY / 2]
     dp = [r for r in relics if r.kind == "deep" and r.solo > DISQUALIFY / 2]
-    need_n, need_d, need_all = requirements(model.build, min_isa, poison_source)
+    need_n, need_d, need_all = requirements(model.build, min_isa, art_poison)
     nt = top_triples(std, normal, per_slot, keep, max_curses, model, need_n)
     dt = top_triples(dp, deep, per_slot, keep, max_curses, model, need_d)
     results = []
@@ -593,7 +603,7 @@ def main():
     ap.add_argument("--keep", type=int, default=800)
     ap.add_argument("--max-curses", type=int, default=99, help="cap on total curses per loadout")
     ap.add_argument("--min-isa", type=int, default=0, help="minimum Improved Initial Standard Attack copies")
-    ap.add_argument("--no-poison-source", action="store_true", help="poison: don't require weapon or Art poison")
+    ap.add_argument("--no-art-poison", action="store_true", help="poison: don't require Art Charge poison")
     args = ap.parse_args()
     model = Model(args.build, args.switch_add)
     relics = load(model)
@@ -601,7 +611,7 @@ def main():
     for name, (normal, deep) in VESSELS.items():
         if args.vessel and args.vessel != name:
             continue
-        res = search(relics, model, normal, deep, args.per_slot, args.keep, args.max_curses, args.min_isa, not args.no_poison_source)
+        res = search(relics, model, normal, deep, args.per_slot, args.keep, args.max_curses, args.min_isa, not args.no_art_poison)
         if not res:
             print(f"=== {name}  normal {normal} / deep {deep}: no loadout meets the requirements\n")
             continue

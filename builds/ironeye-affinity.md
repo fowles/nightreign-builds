@@ -1,6 +1,6 @@
 # Ironeye: Weapon-Switch Affinity
 
-> Generated 2026-10-31 with `python3 -I scripts/ironeye.py --build affinity`. Character reference: [characters/ironeye.md](../characters/ironeye.md).
+> Generated 2026-11-01 with `python3 -I scripts/ironeye.py --build affinity`. Character reference: [characters/ironeye.md](../characters/ironeye.md).
 
 **Goal:** build around **R00860 Night of the Lord** (Blue, standard, Heolstor reward). It's the only relic you own with `Switching Weapons Adds an Affinity Attack`. Swap between two bows often. Each swap adds random-element damage and +10% attack for 10 s.
 
@@ -8,7 +8,7 @@
 - `[Ironeye] +1 additional Character Skill use` (your rule for every Ironeye build)
 - R00860 Night of the Lord, so a blue or white normal slot
 
-The switch supplies the affinity, so no elemental starting armament is required. One is still scored if a loadout carries it, but none of the top loadouts does. Rally does nothing on a ranged bow build, so it weighs 0.
+The switch supplies the affinity, so no elemental starting armament is required. One is still scored if a loadout carries it, but none of the top loadouts does. Rally does nothing on a ranged bow build, so it weighs 0. Arrows count as thrusting counterattacks (confirmed by you), so the thrusting-counter heal and Ironeye's post-Art counter boost are scored.
 
 ## What Night of the Lord does (wiki.gg)
 
@@ -24,36 +24,37 @@ If the switch affinity is really +12 flat, it adds ~4% to an arrow (assuming ~30
 
 | `--switch-add` | Forgotten Goblet | Ironeye's Goblet | Decrepit Goblet |
 |---|---|---|---|
-| 4% (default) | 39.1 | 35.9 | 34.7 |
-| 10% | 41.2 | 38.0 | 36.7 |
-| 20% | 44.7 | 41.5 | 40.1 |
+| 4% (default) | 41.6 | 39.7 | 36.0 |
+| 10% | 43.8 | 41.8 | 38.0 |
+| 20% | 47.3 | 45.4 | 41.3 |
 
-Night of the Lord itself earns ~2.4 points from the +10% switch boost, plus a little from the added affinity. The rest of the build is a Physical Attack Up stack. **This is the weakest of the three Ironeye builds in the model** (poison 49.7, ISA 37.3–41.1).
+Night of the Lord itself earns ~2.4 points from the +10% switch boost, plus a little from the added affinity. The rest of the build is Physical Attack Up plus sustain. **This is the weakest of the three Ironeye builds in the model** (poison 49.6–51.2, ISA 39.9–44.1).
 
 If the in-game number is much bigger than +12, or turns out to be a percentage, re-run with `--switch-add`.
 
 ## Best: Forgotten Ironeye's Goblet (Normal Y B R / Deep Y G W)
 
-**Score 39.1:** damage 33.2, sustain 5.9, utility 7.0, penalties −7.0. Unlock: 4 Sovereign Sigils.
+**Score 41.6:** damage 26.1, sustain 18.5, utility 7.0, penalties −10.0. Unlock: 4 Sovereign Sigils.
 
 | Slot | Relic | Effects (curse attached) |
 |---|---|---|
 | Normal Y | **R00156** Polished Luminous Scene | Attack power increased for each Night Invader defeated; Ultimate Art Auto Charge +3 |
 | Normal B | **R00860** Night of the Lord | **Switching Weapons Adds an Affinity Attack**; **Boosts Attack Power of Added Affinity Attacks**; **Switching Weapons Boosts Attack Power** |
 | Normal R | **R00826** Grand Burning Scene | **[Ironeye] +1 additional Character Skill use**; Attack power increased for each evergaol prisoner defeated; Endurance +1 *(stamina: worth 0)* |
-| Deep Y | **R00292** Deep Polished Luminous Scene | [Wylder] Character Skill inflicts Blood Loss *(wasted on Ironeye)*; Physical Attack Up +4 *(curse: Near Death Reduces Max HP)* |
+| Deep Y | **R00185** Deep Polished Luminous Scene | Max HP increased for each great enemy defeated at a Great Church.; Physical Attack Up +3 *(curse: Reduced Damage Negation for Flask Usages)* |
 | Deep G | **R01257** Deep Grand Tranquil Scene | Physical Attack Up +4 *(curse: Lower Attack When Below Max HP)*; Increased Maximum HP *(curse: Reduced Rune Acquisition)*; Improved Affinity Damage Negation +1 *(curse: Reduced Strength and Intelligence)* |
-| Deep W | **R00669** Deep Polished Drizzly Scene (Blue) | [Undertaker] Improved Dexterity, Reduced Vigor and Faith *(wasted on Ironeye)*; Physical Attack Up +3 *(curse: Reduced Faith and Strength)* |
+| Deep W | **R01191** Deep Grand Luminous Scene (Yellow) | HP Restoration upon Thrusting Counterattack +1 *(curse: Reduced Faith and Strength)*; Attack power up when facing scarlet rot-afflicted enemy *(out of focus)*; Improved Physical Damage Negation +2 *(curse: All Resistances Down)* |
 
-- **Damage stack:** Physical Attack Up +4 / +4 / +3 multiply (+38%), plus Night Invader, the evergaol stacks and the +10% switch boost.
-- **Curses: 5.**
-  - Lower Attack When Below Max HP (−3), Near Death Reduces Max HP (−2), Reduced Rune Acquisition (−1).
+- **Damage stack:** Physical Attack Up +3 / +4 multiply (+24%), plus Night Invader, the evergaol stacks and the +10% switch boost.
+- **Sustain:** the thrusting-counter heal (arrows count, confirmed by you), max HP, physical and affinity negation.
+- **Curses: 6.**
+  - Lower Attack When Below Max HP (−3), Reduced Damage Negation for Flask Usages (−2.5), All Resistances Down (−2.5), Reduced Rune Acquisition (−1).
   - Near-free: Reduced Strength and Intelligence, Reduced Faith and Strength (Str C, Fai D).
 - **Dormant Powers:** none. **`unverified_effect` flags:** none.
 
 ## Alternative: Ironeye's Goblet (Normal R B Y / Deep R B Y)
 
-**Score 35.9:** damage 28.8, sustain 5.1, utility 7.0, penalties −5.0. The normal side is the same three relics.
+**Score 39.7:** damage 17.7, sustain 20.0, utility 7.0, penalties −5.0. The normal side is the same three relics.
 
 | Slot | Relic | Effects (curse attached) |
 |---|---|---|
@@ -61,12 +62,12 @@ If the in-game number is much bigger than +12, or turns out to be a percentage, 
 | Normal B | **R00860** Night of the Lord | **Switching Weapons Adds an Affinity Attack**; **Boosts Attack Power of Added Affinity Attacks**; **Switching Weapons Boosts Attack Power** |
 | Normal Y | **R00156** Polished Luminous Scene | Attack power increased for each Night Invader defeated; Ultimate Art Auto Charge +3 |
 | Deep R | **R00851** Deep Grand Burning Scene | [Revenant] Increased Max FP upon Ability Activation *(wasted on Ironeye)*; Increased Maximum HP *(curse: Near Death Reduces Max HP)*; Physical Attack Up +2 |
-| Deep B | **R00669** Deep Polished Drizzly Scene | [Undertaker] Improved Dexterity, Reduced Vigor and Faith *(wasted on Ironeye)*; Physical Attack Up +3 *(curse: Reduced Faith and Strength)* |
-| Deep Y | **R00185** Deep Polished Luminous Scene | Max HP increased for each great enemy defeated at a Great Church.; Physical Attack Up +3 *(curse: Reduced Damage Negation for Flask Usages)* |
+| Deep B | **R00449** Deep Polished Drizzly Scene | Slowly restore HP for self and nearby allies when HP is low; Improved Affinity Damage Negation |
+| Deep Y | **R01191** Deep Grand Luminous Scene | HP Restoration upon Thrusting Counterattack +1 *(curse: Reduced Faith and Strength)*; Attack power up when facing scarlet rot-afflicted enemy *(out of focus)*; Improved Physical Damage Negation +2 *(curse: All Resistances Down)* |
 
-- **Curses: 3.** Reduced Damage Negation for Flask Usages (−2.5), Near Death Reduces Max HP (−2), Reduced Faith and Strength (near-free).
+- **Curses: 3.** All Resistances Down (−2.5), Near Death Reduces Max HP (−2), Reduced Faith and Strength (near-free).
 - **Dormant Powers:** none. **`unverified_effect` flags:** none.
-- **Decrepit Ironeye's Goblet (34.7)** is close behind. Its deep colors are **unverified** between sources.
+- A sustain-leaning version: only one Physical Attack Up. Ironeye's Chalice (37.1) and Decrepit Ironeye's Goblet (36.0) follow; the Decrepit deep colors are **unverified** between sources.
 
 ## Gameplay loop
 
@@ -89,6 +90,8 @@ If the in-game number is much bigger than +12, or turns out to be a percentage, 
 | Switch uptime | 0.6 | guess |
 | Switch affinity | +4% damage while up (+12 flat on ~300 AR), split evenly across the four elements | `--switch-add`; guess |
 | Rally | 0 | does nothing for ranged |
+| Thrusting-counter heal | 2.5% max HP per counter hit (base, wiki.gg; +1 guessed 3%), 15 counter hits per fight → 0.375 / 0.45 bars | hit count guessed; arrows counting confirmed by you |
+| `[Ironeye] Boosts thrusting counterattacks after executing Art` | +20% × 0.4 window uptime × 0.3 counter share on bow damage | guesses; never picked |
 | Incoming damage mix | physical 0.6; fire, holy, lightning, magic 0.1 each | guess |
 | Fight HP budget / ally factor | 3.0 bars / 0.5 × 2 allies | guess |
 | Ultimate Art Charging Impaired | −10 | Single Shot is the revive |
@@ -96,4 +99,5 @@ If the in-game number is much bigger than +12, or turns out to be a percentage, 
 ## Sources
 
 - https://eldenring.wiki.gg/wiki/Nightreign:Effects (switch affinity +12 for 10 s, added-affinity +10%, switch boost +10% for 10 s, affinity sizes)
+- https://eldenring.wiki.gg/wiki/Nightreign:Night_of_the_Champion (thrusting-counter heal 2.5% max HP)
 - https://gamewith.net/eldenring-nightreign/57370 and https://www.pcgamesn.com/elden-ring-nightreign/relics-best (Night of the Lord's effects, Heolstor reward)

@@ -1,6 +1,6 @@
 # Ironeye: Initial Standard Attack Stack
 
-> Generated 2026-10-31 with `python3 -I scripts/ironeye.py --build isa --min-isa 4`. Character reference: [characters/ironeye.md](../characters/ironeye.md).
+> Generated 2026-11-01 with `python3 -I scripts/ironeye.py --build isa --min-isa 4`. Character reference: [characters/ironeye.md](../characters/ironeye.md).
 
 **Goal:** stack `Improved Initial Standard Attack` (ISA: "damage of first light attack in a chain +15%", wiki.gg) and play a tap-fire bow, so most of your arrows open a fresh chain. **ISA copies stack** (confirmed by you) and multiply like other attack buffs: 4 copies = ×1.75 on chain-opening arrows.
 
@@ -8,30 +8,30 @@
 - `[Ironeye] +1 additional Character Skill use` (your rule for every Ironeye build)
 - at least N ISA copies (`--min-isa N`)
 
-Rally does nothing on a ranged bow build, so it weighs 0.
+Rally does nothing on a ranged bow build, so it weighs 0. **Arrows count as thrusting counterattacks** (confirmed by you), so `HP Restoration upon Thrusting Counterattack` now scores as a heal (2.5% max HP per counter hit, ~15 a fight, guess).
 
 **Open question:** how long you have to pause between shots to reset the chain. Ironeye's bow light attacks are a four-shot chain (wiki.gg). The model assumes 60% of your arrows open a chain. Measure it in the training area.
 
 ## How many copies?
 
-Best vessel at each ISA floor (Ironeye's Goblet throughout; the Forgotten Goblet ties from 3 copies up):
+Best vessel at each ISA floor (Ironeye's Goblet, except at 3 where the Forgotten Goblet edges it 44.5 to 44.1 with 7.5 penalty points; the two tie at 4 and 5):
 
 | ISA floor | Total | Damage | Sustain | Curses |
 |---|---|---|---|---|
-| none (0 ISA picked) | 44.0 | 28.9 | 13.5 | 3 |
-| 2 | 42.4 | 23.8 | 14.1 | 2 |
-| 3 | 41.1 | 22.2 | 11.9 | 0 |
-| **4** | **37.3** | **29.9** | **0.4** | **0** |
-| 5 | 28.0 | 23.6 | 2.4 | 0 |
+| none (0 ISA picked) | 47.7 | 28.9 | 20.3 | 5 |
+| 2 | 45.7 | 23.8 | 20.5 | 3 |
+| 3 | 44.1 | 22.2 | 17.9 | 1 |
+| **4** | **39.9** | **29.9** | **6.0** | **1** |
+| 5 | 30.9 | 23.6 | 8.3 | 1 |
 | 6 | — | — | — | impossible: the mandatory +1 skill relic has no ISA |
 
-**Why the model doesn't stack ISA by itself:** one ISA copy is +15% on the ~45% of your damage that opens a chain, about +6.75% overall. `Physical Attack Up +3/+4` (+10.5/12%) covers every physical hit. None of your deep ISA relics also carries Physical Attack Up, so every ISA copy displaces a bigger physical buff. ISA catches up only if nearly every arrow opens a chain. At a 90% first-shot share (checked in the script), the 4-ISA Goblet scores 45.8 against 47.0 for the best unconstrained loadout.
+**Why the model doesn't stack ISA by itself:** one ISA copy is +15% on the ~45% of your damage that opens a chain, about +6.75% overall. `Physical Attack Up +3/+4` (+10.5/12%) covers every physical hit. None of your deep ISA relics also carries Physical Attack Up, so every ISA copy displaces a bigger physical buff. ISA catches up only if nearly every arrow opens a chain. At a 90% first-shot share (checked in the script before this update), the 4-ISA Goblet scored 45.8 against 47.0 for the best unconstrained loadout.
 
-**4 copies holds the most damage of any row** (29.9) and is curse-free, but it gives up all sustain. Three copies plus R00823 is the balanced version (below).
+**4 copies holds the most damage of any row** (29.9) with one near-free curse; its only sustain is the thrusting-counter heal. Three copies plus R00823 is the balanced version (below).
 
 ## Best: Ironeye's Goblet (Normal R B Y / Deep R B Y), 4 ISA
 
-**Score 37.3:** damage 29.9, sustain 0.4, utility 7.0, penalties 0.0. Unlock: Small Jar Bazaar, 1200 Murk.
+**Score 39.9:** damage 29.9, sustain 6.0, utility 7.0, penalties −3.0. Unlock: Small Jar Bazaar, 1200 Murk.
 
 | Slot | Relic | Effects (curse attached) |
 |---|---|---|
@@ -39,23 +39,24 @@ Best vessel at each ISA floor (Ironeye's Goblet throughout; the Forgotten Goblet
 | Normal B | **R00499** Polished Drizzly Scene | **Improved Initial Standard Attack**; Dexterity +3 |
 | Normal Y | **R00156** Polished Luminous Scene | Attack power increased for each Night Invader defeated; Ultimate Art Auto Charge +3 |
 | Deep R | **R01233** Deep Grand Burning Scene | [Ironeye] Character Skill Inflicts Heavy Poison Damage on Poisoned Enemies *(out of focus)*; HP Recovery From Successful Guarding *(out of focus)*; **Improved Initial Standard Attack** |
-| Deep B | **R00237** Deep Polished Drizzly Scene | **Improved Initial Standard Attack**; Holy Damage Negation Up |
+| Deep B | **R01171** Deep Grand Drizzly Scene | HP Restoration upon Thrusting Counterattack +1 *(curse: Reduced Intelligence and Dexterity)*; **Improved Initial Standard Attack**; Improved Frost Resistance *(hand-weighted 0)* |
 | Deep Y | **R00577** Deep Polished Luminous Scene | [Executor] Slowly Restore HP upon Ability Activation *(wasted on Ironeye)*; **Improved Initial Standard Attack** |
 
 - **ISA copies: 4** → chain-opening arrows ×1.75.
-- **Curses: 0.** **Dormant Powers:** none. **`unverified_effect` flags:** none.
-- **Sustain is essentially nil:** holy negation only.
+- **Curses: 1.** Reduced Intelligence and Dexterity (−3): Dex is Ironeye's A stat, so this one costs real damage. R00237 (ISA; Holy Damage Negation Up) is the curse-free swap at 37.3: it gives up the counter heal.
+- **Dormant Powers:** none. **`unverified_effect` flags:** none.
+- **Sustain:** the thrusting-counter heal only.
 
 ## Alternative: Ironeye's Goblet with 3 ISA + R00823
 
-**Score 41.1:** damage 22.2, sustain 11.9, utility 7.0, penalties 0.0. Same vessel and deep side. Swap R00499 for:
+**Score 44.1:** damage 22.2, sustain 17.9, utility 7.0, penalties −3.0. Same vessel and deep side. Swap R00499 for:
 
 | Slot | Relic | Effects (curse attached) |
 |---|---|---|
 | Normal B | **R00823** Dark Night of the Fathom | Increased Maximum HP; Continuous HP Recovery; Slowly restore HP for self and nearby allies when HP is low |
 
-- **ISA copies: 3** (×1.52). **Curses: 0.** **Dormant Powers:** none. **`unverified_effect` flags:** none.
-- **Forgotten Ironeye's Goblet** ties both rows (Normal Y B R / Deep Y G W). It uses the same normal relics, plus **R00568** Deep Polished Tranquil Scene (Speckled Hardtear in possession at start of expedition; **Improved Initial Standard Attack**) in green in place of R01233.
+- **ISA copies: 3** (×1.52). **Curses: 1** (Reduced Intelligence and Dexterity, on R01171). With R00237 in place of R01171 it's curse-free at 41.1. **Dormant Powers:** none. **`unverified_effect` flags:** none.
+- **Forgotten Ironeye's Goblet** (Normal Y B R / Deep Y G W) ties the 4-copy row and scores 44.5 at 3 copies, with more curses.
 
 ## Gameplay loop
 
@@ -76,6 +77,8 @@ Best vessel at each ISA floor (Ironeye's Goblet throughout; the Forgotten Goblet
 | Damage slices | arrows 0.75 (60% first in chain, 50% from the starting bow), Single Shot 0.12, Marking bursts 0.08, crits 0.05 | guesses |
 | ISA | +15% per copy on first-in-chain arrows; copies multiply | wiki.gg size; stacking confirmed by you |
 | Rally | 0 | does nothing for ranged |
+| Thrusting-counter heal | 2.5% max HP per counter hit (base, wiki.gg; +1 guessed 3%), 15 counter hits per fight → 0.375 / 0.45 bars | hit count guessed; arrows counting confirmed by you |
+| `[Ironeye] Boosts thrusting counterattacks after executing Art` | +20% × 0.4 window uptime × 0.3 counter share on bow damage | guesses; never picked |
 | Incoming damage mix | physical 0.6; fire, holy, lightning, magic 0.1 each | guess |
 | Fight HP budget / ally factor | 3.0 bars / 0.5 × 2 allies | guess |
 | Ultimate Art Charging Impaired | −10 | Single Shot is the revive |
@@ -84,3 +87,4 @@ Best vessel at each ISA floor (Ironeye's Goblet throughout; the Forgotten Goblet
 
 - https://eldenring.wiki.gg/wiki/Nightreign:Effects (ISA +15% on the first light attack in a chain)
 - https://eldenring.wiki.gg/wiki/Ironeye (bow light attacks are a four-shot chain)
+- https://eldenring.wiki.gg/wiki/Nightreign:Night_of_the_Champion (thrusting-counter heal 2.5% max HP)
