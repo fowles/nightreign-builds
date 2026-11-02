@@ -53,7 +53,7 @@ Damage is scored per source, as in the Ironeye builds, because a single fire spe
 | Vessel | Total | Damage | Sustain | Utility | Penalties |
 |---|---|---|---|---|---|
 | Revenant's Chalice | 48.1 | 11.8 | 23.2 | 15.1 | −2.0 |
-| Decrepit Revenant's Goblet | 47.0 | 13.1 | 23.7 | 12.7 | −2.5 |
+| Decrepit Revenant's Goblet (search best, with R01915) | 47.0 | 13.1 | 23.7 | 12.7 | −2.5 |
 | Sealed Revenant's Urn | 46.5 | 6.9 | 31.6 | 9.5 | −1.5 |
 | Revenant's Urn | 46.4 | 12.4 | 25.8 | 12.2 | −4.0 |
 | Soot-Covered Revenant's Urn | 42.6 | 9.8 | 18.2 | 15.2 | −0.5 |
@@ -84,12 +84,12 @@ Damage is scored per source, as in the Ironeye builds, because a single fire spe
 
 ## Alternative: Decrepit Revenant's Goblet (Normal R R Y / Deep R R Y)
 
-**Score 47.0:** damage 13.1, sustain 23.7, utility 12.7, penalties −2.5. Costs 4 Sovereign Sigils. **Its normal slot colors are unverified:** wiki.gg says R R Y, and Fextralife's text says R R G. Check in game.
+**Score 45.2:** damage 13.6, sustain 18.4, utility 15.7, penalties −2.5. It ranks below the Sealed Urn and Revenant's Urn on score, but it keeps the Art buff for allies and family without relying on low-HP effects. Costs 4 Sovereign Sigils. **Its normal slot colors are unverified:** wiki.gg says R R Y, and Fextralife's text says R R G. Check in game.
 
 | Slot | Relic | Effects (curse attached) |
 |---|---|---|
 | Normal R | **R00813** Night of the Fathom | Increased Maximum HP; Flask Also Heals Allies; Items confer effect to all nearby allies |
-| Normal R | **R01915** Grand Burning Scene | Slowly restore HP for self and nearby allies when HP is low; Improved Damage Negation at Low HP; Vigor +3 |
+| Normal R | **R00120** Polished Burning Scene | [Revenant] Strengthens family and allies when Ultimate Art is activated; Vigor +3 |
 | Normal Y | **R00156** Polished Luminous Scene | Attack power increased for each Night Invader defeated; Ultimate Art Auto Charge +3 |
 | Deep R | **R01686** Deep Grand Burning Scene | Partial HP Restoration upon Post-Damage Attacks +1 *(curse: Reduced Rune Acquisition)*; Improved Incantations +1 *(curse: Repeated Evasions Lower Damage Negation)*; Improved Godslayer Incantations |
 | Deep R | **R00368** Deep Polished Burning Scene | Improved Incantations +2 *(curse: Reduced Strength and Intelligence)*; Improved Poise & Damage Negation When Knocked Back by Damage |
@@ -99,6 +99,7 @@ Damage is scored per source, as in the Ironeye builds, because a single fire spe
 - **Dormant Powers:** none.
 - **`unverified_effect` flags:** none.
 - **Rally:** R01686 (+1).
+- **Hand swap:** the search's top pick for this slot is R01915 (Slowly restore HP for self and nearby allies when HP is low; Improved Damage Negation at Low HP; Vigor +3), at 47.0. You chose R00120 instead: R01915 leans on low-HP effects, while R00120 keeps the Vigor and adds the +25% Art buff for allies and family. So the script's output won't match this table for this slot.
 
 ## Playing it
 
