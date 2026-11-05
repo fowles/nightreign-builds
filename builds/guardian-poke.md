@@ -81,7 +81,29 @@ So this build is a damage choice, not the top score. It is still the best way to
 - **Art charges more slowly.** Utility falls from 21.0 to 9.0 because there is no `Successful guarding fills more of the Art gauge`. This is the biggest cost for a team that relies on your revive.
 - **Base rally, not +2.** R01324 is the only relic I own with both ISA and rally, and its rally is base tier. A rally +2 relic costs an ISA copy.
 - **Poke DPS isn't modeled.** Resetting the chain gives up the faster follow-up thrusts, and guard counters are still high damage in their own right.
-- **Dropping a base relic gets you 4 copies, but it isn't worth it.** Replacing R00823 with R00499 (Improved Initial Standard Attack; Dexterity +3) gives 4 ISA at 90.7: damage 33.0, sustain 49.2. That breaks your base rule and costs 16 sustain for 5.5 damage.
+
+## Replacing R00823
+
+Dropping R00823 doesn't open up another vessel: R01922 and R00156 together still fit only the Chalice. The freed W slot takes any color. I scored every standard relic I own there, then re-searched the deep side for the top 25 and for every ISA or rally relic.
+
+**R00823 still scores highest (101.2), but only narrowly.** The best swap is **R01208**, and it's worth taking if Art charge matters more to you than personal HP:
+
+| Slot | Relic | Effects (curse attached) |
+|---|---|---|
+| Normal W | **R01208** Grand Drizzly Scene (Blue) | Successful guarding fills more of the Art gauge; HP Restoration upon Thrusting Counterattack; Physical Attack Up +2 |
+| Deep B | **R00237** Deep Polished Drizzly Scene *(replaces R01171)* | Improved Initial Standard Attack; Holy Damage Negation Up |
+
+| Loadout | Total | Damage | Sustain | Utility | Penalties | Curses |
+|---|---|---|---|---|---|---|
+| R00823, R01171 (best) | 101.2 | 27.5 | 65.2 | 9.0 | −0.5 | 1 |
+| R01208, R01171 | 97.8 | 31.1 | 49.2 | 18.0 | −0.5 | 1 |
+| **R01208, R00237** | **97.5** | **31.1** | **48.3** | **18.0** | **0.0** | **0** |
+| R00823, R00237 | 95.0 | 27.5 | 58.5 | 9.0 | 0.0 | 0 |
+
+- **R00237 pairs well with R01208.** R01208 brings its own thrust-counter heal, so R01171's +1 tier adds little, and its curse goes away for only 0.3 points. All rows have 3 ISA, no Dormant Powers and no `unverified_effect` flags.
+- **The 3.4-point gap is within the guesses.** R01208 (97.8) passes R00823 if `Increased Maximum HP` is +5% rather than +10% (R00823 falls to 96.7) or if both regens are half what I guessed (97.3). It also passes if guard Art gauge is worth 13 points rather than 9 (R01208 rises to 101.8, against 101.2). If the HP and regen guesses are too low instead, R00823 pulls further ahead (105.6 at +15% max HP, 108.9 with doubled regens). Those sizes are unsourced, and the Art gauge value is hand-weighted.
+- **The model slightly undervalues R00823.** Its low-HP regen also heals allies, and that part isn't scored.
+- **Other W-slot options:** R00813 Night of the Fathom (Increased Maximum HP; Flask Also Heals Allies; Items confer effect to all nearby allies) scores 97.5 if you want to keep the max HP. A 4th ISA copy isn't worth it: the best is R01916 Grand Tranquil Scene (Improved Stance-Breaking when Two-Handing; Improved Initial Standard Attack; Poise +3) at 93.2, with damage 33.0 and sustain 51.7. R01640 Grand Luminous Scene (Improved Initial Standard Attack; Strength +2; Dexterity +1) has the most damage of the 4-copy options (34.5) at 92.2.
 
 ## Test in the training area
 
