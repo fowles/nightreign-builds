@@ -24,7 +24,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))  # -I drops the script 
 import guardian_sustain as gs  # noqa: E402
 
 ISA = "Improved Initial Standard Attack"
-BASE = ("R01922", "R00156", "R00823")
+BASE = ("R01922", "R00156", "R01208")
 
 # Share of this build's total damage each scope covers (CLAUDE.md "Coverage"). All guesses.
 gs.COVERAGE.clear()
